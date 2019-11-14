@@ -4,19 +4,20 @@ namespace Carrosse.Figures
 {
     public class Rectangle : Figure
     {
-        public Rectangle(Point position, Point dimension, Color couleur) : base(position, dimension, couleur)
+        public Rectangle(Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 10) :
+            base(position, dimension, remplissage, contour, largeurContour)
         {
+            
         }
 
         protected override void Genere()
         {
-            int brosse = dimension.X;
-            if (dimension.X < dimension.Y)
-                brosse = dimension.Y;
+            base.Genere();
             
-            pinceau = new Pen(couleur, brosse);
+            graphique.FillRectangle(remplissage,0, 0, 
+                dimension.X, dimension.Y);
             
-            graphique.DrawRectangle(pinceau,
+            graphique.DrawRectangle(contour,
                 0, 0, 
                 dimension.X, dimension.Y); // dessine le rectangle dans l'image
         }
