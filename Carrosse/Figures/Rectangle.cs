@@ -14,10 +14,10 @@ namespace Carrosse.Figures
         {
             base.Genere();
             
-            graphique.FillRectangle(remplissage,0, 0, 
+            Graphique.FillRectangle(Remplissage,0, 0, 
                 dimension.X, dimension.Y);
             
-            graphique.DrawRectangle(contour,
+            Graphique.DrawRectangle(Contour,
                 0, 0, 
                 dimension.X, dimension.Y); // dessine le rectangle dans l'image
         }

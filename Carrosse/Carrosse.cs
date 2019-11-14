@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using Carrosse.Figures;
@@ -9,10 +8,10 @@ namespace Carrosse
 {
     public class Carrosse
     {
-        private Dictionary<string, Figure> elements;
-        private Dictionary<string, Point> decalage;
-        private Point position;
-        private Point dimensions;
+        private Dictionary<string, Figure> elements; // contient les éléments du carrosse
+        private Dictionary<string, Point> decalage; // définit leur décalage par rapport au carrosse
+        private Point position; // position courante du carrosse
+        private Point dimensions; // tailles du carrosse
 
         public Carrosse(Point position)
         {
@@ -69,55 +68,50 @@ namespace Carrosse
             AjouterRoue("roueD", position, dimension, Color.Brown);
         }
 
-        private Point PositionElement()
-        {
-            return new Point();
-        }
-
         private void AjouterRectangle(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
             elements.Add(cle, new Rectangle(position, dimension, remplissage, contour, largeurContour));
-
-            position.X -= this.position.X;
-            position.Y -= this.position.Y;
             
-            decalage.Add(cle, position);
+            LieDecalage(cle, position);
         }
         
         private void AjouterRoue(string cle, Point position, Point dimension, Color remplissage)
         {
             elements.Add(cle, new Cercle(position, dimension.X, remplissage));
             
+            LieDecalage(cle, position);
+        }
+
+        private void LieDecalage(string cle, Point position)
+        {
             position.X -= this.position.X;
             position.Y -= this.position.Y;
-
+            
             decalage.Add(cle, position);
         }
 
-        public void Deplace(Point position)
+        public void Deplace(Point positionDestination)
         {
             Figure figure;
-            Point decalage;
-            
+            Point decalageFigure;
+
             for (int id = 0; id < elements.Values.Count; id++)
             {
                 figure = elements.ElementAt(id).Value;
-                decalage = this.decalage.ElementAt(id).Value;
+                decalageFigure = decalage.ElementAt(id).Value;
                 
-                figure.SetPositionX(position.X + decalage.X);
-                figure.SetPositionY(position.Y + decalage.Y);
+                figure.SetPositionX(positionDestination.X + decalageFigure.X);
+                figure.SetPositionY(positionDestination.Y + decalageFigure.Y);
             }
         }
 
         public void Deplace(int x, int y = 0)
         {
             Figure figure;
-            Point decalage;
             
             for (int id = 0; id < elements.Values.Count; id++)
             {
                 figure = elements.ElementAt(id).Value;
-                decalage = this.decalage.ElementAt(id).Value;
                 
                 figure.SetPositionX(figure.Position.X + x);
                 figure.SetPositionY(figure.Position.Y + y);

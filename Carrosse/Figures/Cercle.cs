@@ -8,7 +8,7 @@ namespace Carrosse.Figures
             base(position, new Point(rayon, rayon), couleurRemplissage, contour, largeurContour)
         {
             image = new Bitmap(rayon * 2, rayon * 2);
-            graphique = Graphics.FromImage(image);
+            Graphique = Graphics.FromImage(image);
             
             Genere();
         }
@@ -19,20 +19,11 @@ namespace Carrosse.Figures
             
             int rayon = dimension.X;
             
-            /*graphique.FillRectangle(remplissage,0, 0, 
+            Graphique.FillEllipse(Remplissage,largeurContour, largeurContour, 
                 dimension.X, dimension.Y);
             
-            graphique.DrawRectangle(contour,
-                0, 0, 
-                dimension.X, dimension.Y); // dessine le rectangle dans l'image*/
-            
-            
-            
-            graphique.FillEllipse(remplissage,0, 0, 
-                dimension.X, dimension.Y);
-            
-            graphique.DrawEllipse(contour,
-                rayon / 2, rayon / 2, 
+            Graphique.DrawEllipse(Contour,
+                largeurContour, largeurContour, 
                 rayon, rayon); // dessine le cercle dans l'image
         }
     }

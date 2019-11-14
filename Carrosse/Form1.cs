@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Carrosse.Figures;
-using Rectangle = Carrosse.Figures.Rectangle;
 
 namespace Carrosse
 {
@@ -16,6 +9,9 @@ namespace Carrosse
     {
         private Carrosse Carrosse;
         private bool drag;
+
+        #region Initialisation
+
         public Form1()
         {
             InitializeComponent();
@@ -29,14 +25,38 @@ namespace Carrosse
 
         }
 
+        #endregion
+        
         private void button1_Click(object sender, EventArgs e)
         {
-            pictureBox1.Invalidate();
+           
         }
 
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            // redessine toutes les parties du carrosse
+            foreach (Figure figure in Carrosse.ListeElements())
+            {
+                e.Graphics.DrawImage(figure.Image, figure.Position);
+            }
+        }
+
+        #region Controles déplacement
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            drag = true;
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            drag = false;
+        }
+        
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if(!drag) return;
+            if(!drag) return; // si le drag&drop n'est pas activé on ne fait rien
+            
             Carrosse.Deplace(e.Location);
             pictureBox1.Invalidate();
         }
@@ -66,23 +86,7 @@ namespace Carrosse
 
             return base.ProcessCmdKey(ref msg, keyData);
         }
-        
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            foreach (Figure figure in Carrosse.ListeElements())
-            {
-                e.Graphics.DrawImage(figure.Image, figure.Position);
-            }
-        }
 
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            drag = true;
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            drag = false;
-        }
+        #endregion
     }
 }
