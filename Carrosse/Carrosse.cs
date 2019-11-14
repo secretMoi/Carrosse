@@ -109,6 +109,21 @@ namespace Carrosse
             }
         }
 
+        public void Deplace(int x, int y = 0)
+        {
+            Figure figure;
+            Point decalage;
+            
+            for (int id = 0; id < elements.Values.Count; id++)
+            {
+                figure = elements.ElementAt(id).Value;
+                decalage = this.decalage.ElementAt(id).Value;
+                
+                figure.SetPositionX(figure.Position.X + x);
+                figure.SetPositionY(figure.Position.Y + y);
+            }
+        }
+
         public List<Figure> ListeElements()
         {
             List<Figure> figures = new List<Figure>();
