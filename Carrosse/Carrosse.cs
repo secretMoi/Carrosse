@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using Carrosse.Figures;
 using Rectangle = Carrosse.Figures.Rectangle;
 
@@ -8,12 +10,15 @@ namespace Carrosse
     public class Carrosse
     {
         private Dictionary<string, Figure> elements;
+        private Dictionary<string, Point> decalage;
         private Point position;
         private Point dimensions;
 
         public Carrosse(Point position)
         {
             elements = new Dictionary<string, Figure>();
+            decalage = new Dictionary<string, Point>();
+            
             this.position = position;
             this.dimensions = new Point(200, 100);
             
@@ -72,18 +77,35 @@ namespace Carrosse
         private void AjouterRectangle(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
             elements.Add(cle, new Rectangle(position, dimension, remplissage, contour, largeurContour));
+
+            position.X -= this.position.X;
+            position.Y -= this.position.Y;
+            
+            decalage.Add(cle, position);
         }
         
         private void AjouterRoue(string cle, Point position, Point dimension, Color remplissage)
         {
             elements.Add(cle, new Cercle(position, dimension.X, remplissage));
+            
+            position.X -= this.position.X;
+            position.Y -= this.position.Y;
+
+            decalage.Add(cle, position);
         }
 
         public void Deplace(Point position)
         {
-            foreach (Figure figure in elements.Values)
+            Figure figure;
+            Point decalage;
+            
+            for (int id = 0; id < elements.Values.Count; id++)
             {
-                figure.Position = position;
+                figure = elements.ElementAt(id).Value;
+                decalage = this.decalage.ElementAt(id).Value;
+                
+                figure.SetPositionX(position.X + decalage.X);
+                figure.SetPositionY(position.Y + decalage.Y);
             }
         }
 

@@ -46,5 +46,15 @@ namespace Carrosse.Figures
             get => position;
             set => position = value;
         }
+
+        public void SetPositionX(int positionX)
+        {
+            position.X = positionX;
+        }
+        
+        public void SetPositionY(int positionY)
+        {
+            position.Y = positionY;
+        }
     }
 }

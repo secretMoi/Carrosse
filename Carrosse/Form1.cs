@@ -34,10 +34,34 @@ namespace Carrosse
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            button1.Text = e.Location.ToString();
-            
-            
+            Carrosse.Deplace(e.Location);
+            pictureBox1.Invalidate();
         }
+        
+        /*protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+                {
+                case Keys.Up:
+                    figureCourante.Bouger(0, -3);
+                    break;
+            
+                case Keys.Down:
+                    figureCourante.Bouger(0, 3);
+                    break;
+            
+                case Keys.Left:
+                    figureCourante.Bouger(-3);
+                    break;
+            
+                case Keys.Right:
+                    figureCourante.Bouger(3);
+                    break;
+            }
+
+
+            return base.ProcessCmdKey(ref msg, keyData);
+        }*/
         
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
