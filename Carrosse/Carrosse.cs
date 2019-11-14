@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using Carrosse.Figures;
@@ -9,14 +10,14 @@ namespace Carrosse
     public class Carrosse
     {
         private Dictionary<string, Figure> elements; // contient les éléments du carrosse
-        private Dictionary<string, Point> decalage; // définit leur décalage par rapport au carrosse
+        //private Dictionary<string, Point> decalage; // définit leur décalage par rapport au carrosse
         private Point position; // position courante du carrosse
         private Point dimensions; // tailles du carrosse
 
         public Carrosse(Point position)
         {
             elements = new Dictionary<string, Figure>();
-            decalage = new Dictionary<string, Point>();
+            //decalage = new Dictionary<string, Point>();
             
             this.position = position;
             this.dimensions = new Point(200, 100);
@@ -58,7 +59,7 @@ namespace Carrosse
             // création roue gauche
             dimension = new Point(80, 10);
             position.X = this.position.X - dimension.X / 2;
-            position.Y = this.position.Y + this.dimensions.Y - dimension.X / 2;;
+            position.Y = this.position.Y + this.dimensions.Y - dimension.X / 2;
             AjouterRoue("roueG", position, dimension, Color.Brown);
             
             // création roue droite
@@ -72,42 +73,38 @@ namespace Carrosse
         {
             elements.Add(cle, new Rectangle(position, dimension, remplissage, contour, largeurContour));
             
-            LieDecalage(cle, position);
+            //LieDecalage(cle, position);
         }
         
         private void AjouterRoue(string cle, Point position, Point dimension, Color remplissage)
         {
             elements.Add(cle, new Cercle(position, dimension.X, remplissage));
             
-            LieDecalage(cle, position);
+            //LieDecalage(cle, position);
         }
 
-        private void LieDecalage(string cle, Point position)
+        /*private void LieDecalage(string cle, Point position)
         {
             position.X -= this.position.X;
             position.Y -= this.position.Y;
             
             decalage.Add(cle, position);
-        }
+        }*/
 
         public void Deplace(Point positionDestination)
         {
-            Figure figure;
-            Point decalageFigure;
-
-            for (int id = 0; id < elements.Values.Count; id++)
-            {
-                figure = elements.ElementAt(id).Value;
-                decalageFigure = decalage.ElementAt(id).Value;
-                
-                figure.SetPositionX(positionDestination.X + decalageFigure.X);
-                figure.SetPositionY(positionDestination.Y + decalageFigure.Y);
-            }
+            positionDestination.X -= position.X;
+            positionDestination.Y -= position.Y;
+            
+            Deplace(positionDestination.X, positionDestination.Y);
         }
 
         public void Deplace(int x, int y = 0)
         {
             Figure figure;
+
+            position.X += x;
+            position.Y += y;
             
             for (int id = 0; id < elements.Values.Count; id++)
             {
