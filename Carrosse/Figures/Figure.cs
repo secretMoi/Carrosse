@@ -38,13 +38,13 @@ namespace Carrosse.Figures
             contour = new Pen(couleurContour, largeurContour);
         }
 
-        public virtual void Deplace()
-        {
-            
-        }
-
         public Point Dimension => dimension;
         public Bitmap Image => image;
-        public Point Position => position;
+
+        public Point Position
+        {
+            get => position;
+            set => position = value;
+        }
     }
 }

@@ -52,10 +52,21 @@ namespace Carrosse
             AjouterRectangle("poignee", position, dimension, Color.Yellow);
             
             // création roue gauche
-            dimension = new Point(20, 10);
-            position.X = this.position.X;
-            position.Y = this.position.Y + this.dimensions.Y;
+            dimension = new Point(80, 10);
+            position.X = this.position.X - dimension.X / 2;
+            position.Y = this.position.Y + this.dimensions.Y - dimension.X / 2;;
             AjouterRoue("roueG", position, dimension, Color.Brown);
+            
+            // création roue droite
+            dimension = new Point(80, 10);
+            position.X = this.position.X + this.dimensions.X - dimension.X / 2;
+            position.Y = this.position.Y + this.dimensions.Y - dimension.X / 2;
+            AjouterRoue("roueD", position, dimension, Color.Brown);
+        }
+
+        private Point PositionElement()
+        {
+            return new Point();
         }
 
         private void AjouterRectangle(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
@@ -66,6 +77,14 @@ namespace Carrosse
         private void AjouterRoue(string cle, Point position, Point dimension, Color remplissage)
         {
             elements.Add(cle, new Cercle(position, dimension.X, remplissage));
+        }
+
+        public void Deplace(Point position)
+        {
+            foreach (Figure figure in elements.Values)
+            {
+                figure.Position = position;
+            }
         }
 
         public List<Figure> ListeElements()

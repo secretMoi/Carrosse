@@ -19,6 +19,18 @@ namespace Carrosse.Figures
             
             int rayon = dimension.X;
             
+            /*graphique.FillRectangle(remplissage,0, 0, 
+                dimension.X, dimension.Y);
+            
+            graphique.DrawRectangle(contour,
+                0, 0, 
+                dimension.X, dimension.Y); // dessine le rectangle dans l'image*/
+            
+            
+            
+            graphique.FillEllipse(remplissage,0, 0, 
+                dimension.X, dimension.Y);
+            
             graphique.DrawEllipse(contour,
                 rayon / 2, rayon / 2, 
                 rayon, rayon); // dessine le cercle dans l'image

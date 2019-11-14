@@ -14,14 +14,12 @@ namespace Carrosse
 {
     public partial class Form1 : Form
     {
-        private List<Figure> figures;
         private Carrosse Carrosse;
         public Form1()
         {
             InitializeComponent();
             
-            Carrosse = new Carrosse(new Point(100, 100));
-            figures = new List<Figure>();
+            Carrosse = new Carrosse(new Point(50, 100));
         }
         
         private void Form1_Load(object sender, EventArgs e)
@@ -29,29 +27,24 @@ namespace Carrosse
 
         }
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            foreach (Figure figure in Carrosse.ListeElements())
-            {
-                e.Graphics.DrawImage(figure.Image, figure.Position);
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            figures = new List<Figure>();
-            
-            figures.Add(new Rectangle(new Point(70, 70), new Point(50,50),  Color.Red));
-            figures.Add(new Rectangle(new Point(200, 200), new Point(50,50),  Color.Navy));
-            
-            figures.Add(new Cercle(new Point(100, 100), 40,  Color.Brown));
-            
             pictureBox1.Invalidate();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             button1.Text = e.Location.ToString();
+            
+            
+        }
+        
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            foreach (Figure figure in Carrosse.ListeElements())
+            {
+                e.Graphics.DrawImage(figure.Image, figure.Position);
+            }
         }
     }
 }
