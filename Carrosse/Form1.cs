@@ -56,8 +56,11 @@ namespace Carrosse
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if(!drag) return; // si le drag&drop n'est pas activé on ne fait rien
+
+            Point positionCourante = e.Location;
+            Carrosse.Centre(ref positionCourante);
+            Carrosse.Deplace(positionCourante);
             
-            Carrosse.Deplace(e.Location);
             pictureBox1.Invalidate();
         }
         

@@ -106,6 +106,12 @@ namespace Carrosse
                 figure.SetPositionY(figure.Position.Y + y);
             }
         }
+        
+        public void Centre(ref Point point)
+        {
+            point.X -= dimensions.X / 2;
+            point.Y -= dimensions.Y / 2;
+        }
 
         public List<Figure> ListeElements()
         {
