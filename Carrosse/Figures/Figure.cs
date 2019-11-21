@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
+using System.Drawing.Drawing2D;
 
 namespace Carrosse.Figures
 {
@@ -41,6 +41,11 @@ namespace Carrosse.Figures
         public Point Dimension => dimension;
         public Bitmap Image => image;
         public Point Position => position;
+
+        public void Rotation()
+        {
+            //Graphique.RotateTransform(20.0f);
+        }
 
         public void SetPositionX(int positionX)
         {

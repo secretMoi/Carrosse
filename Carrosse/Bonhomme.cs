@@ -1,9 +1,11 @@
 ﻿using System.Drawing;
+using Carrosse.Figures;
 
 namespace Carrosse
 {
     public class Bonhomme : Element
     {
+        private static int compteur;
         public Bonhomme(Point position) : base(position)
         {
             // création tête
@@ -41,9 +43,28 @@ namespace Carrosse
             position.X = elements["brasG"].Position.X - 5;
             position.Y = elements["brasG"].Position.Y;
             AjouterEllipse("brasD", position, dimension, Color.Brown, Color.Black, 1);
-            
-            // création pied gauche
-            
+        }
+
+        public override void Centre(ref Point point)
+        {
+            point.X = point.X - 
+                      elements["corps"].Dimension.X / 2;
+            point.Y = point.Y - 
+                      elements["tete"].Dimension.Y - elements["corps"].Dimension.Y / 2;
+        }
+
+        public override string ToString()
+        {
+            compteur++;
+            return "Bonhomme - " + compteur;
+        }
+
+        public void Rotation()
+        {
+            foreach (Figure figure in elements.Values)
+            {
+                figure.Rotation();
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ using Rectangle = Carrosse.Figures.Rectangle;
 
 namespace Carrosse
 {
-    public class Element
+    public abstract class Element
     {
         protected Dictionary<string, Figure> elements; // contient les éléments du carrosse
         protected Point position; // position courante du carrosse
@@ -57,12 +57,8 @@ namespace Carrosse
                 figure.SetPositionY(figure.Position.Y + y);
             }
         }
-        
-        public void Centre(ref Point point)
-        {
-            point.X -= dimensions.X / 2;
-            point.Y -= dimensions.Y / 2;
-        }
+
+        public abstract void Centre(ref Point point);
 
         public List<Figure> ListeElements()
         {

@@ -9,6 +9,7 @@ namespace Carrosse
 {
     public class Carrosse : Element
     {
+        private static int compteur;
         public Carrosse(Point position) : base(position)
         {
             this.dimensions = new Point(200, 100);
@@ -64,6 +65,18 @@ namespace Carrosse
             position.X = this.position.X - dimension.X / 2;
             position.Y = this.position.Y - dimension.X / 2;
             AjouterCercle("pointRef", position, dimension, Color.Black);
+        }
+
+        public override void Centre(ref Point point)
+        {
+            point.X -= dimensions.X / 2;
+            point.Y -= dimensions.Y / 2;
+        }
+        
+        public override string ToString()
+        {
+            compteur++;
+            return "Carrosse - " + compteur;
         }
     }
 }

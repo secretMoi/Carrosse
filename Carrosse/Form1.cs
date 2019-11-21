@@ -10,8 +10,8 @@ namespace Carrosse
     {
         private Carrosse Carrosse;
         private Bonhomme Bonhomme;
-        private List<Element> Elements;
-        private int elementCourant;
+        private readonly List<Element> Elements;
+        private Element elementCourant;
         private bool drag;
 
         #region Initialisation
@@ -26,10 +26,6 @@ namespace Carrosse
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            Elements.Add(new Bonhomme(new Point(50, 100)));
-            elementCourant = Elements.Count - 1;
-            
-            pictureBox1.Invalidate();
         }
 
         #endregion
@@ -61,10 +57,13 @@ namespace Carrosse
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if(!drag) return; // si le drag&drop n'est pas activé on ne fait rien
+            
+            /*(Elements[elementCourant] as Bonhomme).Rotation();
+            pictureBox1.Invalidate();*/
 
             Point positionCourante = e.Location;
-            Elements[elementCourant].Centre(ref positionCourante);
-            Elements[elementCourant].Deplace(positionCourante);
+            elementCourant.Centre(ref positionCourante);
+            elementCourant.Deplace(positionCourante);
             
             pictureBox1.Invalidate();
         }
@@ -74,19 +73,19 @@ namespace Carrosse
             switch (keyData)
             {
                 case Keys.Up:
-                    Elements[elementCourant].Deplace(0, -3);
+                    elementCourant.Deplace(0, -3);
                     break;
             
                 case Keys.Down:
-                    Elements[elementCourant].Deplace(0, 3);
+                    elementCourant.Deplace(0, 3);
                     break;
             
                 case Keys.Left:
-                    Elements[elementCourant].Deplace(-3);
+                    elementCourant.Deplace(-3);
                     break;
             
                 case Keys.Right:
-                    Elements[elementCourant].Deplace(3);
+                    elementCourant.Deplace(3);
                     break;
             }
 
@@ -100,7 +99,8 @@ namespace Carrosse
         private void button1_Click(object sender, EventArgs e)
         {
             Elements.Add(new Carrosse(new Point(50, 100)));
-            elementCourant = Elements.Count - 1;
+            elementCourant = Elements[Elements.Count - 1] as Carrosse;
+            listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
             pictureBox1.Invalidate();
         }
@@ -108,9 +108,16 @@ namespace Carrosse
         private void button2_Click(object sender, EventArgs e)
         {
             Elements.Add(new Bonhomme(new Point(50, 100)));
-            elementCourant = Elements.Count - 1;
+            elementCourant = Elements[Elements.Count - 1] as Bonhomme;
+            listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
             pictureBox1.Invalidate();
+        }
+
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            elementCourant = Elements[listBox1.SelectedIndex];
         }
     }
 }
