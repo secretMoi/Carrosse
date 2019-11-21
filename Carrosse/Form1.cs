@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using Carrosse.Figures;
@@ -7,7 +8,10 @@ namespace Carrosse
 {
     public partial class Form1 : Form
     {
-        private readonly Carrosse Carrosse;
+        private Carrosse Carrosse;
+        private Bonhomme Bonhomme;
+        private List<Element> Elements;
+        private int elementCourant;
         private bool drag;
 
         #region Initialisation
@@ -16,7 +20,7 @@ namespace Carrosse
         {
             InitializeComponent();
             
-            Carrosse = new Carrosse(new Point(50, 100));
+            Elements = new List<Element>();
             drag = false;
         }
         
@@ -26,18 +30,16 @@ namespace Carrosse
         }
 
         #endregion
-        
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
-        }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            // redessine toutes les parties du carrosse
-            foreach (Figure figure in Carrosse.ListeElements())
+            foreach (Element element in Elements)
             {
-                e.Graphics.DrawImage(figure.Image, figure.Position);
+                // redessine toutes les parties des éléments
+                foreach (Figure figure in element.ListeElements())
+                {
+                    e.Graphics.DrawImage(figure.Image, figure.Position);
+                }
             }
         }
 
@@ -58,8 +60,8 @@ namespace Carrosse
             if(!drag) return; // si le drag&drop n'est pas activé on ne fait rien
 
             Point positionCourante = e.Location;
-            Carrosse.Centre(ref positionCourante);
-            Carrosse.Deplace(positionCourante);
+            Elements[elementCourant].Centre(ref positionCourante);
+            Elements[elementCourant].Deplace(positionCourante);
             
             pictureBox1.Invalidate();
         }
@@ -69,19 +71,19 @@ namespace Carrosse
             switch (keyData)
             {
                 case Keys.Up:
-                    Carrosse.Deplace(0, -3);
+                    Elements[elementCourant].Deplace(0, -3);
                     break;
             
                 case Keys.Down:
-                    Carrosse.Deplace(0, 3);
+                    Elements[elementCourant].Deplace(0, 3);
                     break;
             
                 case Keys.Left:
-                    Carrosse.Deplace(-3);
+                    Elements[elementCourant].Deplace(-3);
                     break;
             
                 case Keys.Right:
-                    Carrosse.Deplace(3);
+                    Elements[elementCourant].Deplace(3);
                     break;
             }
 
@@ -91,5 +93,21 @@ namespace Carrosse
         }
 
         #endregion
+        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Elements.Add(new Carrosse(new Point(50, 100)));
+            elementCourant = Elements.Count - 1;
+            
+            pictureBox1.Invalidate();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Elements.Add(new Bonhomme(new Point(50, 100)));
+            elementCourant = Elements.Count - 1;
+            
+            pictureBox1.Invalidate();
+        }
     }
 }
