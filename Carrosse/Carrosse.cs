@@ -9,15 +9,13 @@ namespace Carrosse
 {
     public class Carrosse
     {
-        private Dictionary<string, Figure> elements; // contient les éléments du carrosse
-        //private Dictionary<string, Point> decalage; // définit leur décalage par rapport au carrosse
+        private readonly Dictionary<string, Figure> elements; // contient les éléments du carrosse
         private Point position; // position courante du carrosse
         private Point dimensions; // tailles du carrosse
 
         public Carrosse(Point position)
         {
             elements = new Dictionary<string, Figure>();
-            //decalage = new Dictionary<string, Point>();
             
             this.position = position;
             this.dimensions = new Point(200, 100);
@@ -67,29 +65,23 @@ namespace Carrosse
             position.X = this.position.X + this.dimensions.X - dimension.X / 2;
             position.Y = this.position.Y + this.dimensions.Y - dimension.X / 2;
             AjouterRoue("roueD", position, dimension, Color.Brown);
+            
+            // création point de référence
+            dimension = new Point(15, 10);
+            position.X = this.position.X - dimension.X / 2;
+            position.Y = this.position.Y - dimension.X / 2;
+            AjouterRoue("pointRef", position, dimension, Color.Black);
         }
 
         private void AjouterRectangle(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
             elements.Add(cle, new Rectangle(position, dimension, remplissage, contour, largeurContour));
-            
-            //LieDecalage(cle, position);
         }
         
         private void AjouterRoue(string cle, Point position, Point dimension, Color remplissage)
         {
             elements.Add(cle, new Cercle(position, dimension.X, remplissage));
-            
-            //LieDecalage(cle, position);
         }
-
-        /*private void LieDecalage(string cle, Point position)
-        {
-            position.X -= this.position.X;
-            position.Y -= this.position.Y;
-            
-            decalage.Add(cle, position);
-        }*/
 
         public void Deplace(Point positionDestination)
         {

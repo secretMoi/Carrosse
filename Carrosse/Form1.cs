@@ -7,7 +7,7 @@ namespace Carrosse
 {
     public partial class Form1 : Form
     {
-        private Carrosse Carrosse;
+        private readonly Carrosse Carrosse;
         private bool drag;
 
         #region Initialisation
