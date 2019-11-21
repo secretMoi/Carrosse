@@ -26,7 +26,10 @@ namespace Carrosse
         
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Elements.Add(new Bonhomme(new Point(50, 100)));
+            elementCourant = Elements.Count - 1;
+            
+            pictureBox1.Invalidate();
         }
 
         #endregion

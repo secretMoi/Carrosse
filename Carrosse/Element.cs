@@ -29,10 +29,10 @@ namespace Carrosse
             elements.Add(cle, new Cercle(position, dimension.X, remplissage));
         }
         
-        /*protected void AjouterEllipse(string cle, Point position, Point dimension, Color remplissage)
+        protected void AjouterEllipse(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
-            elements.Add(cle, new Ellipse(position, dimension, remplissage));
-        }*/
+            elements.Add(cle, new Ellipse(position, dimension, remplissage, contour, largeurContour));
+        }
 
         public void Deplace(Point positionDestination)
         {

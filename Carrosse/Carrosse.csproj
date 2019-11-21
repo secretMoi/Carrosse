@@ -50,6 +50,7 @@
     <Compile Include="Carrosse.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Figures\Cercle.cs" />
+    <Compile Include="Figures\Ellipse.cs" />
     <Compile Include="Figures\Figure.cs" />
     <Compile Include="Figures\Rectangle.cs" />
     <Compile Include="Form1.cs">
