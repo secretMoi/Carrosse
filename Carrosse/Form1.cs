@@ -119,5 +119,14 @@ namespace Carrosse
         {
             elementCourant = Elements[listBox1.SelectedIndex];
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Elements.Add(new TestPolygone(new Point(50, 100)));
+            elementCourant = Elements[Elements.Count - 1] as TestPolygone;
+            listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
+            
+            pictureBox1.Invalidate();
+        }
     }
 }

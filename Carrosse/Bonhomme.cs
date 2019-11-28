@@ -43,6 +43,8 @@ namespace Carrosse
             position.X = elements["brasG"].Position.X - 5;
             position.Y = elements["brasG"].Position.Y;
             AjouterEllipse("brasD", position, dimension, Color.Brown, Color.Black, 1);
+            
+            elements["brasD"].Rotation(-30.0f);
         }
 
         public override void Centre(ref Point point)
@@ -57,14 +59,6 @@ namespace Carrosse
         {
             compteur++;
             return "Bonhomme - " + compteur;
-        }
-
-        public void Rotation()
-        {
-            foreach (Figure figure in elements.Values)
-            {
-                figure.Rotation();
-            }
         }
     }
 }
