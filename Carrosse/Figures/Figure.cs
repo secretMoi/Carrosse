@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 
 namespace Carrosse.Figures
 {
@@ -8,6 +7,7 @@ namespace Carrosse.Figures
     {
         protected Point position;
         protected Point dimension;
+        protected Rotation rotation;
         protected Color CouleurRemplissage;
         protected Color CouleurContour;
         protected int largeurContour;
@@ -22,15 +22,27 @@ namespace Carrosse.Figures
             this.position = position;
             this.dimension = dimension;
             
+            rotation = new Rotation();
+            
             this.CouleurRemplissage = couleurRemplissage;
             if (contour != null)
                 this.CouleurContour = (Color) contour;
             this.largeurContour = largeurContour;
+
+            int dimensionMax = PlusGrand(this.dimension.X, this.dimension.Y);
             
-            image = new Bitmap(this.dimension.X, this.dimension.Y);
+            image = new Bitmap(dimensionMax, dimensionMax);
             Graphique = Graphics.FromImage(image);
             
             Genere();
+        }
+
+        protected int PlusGrand(int nombre1, int nombre2)
+        {
+            if (nombre1 > nombre2)
+                return nombre1;
+
+            return nombre2;
         }
 
         protected virtual void Genere()
@@ -39,17 +51,52 @@ namespace Carrosse.Figures
             Contour = new Pen(CouleurContour, largeurContour);
         }
         
+        public void Rotation2(double angle)
+        {
+            int largeur = Image.Width;
+            int hauteur = Image.Height;
+
+            angle = 360 - angle;
+            
+            //create a new empty bitmap to hold rotated image
+            Bitmap imageDestination = new Bitmap(largeur, hauteur);
+            //make a graphics object from the empty bitmap
+            using(Graphics g = Graphics.FromImage(imageDestination)) 
+            {
+                //move rotation point to center of image
+                g.TranslateTransform(0, 0);
+                //rotate
+                g.RotateTransform((float) angle);
+                //move image back
+                g.TranslateTransform(0, 0);
+                //draw passed in image onto graphics object
+                g.DrawImage(image, new Point(0, 0)); 
+            }
+
+            image = imageDestination;
+        }
+
+        public void Cadre()
+        {
+            
+        }
+        
+        public void Rotation3(double angle)
+        {
+            int maxside = (int)(Math.Sqrt(image.Width * image.Width + image.Height * image.Height));
+        }
+        
         public void Rotation(float angle)
         {
             int largeurImage, hauteurImage, x, y;
             var dW = (double)image.Width;
             var dH = (double)image.Height;
 
-            double degrees = Math.Abs(angle);
+            double degres = Math.Abs(angle);
             
-            if (degrees <= 90)
+            if (degres <= 90)
             {
-                double radians = 0.0174532925 * degrees;
+                double radians = 0.0174532925 * degres;
                 double dSin = Math.Sin(radians);
                 double dCos = Math.Cos(radians);
                 largeurImage = (int)(dH * dSin + dW * dCos);
@@ -59,8 +106,8 @@ namespace Carrosse.Figures
             }
             else
             {
-                degrees -= 90;
-                double radians = 0.0174532925 * degrees;
+                degres -= 90;
+                double radians = 0.0174532925 * degres;
                 double dSin = Math.Sin(radians);
                 double dCos = Math.Cos(radians);
                 largeurImage = (int)(dW * dSin + dH * dCos);
@@ -69,12 +116,12 @@ namespace Carrosse.Figures
                 y = (hauteurImage - image.Height) / 2;
             }
 
-            var rotateAtX = image.Width / 2f;
-            var rotateAtY = image.Height / 2f;
+            float rotateAtX = image.Width / 2f;
+            float rotateAtY = image.Height / 2f;
 
-            var bmpRet = new Bitmap(largeurImage, hauteurImage);
-            bmpRet.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-            using (var graphics = Graphics.FromImage(bmpRet))
+            Bitmap imageTemp = new Bitmap(largeurImage, hauteurImage);
+            imageTemp.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            using (Graphics graphics = Graphics.FromImage(imageTemp))
             {
                 graphics.TranslateTransform(rotateAtX + x, rotateAtY + y);
                 graphics.RotateTransform(angle);
@@ -82,7 +129,7 @@ namespace Carrosse.Figures
                 graphics.DrawImage(image, new PointF(0 + x, 0 + y));
             }
 
-            image = bmpRet;
+            image = imageTemp;
         }
 
         public Point Dimension => dimension;

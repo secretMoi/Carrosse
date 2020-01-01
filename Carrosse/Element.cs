@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using Carrosse.Figures;
@@ -9,7 +8,7 @@ namespace Carrosse
 {
     public abstract class Element
     {
-        protected Dictionary<string, Figure> elements; // contient les éléments du carrosse
+        protected readonly Dictionary<string, Figure> elements; // contient les éléments du carrosse
         protected Point position; // position courante du carrosse
         protected Point dimensions; // tailles du carrosse
 
