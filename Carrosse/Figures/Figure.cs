@@ -9,6 +9,7 @@ namespace Carrosse.Figures
         protected Point position;
         protected Point dimension;
         protected Rotation rotation;
+        public double angle;
         protected Color CouleurRemplissage;
         protected Color CouleurContour;
         protected int largeurContour;
@@ -24,6 +25,7 @@ namespace Carrosse.Figures
         {
             this.position = position;
             this.dimension = dimension;
+            this.angle = 0;
             
             rotation = new Rotation();
             
@@ -33,13 +35,17 @@ namespace Carrosse.Figures
             this.largeurContour = largeurContour;
 
             Graphique = GraphiquePartage;
-
-            //int dimensionMax = PlusGrand(this.dimension.X, this.dimension.Y);
-            
-            /*image = new Bitmap(dimensionMax, dimensionMax);
-            Graphique = Graphics.FromImage(image);*/
             
             Genere();
+
+            // permet de rectifier l'angle pour ne pas impacter les autres éléments
+            if (Math.Abs(angle) > 1)
+            {
+                Graphique.TranslateTransform(position.X + dimension.X / 2, position.Y);
+                // rotation
+                Graphique.RotateTransform(-(float) angle);
+                Graphique.TranslateTransform(-(position.X+ dimension.X / 2), -position.Y);
+            }
         }
 
         public static void InitialiseConteneur(PictureBox pictureBox)
@@ -72,6 +78,23 @@ namespace Carrosse.Figures
             
             if (graphics != null)
                 Graphique = graphics;
+
+            if (Math.Abs(angle) > 1)
+            {
+                Graphique.FillRectangle(new SolidBrush(Color.Chartreuse), position.X + dimension.X / 2, position.Y, 20, 20);
+            
+                Graphique.TranslateTransform(position.X + dimension.X / 2, position.Y);
+                // rotation
+                Graphique.RotateTransform((float) angle);
+                Graphique.TranslateTransform(-(position.X+ dimension.X / 2), -position.Y);
+            }
+        }
+        
+        public void Rotation(double angle)
+        {
+            angle = 360 - angle;
+
+            this.angle = angle;
         }
         
         /*public void Rotation2(double angle)
@@ -102,52 +125,6 @@ namespace Carrosse.Figures
         public void Rotation3(double angle)
         {
             int maxside = (int)(Math.Sqrt(image.Width * image.Width + image.Height * image.Height));
-        }
-        
-        public void Rotation(float angle)
-        {
-            int largeurImage, hauteurImage, x, y;
-            var dW = (double)image.Width;
-            var dH = (double)image.Height;
-
-            double degres = Math.Abs(angle);
-            
-            if (degres <= 90)
-            {
-                double radians = 0.0174532925 * degres;
-                double dSin = Math.Sin(radians);
-                double dCos = Math.Cos(radians);
-                largeurImage = (int)(dH * dSin + dW * dCos);
-                hauteurImage = (int)(dW * dSin + dH * dCos);
-                x = (largeurImage - image.Width) / 2;
-                y = (hauteurImage - image.Height) / 2;
-            }
-            else
-            {
-                degres -= 90;
-                double radians = 0.0174532925 * degres;
-                double dSin = Math.Sin(radians);
-                double dCos = Math.Cos(radians);
-                largeurImage = (int)(dW * dSin + dH * dCos);
-                hauteurImage = (int)(dH * dSin + dW * dCos);
-                x = (largeurImage - image.Width) / 2;
-                y = (hauteurImage - image.Height) / 2;
-            }
-
-            float rotateAtX = image.Width / 2f;
-            float rotateAtY = image.Height / 2f;
-
-            Bitmap imageTemp = new Bitmap(largeurImage, hauteurImage);
-            imageTemp.SetResolution(image.HorizontalResolution, image.VerticalResolution);
-            using (Graphics graphics = Graphics.FromImage(imageTemp))
-            {
-                graphics.TranslateTransform(rotateAtX + x, rotateAtY + y);
-                graphics.RotateTransform(angle);
-                graphics.TranslateTransform(-rotateAtX - x, -rotateAtY - y);
-                graphics.DrawImage(image, new PointF(0 + x, 0 + y));
-            }
-
-            image = imageTemp;
         }*/
 
         public Point Dimension => dimension;

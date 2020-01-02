@@ -22,13 +22,12 @@ namespace Carrosse
             dimension = new Point(40, 30);
             position.X = this.position.X + 10;
             position.Y = this.position.Y + 10;
-            AjouterRectangle("fenetreG", position, dimension, Color.Navy);
+            AjouterRectangle("fenetreG", position, dimension, Color.Navy, Color.Black, 2);
             
             // création fenêtre droite
             dimension = new Point(40, 30);
             position.X = (this.position.X + this.dimensions.X) -
                          (dimension.X + 10);
-            position.Y = this.position.Y + 10;
             AjouterRectangle("fenetreD", position, dimension, Color.Navy, Color.Black, 2);
             
             // création porte
@@ -65,6 +64,8 @@ namespace Carrosse
             position.X = this.position.X - dimension.X / 2;
             position.Y = this.position.Y - dimension.X / 2;
             AjouterCercle("pointRef", position, dimension, Color.Black);
+
+            elements["fenetreD"].angle = 20;
         }
 
         public override void Centre(ref Point point)

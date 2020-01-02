@@ -35,7 +35,9 @@ namespace Carrosse
         
         private void loopTimerEvent(Object source, ElapsedEventArgs e)
         {
+            /*Elements[0].ListeElements()[2].Rotation(45);
             
+            pictureBox1.Invalidate();*/
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -45,6 +47,7 @@ namespace Carrosse
                 // redessine toutes les parties des éléments
                 foreach (Figure figure in element.ListeElements())
                 {
+                    //figure.Rotation(10);
                     figure.Afficher(e.Graphics);
                 }
             }
@@ -116,9 +119,9 @@ namespace Carrosse
             elementCourant = Elements[Elements.Count - 1] as Bonhomme;
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
-            //SetTimer();
+            SetTimer();
             
-            //pictureBox1.Invalidate();
+            pictureBox1.Invalidate();
         }
 
 
@@ -141,7 +144,7 @@ namespace Carrosse
             // timer qui se déclenche lorsque l'on clique dans la tv et sert à déplacer une figure
             loopTimer = new System.Timers.Timer();
             loopTimer.Interval = 15; //interval in milliseconds
-            loopTimer.Enabled = false; // désactive par défaut pour limiter les ressources
+            loopTimer.Enabled = true; // désactive par défaut pour limiter les ressources
             loopTimer.Elapsed += loopTimerEvent; // à effectuer entre les 2 clics souris
             loopTimer.AutoReset = true; // le ré enclenche à la fin
         }
