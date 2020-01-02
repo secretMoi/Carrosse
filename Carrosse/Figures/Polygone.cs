@@ -12,11 +12,11 @@ namespace Carrosse.Figures
             angle = 10.0f;
         }
         
-        protected override void Genere()
+        public override void Genere(Graphics graphics = null)
         {
-            base.Genere();
+            PreparationAffichage(graphics);
             
-            Graphique.FillPolygon(Remplissage, new []{ CSG, CSD, CIG, CID });
+            GraphiquePartage.FillPolygon(Remplissage, new []{ CSG, CSD, CIG, CID });
         }
         
         public Point CSG

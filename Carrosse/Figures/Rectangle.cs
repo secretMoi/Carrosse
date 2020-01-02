@@ -10,15 +10,15 @@ namespace Carrosse.Figures
             
         }
 
-        protected override void Genere()
+        public override void Genere(Graphics graphics = null)
         {
-            base.Genere();
+            PreparationAffichage(graphics);
             
-            Graphique.FillRectangle(Remplissage,0, 0, 
+            Graphique.FillRectangle(Remplissage, position.X, position.Y, 
                 dimension.X, dimension.Y);
             
             Graphique.DrawRectangle(Contour,
-                0, 0, 
+                position.X, position.Y, 
                 dimension.X, dimension.Y); // dessine le rectangle dans l'image
         }
     }

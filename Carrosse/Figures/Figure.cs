@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Carrosse.Figures
 {
@@ -13,6 +14,8 @@ namespace Carrosse.Figures
         protected int largeurContour;
         
         protected Bitmap image;
+        protected static PictureBox pictureBox;
+        protected static Graphics GraphiquePartage;
         protected Graphics Graphique;
         protected SolidBrush Remplissage;
         protected Pen Contour;
@@ -29,12 +32,20 @@ namespace Carrosse.Figures
                 this.CouleurContour = (Color) contour;
             this.largeurContour = largeurContour;
 
-            int dimensionMax = PlusGrand(this.dimension.X, this.dimension.Y);
+            Graphique = GraphiquePartage;
+
+            //int dimensionMax = PlusGrand(this.dimension.X, this.dimension.Y);
             
-            image = new Bitmap(dimensionMax, dimensionMax);
-            Graphique = Graphics.FromImage(image);
+            /*image = new Bitmap(dimensionMax, dimensionMax);
+            Graphique = Graphics.FromImage(image);*/
             
             Genere();
+        }
+
+        public static void InitialiseConteneur(PictureBox pictureBox)
+        {
+            Figure.pictureBox = pictureBox;
+            Figure.GraphiquePartage = Graphics.FromHwnd(Figure.pictureBox.Handle);
         }
 
         protected int PlusGrand(int nombre1, int nombre2)
@@ -45,13 +56,25 @@ namespace Carrosse.Figures
             return nombre2;
         }
 
-        protected virtual void Genere()
+        public void Afficher(Graphics graphics)
         {
-            Remplissage = new SolidBrush(CouleurRemplissage);
-            Contour = new Pen(CouleurContour, largeurContour);
+            Genere(graphics);
+        }
+
+        public abstract void Genere(Graphics graphics = null);
+
+        protected void PreparationAffichage(Graphics graphics = null)
+        {
+            if(Remplissage == null)
+                Remplissage = new SolidBrush(CouleurRemplissage);
+            if(Contour == null)
+                Contour = new Pen(CouleurContour, largeurContour);
+            
+            if (graphics != null)
+                Graphique = graphics;
         }
         
-        public void Rotation2(double angle)
+        /*public void Rotation2(double angle)
         {
             int largeur = Image.Width;
             int hauteur = Image.Height;
@@ -74,11 +97,6 @@ namespace Carrosse.Figures
             }
 
             image = imageDestination;
-        }
-
-        public void Cadre()
-        {
-            
         }
         
         public void Rotation3(double angle)
@@ -130,10 +148,21 @@ namespace Carrosse.Figures
             }
 
             image = imageTemp;
-        }
+        }*/
 
         public Point Dimension => dimension;
-        public Bitmap Image => image;
+
+        public Bitmap Image
+        {
+            get
+            {
+                int dimensionMax = PlusGrand(dimension.X, dimension.Y);
+                //Bitmap images = new Bitmap(dimensionMax, dimensionMax);
+                //Graphique = Graphics.FromImage(images);
+
+                return new Bitmap(dimensionMax,dimensionMax, GraphiquePartage);
+            }
+        }
         public Point Position => position;
 
         public void SetPositionX(int positionX)

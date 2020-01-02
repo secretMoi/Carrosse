@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 using Carrosse.Figures;
@@ -10,8 +9,6 @@ namespace Carrosse
 {
     public partial class Form1 : Form
     {
-        private Carrosse Carrosse;
-        private Bonhomme Bonhomme;
         private readonly List<Element> Elements;
         private Element elementCourant;
         private bool drag;
@@ -26,6 +23,8 @@ namespace Carrosse
             
             Elements = new List<Element>();
             drag = false;
+            
+            Figure.InitialiseConteneur(pictureBox1);
         }
         
         private void Form1_Load(object sender, EventArgs e)
@@ -46,7 +45,7 @@ namespace Carrosse
                 // redessine toutes les parties des éléments
                 foreach (Figure figure in element.ListeElements())
                 {
-                    e.Graphics.DrawImage(figure.Image, figure.Position);
+                    figure.Afficher(e.Graphics);
                 }
             }
         }
@@ -66,9 +65,6 @@ namespace Carrosse
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if(!drag) return; // si le drag&drop n'est pas activé on ne fait rien
-            
-            /*(Elements[elementCourant] as Bonhomme).Rotation();
-            pictureBox1.Invalidate();*/
 
             Point positionCourante = e.Location;
             elementCourant.Centre(ref positionCourante);
@@ -120,9 +116,9 @@ namespace Carrosse
             elementCourant = Elements[Elements.Count - 1] as Bonhomme;
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
-            SetTimer();
+            //SetTimer();
             
-            pictureBox1.Invalidate();
+            //pictureBox1.Invalidate();
         }
 
 
@@ -145,7 +141,7 @@ namespace Carrosse
             // timer qui se déclenche lorsque l'on clique dans la tv et sert à déplacer une figure
             loopTimer = new System.Timers.Timer();
             loopTimer.Interval = 15; //interval in milliseconds
-            loopTimer.Enabled = true; // désactive par défaut pour limiter les ressources
+            loopTimer.Enabled = false; // désactive par défaut pour limiter les ressources
             loopTimer.Elapsed += loopTimerEvent; // à effectuer entre les 2 clics souris
             loopTimer.AutoReset = true; // le ré enclenche à la fin
         }

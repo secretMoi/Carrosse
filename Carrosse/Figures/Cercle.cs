@@ -7,23 +7,19 @@ namespace Carrosse.Figures
         public Cercle(Point position, int rayon, Color couleurRemplissage, Color? contour = null, int largeurContour = 0) :
             base(position, new Point(rayon, rayon), couleurRemplissage, contour, largeurContour)
         {
-            image = new Bitmap(rayon * 2, rayon * 2);
-            Graphique = Graphics.FromImage(image);
-            
-            Genere();
         }
 
-        protected override void Genere()
+        public override void Genere(Graphics graphics = null)
         {
-            base.Genere();
+            PreparationAffichage(graphics);
             
             int rayon = dimension.X;
             
-            Graphique.FillEllipse(Remplissage,largeurContour, largeurContour, 
+            Graphique.FillEllipse(Remplissage, position.X, position.Y, 
                 dimension.X, dimension.Y);
             
             Graphique.DrawEllipse(Contour,
-                largeurContour, largeurContour, 
+                position.X, position.Y,
                 rayon, rayon); // dessine le cercle dans l'image
         }
     }

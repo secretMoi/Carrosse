@@ -44,7 +44,7 @@ namespace Carrosse
             AjouterEllipse("brasD", position, dimension, Color.Brown, Color.Black, 1);
             
             //elements["brasD"].Rotation(-30.0f);
-            elements["brasD"].Rotation2(90.0);
+            //elements["brasD"].Rotation2(90.0);
         }
 
         public override void Centre(ref Point point)
