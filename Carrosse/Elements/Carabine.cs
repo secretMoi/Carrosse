@@ -18,7 +18,7 @@ namespace Carrosse.Elements
             AjouterArc("anneauGachette", position, dimension, Color.Black, 3, 0, 180);
 
             // création corps
-            dimension = new Point(150, 50);
+            dimension = new Point(150, 40);
             position.X -= dimension.X / 3;
             position.Y = elements["gachette"].Position.Y 
                          - dimension.Y;

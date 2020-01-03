@@ -62,6 +62,7 @@ namespace Carrosse
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if(!drag) return; // si le drag&drop n'est pas activé on ne fait rien
+            if (Elements.Count < 1) return; // vérifie qu'il y a bien des éléments à déplacer
 
             Point positionCourante = e.Location;
             elementCourant.Centre(ref positionCourante);
@@ -139,6 +140,15 @@ namespace Carrosse
         {
             Elements.Add(new Carabine(new Point(0, 0)));
             elementCourant = Elements[Elements.Count - 1] as Carabine;
+            listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
+            
+            pictureBox1.Invalidate();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            Elements.Add(new Arbre(new Point(0, 0)));
+            elementCourant = Elements[Elements.Count - 1] as Arbre;
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
             pictureBox1.Invalidate();

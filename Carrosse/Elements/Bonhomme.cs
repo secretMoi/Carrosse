@@ -8,11 +8,11 @@ namespace Carrosse.Elements
         public Bonhomme(Point position) : base(position)
         {
             // création tête
-            Point dimension = new Point(50, 100);
+            Point dimension = new Point(100, 100);
             AjouterDisque("tete", position, dimension, Color.Bisque);
             
             // création bras gauche
-            dimension = new Point(20, 80);
+            dimension = new Point(40, 160);
             position.X += elements["tete"].Dimension.X / 2 -
                           dimension.X / 2 + 5;
             position.Y = position.Y +
@@ -20,14 +20,14 @@ namespace Carrosse.Elements
             AjouterEllipse("brasG", position, dimension, Color.Brown, Color.Black, 1);
 
             // création corps
-            dimension = new Point(40, 80);
+            dimension = new Point(80, 160);
             position.X = elements["tete"].Position.X + 5;
             position.Y = elements["tete"].Position.Y +
                          elements["tete"].Dimension.Y;
             AjouterEllipse("corps", position, dimension, Color.Navy);
             
             // création jambe gauche
-            dimension = new Point(20, 80);
+            dimension = new Point(40, 160);
             position.X = elements["brasG"].Position.X;
             position.Y = elements["corps"].Position.Y +
                          elements["corps"].Dimension.Y;

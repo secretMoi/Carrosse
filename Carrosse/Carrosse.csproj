@@ -47,12 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Elements\Arbre.cs" />
     <Compile Include="Elements\Balle.cs" />
     <Compile Include="Elements\Bonhomme.cs" />
     <Compile Include="Elements\Carabine.cs" />
     <Compile Include="Elements\Carrosse.cs" />
     <Compile Include="Elements\Cible.cs" />
     <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\RessourceImage.cs" />
     <Compile Include="Elements\Lunette.cs" />
     <Compile Include="Figures\Arc.cs" />
     <Compile Include="Figures\Cercle.cs" />
@@ -108,7 +110,35 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ressources\sons" />
+    <EmbeddedResource Include="ressources\images\arbre-1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ressources\images\arbre-2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ressources\images\arbre-3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ressources\images\arbre-4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ressources\images\arbre-5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ressources\images\arbre-6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ressources\sons\ouh.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ressources\sons\reload.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ressources\sons\shot.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
