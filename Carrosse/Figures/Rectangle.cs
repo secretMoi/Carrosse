@@ -4,7 +4,7 @@ namespace Carrosse.Figures
 {
     public class Rectangle : Figure
     {
-        public Rectangle(Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 10) :
+        public Rectangle(Point position, Point dimension, Color? remplissage = null, Color? contour = null, int largeurContour = 10) :
             base(position, dimension, remplissage, contour, largeurContour)
         {
             

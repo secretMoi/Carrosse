@@ -49,10 +49,12 @@
     <Compile Include="Animation.cs" />
     <Compile Include="Elements\Balle.cs" />
     <Compile Include="Elements\Bonhomme.cs" />
+    <Compile Include="Elements\Carabine.cs" />
     <Compile Include="Elements\Carrosse.cs" />
     <Compile Include="Elements\Cible.cs" />
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\Lunette.cs" />
+    <Compile Include="Figures\Arc.cs" />
     <Compile Include="Figures\Cercle.cs" />
     <Compile Include="Figures\Disque.cs" />
     <Compile Include="Figures\Ellipse.cs" />
@@ -104,6 +106,9 @@
     <EmbeddedResource Include="ressources\images\balle.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ressources\sons" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

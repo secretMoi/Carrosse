@@ -28,10 +28,6 @@ namespace Carrosse
             
             Figure.InitialiseConteneur(pictureBox1);
         }
-        
-        private void Form1_Load(object sender, EventArgs e)
-        {
-        }
 
         #endregion
         
@@ -48,12 +44,6 @@ namespace Carrosse
             foreach (Element element in Elements)
             {
                 element.Affiche(e.Graphics);
-                /*// redessine toutes les parties des éléments
-                foreach (Figure figure in element.ListeElements())
-                {
-                    //figure.Rotation(10);
-                    figure.Afficher(e.Graphics);
-                }*/
             }
         }
 
@@ -79,32 +69,6 @@ namespace Carrosse
             
             pictureBox1.Invalidate();
         }
-        
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            switch (keyData)
-            {
-                case Keys.Up:
-                    elementCourant.Deplace(0, -3);
-                    break;
-            
-                case Keys.Down:
-                    elementCourant.Deplace(0, 3);
-                    break;
-            
-                case Keys.Left:
-                    elementCourant.Deplace(-3);
-                    break;
-            
-                case Keys.Right:
-                    elementCourant.Deplace(3);
-                    break;
-            }
-
-            pictureBox1.Invalidate();
-
-            return base.ProcessCmdKey(ref msg, keyData);
-        }
 
         #endregion
         
@@ -123,7 +87,7 @@ namespace Carrosse
             elementCourant = Elements[Elements.Count - 1] as Bonhomme;
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
-            SetTimer();
+            //SetTimer();
             
             pictureBox1.Invalidate();
         }
@@ -166,6 +130,15 @@ namespace Carrosse
         {
             Elements.Add(new Balle(new Point(0, 0)));
             elementCourant = Elements[Elements.Count - 1] as Balle;
+            listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
+            
+            pictureBox1.Invalidate();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Elements.Add(new Carabine(new Point(0, 0)));
+            elementCourant = Elements[Elements.Count - 1] as Carabine;
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
             pictureBox1.Invalidate();

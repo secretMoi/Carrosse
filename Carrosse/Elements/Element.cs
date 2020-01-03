@@ -28,7 +28,7 @@ namespace Carrosse.Elements
             }
         }
         
-        protected void AjouterRectangle(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
+        protected void AjouterRectangle(string cle, Point position, Point dimension, Color? remplissage = null, Color? contour = null, int largeurContour = 0)
         {
             elements.Add(cle, new Rectangle(position, dimension, remplissage, contour, largeurContour));
         }
@@ -51,6 +51,11 @@ namespace Carrosse.Elements
         protected void AjouterLigne(string cle, Point positionSource, Point positionDestination, Color contour, int largeurContour)
         {
             elements.Add(cle, new Ligne(positionSource, positionDestination, contour, largeurContour));
+        }
+
+        protected void AjouterArc(string cle, Point position, Point dimension, Color contour, int largeurContour, float angleDebut, float amplitude)
+        {
+            elements.Add(cle, new Arc(position, dimension, contour, largeurContour, angleDebut, amplitude));
         }
 
         public virtual void Deplace(Point positionDestination)
