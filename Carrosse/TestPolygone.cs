@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Carrosse.Elements;
 using Carrosse.Figures;
 
 namespace Carrosse

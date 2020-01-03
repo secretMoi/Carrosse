@@ -46,12 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bonhomme.cs" />
-    <Compile Include="Carrosse.cs" />
-    <Compile Include="Element.cs" />
+    <Compile Include="Animation.cs" />
+    <Compile Include="Elements\Bonhomme.cs" />
+    <Compile Include="Elements\Carrosse.cs" />
+    <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\Lunette.cs" />
     <Compile Include="Figures\Cercle.cs" />
+    <Compile Include="Figures\Disque.cs" />
     <Compile Include="Figures\Ellipse.cs" />
     <Compile Include="Figures\Figure.cs" />
+    <Compile Include="Figures\Ligne.cs" />
     <Compile Include="Figures\Polygone.cs" />
     <Compile Include="Figures\Rectangle.cs" />
     <Compile Include="Figures\Rotation.cs" />

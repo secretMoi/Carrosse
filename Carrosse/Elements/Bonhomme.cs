@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Carrosse
+namespace Carrosse.Elements
 {
     public class Bonhomme : Element
     {
@@ -9,7 +9,7 @@ namespace Carrosse
         {
             // création tête
             Point dimension = new Point(50, 100);
-            AjouterCercle("tete", position, dimension, Color.Bisque);
+            AjouterDisque("tete", position, dimension, Color.Bisque);
             
             // création bras gauche
             dimension = new Point(20, 80);

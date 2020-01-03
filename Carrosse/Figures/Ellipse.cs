@@ -11,7 +11,7 @@ namespace Carrosse.Figures
             
         }
         
-        public override void Genere(Graphics graphics = null)
+        public override void Genere()
         {
             Graphique.FillEllipse(Remplissage, position.X, position.Y, 
                 dimension.X, dimension.Y);

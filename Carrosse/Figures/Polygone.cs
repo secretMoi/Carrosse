@@ -12,10 +12,8 @@ namespace Carrosse.Figures
             angle = 10.0f;
         }
         
-        public override void Genere(Graphics graphics = null)
+        public override void Genere()
         {
-            PreparationAffichage(graphics);
-            
             GraphiquePartage.FillPolygon(Remplissage, new []{ CSG, CSD, CIG, CID });
         }
         

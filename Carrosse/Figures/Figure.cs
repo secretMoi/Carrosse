@@ -19,15 +19,16 @@ namespace Carrosse.Figures
         protected SolidBrush Remplissage;
         protected Pen Contour;
 
-        public Figure(Point position, Point dimension, Color couleurRemplissage, Color? contour = null, int largeurContour = 0)
+        public Figure(Point position, Point dimension, Color? couleurRemplissage = null, Color? contour = null, int largeurContour = 0)
         {
             this.position = position;
             this.dimension = dimension;
             this.angle = 0.0;
             
             rotation = new Rotation();
-            
-            this.CouleurRemplissage = couleurRemplissage;
+
+            if (couleurRemplissage != null)
+                this.CouleurRemplissage = (Color) couleurRemplissage;
             if (contour != null)
                 this.CouleurContour = (Color) contour;
             this.largeurContour = largeurContour;
@@ -42,26 +43,18 @@ namespace Carrosse.Figures
             GraphiquePartage = Graphics.FromHwnd(pictureBox.Handle);
         }
 
-        protected int PlusGrand(int nombre1, int nombre2)
-        {
-            if (nombre1 > nombre2)
-                return nombre1;
-
-            return nombre2;
-        }
-
         public void Afficher(Graphics graphics)
         {
             Dessine(graphics);
         }
 
-        public abstract void Genere(Graphics graphics = null);
+        public abstract void Genere();
 
         public void Dessine(Graphics graphics = null)
         {
             PreparationAffichage(graphics);
             
-            Genere(graphics);
+            Genere();
             
             FinDessin();
         }
@@ -90,8 +83,6 @@ namespace Carrosse.Figures
 
             if (Math.Abs(angle) > 1)
             {
-                Graphique.FillRectangle(new SolidBrush(Color.Chartreuse), position.X + dimension.X / 2, position.Y, 20, 20);
-            
                 Graphique.TranslateTransform(position.X + dimension.X / 2, position.Y);
                 // rotation
                 Graphique.RotateTransform((float) angle);
@@ -112,12 +103,12 @@ namespace Carrosse.Figures
 
             this.angle += angle;
         }
-        
-        /*        
-        public void Rotation3(double angle)
+
+        public virtual void Deplace(int x, int y)
         {
-            int maxside = (int)(Math.Sqrt(image.Width * image.Width + image.Height * image.Height));
-        }*/
+            position.X = x;
+            position.Y = y;
+        }
 
         public Point Dimension => dimension;
         public Point Position => position;

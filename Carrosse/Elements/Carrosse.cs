@@ -1,11 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using Carrosse.Figures;
-using Rectangle = Carrosse.Figures.Rectangle;
+﻿using System.Drawing;
 
-namespace Carrosse
+namespace Carrosse.Elements
 {
     public class Carrosse : Element
     {
@@ -51,19 +46,19 @@ namespace Carrosse
             dimension = new Point(80, 10);
             position.X = this.position.X - dimension.X / 2;
             position.Y = this.position.Y + this.dimensions.Y - dimension.X / 2;
-            AjouterCercle("roueG", position, dimension, Color.Brown);
+            AjouterDisque("roueG", position, dimension, Color.Brown);
             
             // création roue droite
             dimension = new Point(80, 10);
             position.X = this.position.X + this.dimensions.X - dimension.X / 2;
             position.Y = this.position.Y + this.dimensions.Y - dimension.X / 2;
-            AjouterCercle("roueD", position, dimension, Color.Brown);
+            AjouterDisque("roueD", position, dimension, Color.Brown);
             
             // création point de référence
             dimension = new Point(15, 10);
             position.X = this.position.X - dimension.X / 2;
             position.Y = this.position.Y - dimension.X / 2;
-            AjouterCercle("pointRef", position, dimension, Color.Black);
+            AjouterDisque("pointRef", position, dimension, Color.Black);
 
             elements["fenetreD"].angle = 20;
         }

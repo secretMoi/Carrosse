@@ -4,18 +4,15 @@ namespace Carrosse.Figures
 {
     public class Cercle : Figure
     {
-        public Cercle(Point position, int rayon, Color couleurRemplissage, Color? contour = null, int largeurContour = 0) :
-            base(position, new Point(rayon, rayon), couleurRemplissage, contour, largeurContour)
+        public Cercle(Point position, int rayon, Color contour, int largeurContour) :
+            base(position, new Point(rayon, rayon), null, contour, largeurContour)
         {
         }
 
-        public override void Genere(Graphics graphics = null)
+        public override void Genere()
         {
             int rayon = dimension.X;
-            
-            Graphique.FillEllipse(Remplissage, position.X, position.Y, 
-                dimension.X, dimension.Y);
-            
+
             Graphique.DrawEllipse(Contour,
                 position.X, position.Y,
                 rayon, rayon); // dessine le cercle dans l'image

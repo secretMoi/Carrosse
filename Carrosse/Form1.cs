@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Timers;
 using System.Windows.Forms;
+using Carrosse.Elements;
 using Carrosse.Figures;
 
 namespace Carrosse
@@ -42,6 +44,7 @@ namespace Carrosse
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias; // lisse les contours
             foreach (Element element in Elements)
             {
                 // redessine toutes les parties des éléments
@@ -106,8 +109,8 @@ namespace Carrosse
         
         private void button1_Click(object sender, EventArgs e)
         {
-            Elements.Add(new Carrosse(new Point(50, 100)));
-            elementCourant = Elements[Elements.Count - 1] as Carrosse;
+            Elements.Add(new Elements.Carrosse(new Point(50, 100)));
+            elementCourant = Elements[Elements.Count - 1] as Elements.Carrosse;
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
             pictureBox1.Invalidate();
@@ -132,8 +135,8 @@ namespace Carrosse
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Elements.Add(new TestPolygone(new Point(50, 100)));
-            elementCourant = Elements[Elements.Count - 1] as TestPolygone;
+            Elements.Add(new Lunette(new Point(0, 0)));
+            elementCourant = Elements[Elements.Count - 1] as Lunette;
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
             pictureBox1.Invalidate();
