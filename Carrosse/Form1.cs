@@ -47,12 +47,13 @@ namespace Carrosse
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias; // lisse les contours
             foreach (Element element in Elements)
             {
-                // redessine toutes les parties des éléments
+                element.Affiche(e.Graphics);
+                /*// redessine toutes les parties des éléments
                 foreach (Figure figure in element.ListeElements())
                 {
                     //figure.Rotation(10);
                     figure.Afficher(e.Graphics);
-                }
+                }*/
             }
         }
 
@@ -150,6 +151,24 @@ namespace Carrosse
             loopTimer.Enabled = true; // désactive par défaut pour limiter les ressources
             loopTimer.Elapsed += loopTimerEvent; // à effectuer entre les 2 clics souris
             loopTimer.AutoReset = true; // le ré enclenche à la fin
+        }
+
+        private void Cible_Click(object sender, EventArgs e)
+        {
+            Elements.Add(new Cible(new Point(0, 0)));
+            elementCourant = Elements[Elements.Count - 1] as Cible;
+            listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
+            
+            pictureBox1.Invalidate();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Elements.Add(new Balle(new Point(0, 0)));
+            elementCourant = Elements[Elements.Count - 1] as Balle;
+            listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
+            
+            pictureBox1.Invalidate();
         }
     }
 }

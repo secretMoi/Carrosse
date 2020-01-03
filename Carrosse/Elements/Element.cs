@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.ConstrainedExecution;
 using Carrosse.Figures;
 using Rectangle = Carrosse.Figures.Rectangle;
 
@@ -18,6 +17,15 @@ namespace Carrosse.Elements
             elements = new Dictionary<string, Figure>();
             
             this.position = position;
+        }
+
+        public virtual void Affiche(Graphics graphics)
+        {
+            // redessine toutes les parties des éléments
+            foreach (Figure figure in ListeElements())
+            {
+                figure.Afficher(graphics);
+            }
         }
         
         protected void AjouterRectangle(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
@@ -65,9 +73,6 @@ namespace Carrosse.Elements
                 figure = elements.ElementAt(id).Value;
 
                 figure.Deplace(figure.Position.X + x, figure.Position.Y + y);
-                
-                /*figure.SetPositionX(figure.Position.X + x);
-                figure.SetPositionY(figure.Position.Y + y);*/
             }
         }
 

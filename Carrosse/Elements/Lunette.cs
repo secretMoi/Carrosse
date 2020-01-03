@@ -8,6 +8,7 @@ namespace Carrosse.Elements
         {
             // création cercle lunette
             Point dimension = new Point(400, 400);
+            dimensions = dimension;
             AjouterCercle("lunette", position, dimension, Color.Black, 15);
             
             // création mollette gauche
