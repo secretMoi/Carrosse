@@ -14,8 +14,6 @@ namespace Carrosse.Figures
         protected Color CouleurContour;
         protected int largeurContour;
         
-        protected Bitmap image;
-        protected static PictureBox pictureBox;
         protected static Graphics GraphiquePartage;
         protected Graphics Graphique;
         protected SolidBrush Remplissage;
@@ -25,7 +23,7 @@ namespace Carrosse.Figures
         {
             this.position = position;
             this.dimension = dimension;
-            this.angle = 0;
+            this.angle = 0.0;
             
             rotation = new Rotation();
             
@@ -36,22 +34,12 @@ namespace Carrosse.Figures
 
             Graphique = GraphiquePartage;
             
-            Genere();
-
-            // permet de rectifier l'angle pour ne pas impacter les autres éléments
-            if (Math.Abs(angle) > 1)
-            {
-                Graphique.TranslateTransform(position.X + dimension.X / 2, position.Y);
-                // rotation
-                Graphique.RotateTransform(-(float) angle);
-                Graphique.TranslateTransform(-(position.X+ dimension.X / 2), -position.Y);
-            }
+            Dessine();
         }
 
         public static void InitialiseConteneur(PictureBox pictureBox)
         {
-            Figure.pictureBox = pictureBox;
-            Figure.GraphiquePartage = Graphics.FromHwnd(Figure.pictureBox.Handle);
+            GraphiquePartage = Graphics.FromHwnd(pictureBox.Handle);
         }
 
         protected int PlusGrand(int nombre1, int nombre2)
@@ -64,10 +52,31 @@ namespace Carrosse.Figures
 
         public void Afficher(Graphics graphics)
         {
-            Genere(graphics);
+            Dessine(graphics);
         }
 
         public abstract void Genere(Graphics graphics = null);
+
+        public void Dessine(Graphics graphics = null)
+        {
+            PreparationAffichage(graphics);
+            
+            Genere(graphics);
+            
+            FinDessin();
+        }
+
+        public void FinDessin()
+        {
+            // permet de rectifier l'angle pour ne pas impacter les autres éléments
+            if (Math.Abs(angle) > 1)
+            {
+                Graphique.TranslateTransform(position.X + dimension.X / 2, position.Y);
+                // rotation
+                Graphique.RotateTransform(-(float) angle);
+                Graphique.TranslateTransform(-(position.X+ dimension.X / 2), -position.Y);
+            }
+        }
 
         protected void PreparationAffichage(Graphics graphics = null)
         {
@@ -97,49 +106,20 @@ namespace Carrosse.Figures
             this.angle = angle;
         }
         
-        /*public void Rotation2(double angle)
+        public void Tourne(double angle)
         {
-            int largeur = Image.Width;
-            int hauteur = Image.Height;
+            angle = -angle;
 
-            angle = 360 - angle;
-            
-            //create a new empty bitmap to hold rotated image
-            Bitmap imageDestination = new Bitmap(largeur, hauteur);
-            //make a graphics object from the empty bitmap
-            using(Graphics g = Graphics.FromImage(imageDestination)) 
-            {
-                //move rotation point to center of image
-                g.TranslateTransform(0, 0);
-                //rotate
-                g.RotateTransform((float) angle);
-                //move image back
-                g.TranslateTransform(0, 0);
-                //draw passed in image onto graphics object
-                g.DrawImage(image, new Point(0, 0)); 
-            }
-
-            image = imageDestination;
+            this.angle += angle;
         }
         
+        /*        
         public void Rotation3(double angle)
         {
             int maxside = (int)(Math.Sqrt(image.Width * image.Width + image.Height * image.Height));
         }*/
 
         public Point Dimension => dimension;
-
-        public Bitmap Image
-        {
-            get
-            {
-                int dimensionMax = PlusGrand(dimension.X, dimension.Y);
-                //Bitmap images = new Bitmap(dimensionMax, dimensionMax);
-                //Graphique = Graphics.FromImage(images);
-
-                return new Bitmap(dimensionMax,dimensionMax, GraphiquePartage);
-            }
-        }
         public Point Position => position;
 
         public void SetPositionX(int positionX)

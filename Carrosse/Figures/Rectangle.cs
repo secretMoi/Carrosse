@@ -12,8 +12,6 @@ namespace Carrosse.Figures
 
         public override void Genere(Graphics graphics = null)
         {
-            PreparationAffichage(graphics);
-            
             Graphique.FillRectangle(Remplissage, position.X, position.Y, 
                 dimension.X, dimension.Y);
             
