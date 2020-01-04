@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using Carrosse.Figures;
 
 namespace Carrosse.Elements
 {
@@ -42,18 +43,13 @@ namespace Carrosse.Elements
             position.X = elements["brasG"].Position.X - 5;
             position.Y = elements["brasG"].Position.Y;
             AjouterEllipse("brasD", position, dimension, Color.Brown, Color.Black, 1);
-            
+            elements["brasD"].Rotation(90);
+
             // création avant-bras gauche
-            // /AjouterEllipse("avantBrasD", position, dimension, Color.Brown, Color.Black, 1);
+            //AjouterEllipse("avantBrasD", elements["brasD"].PointAdjacent(Figure.Y), dimension, Color.Brown, Color.Black, 1);
             
-            elements["brasD"].Rotation(20);
-            
-            
-            Point testPos = new Point();
-            testPos = elements["brasD"].Fin();
-            AjouterDisque("test", testPos, new Point(10,50), Color.Red);
-            
-            
+            AjouterRectangle("test", elements["brasD"].PointAdjacent(Figure.Y), new Point(10,10), Color.Red);
+
             //elements["avantBrasD"].Rotation(20);
         }
 

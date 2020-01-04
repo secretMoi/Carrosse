@@ -19,6 +19,9 @@ namespace Carrosse.Figures
         protected SolidBrush Remplissage;
         protected Pen Contour;
 
+        public const bool X = true;
+        public const bool Y = false;
+
         public Figure(Point position, Point dimension, Color? couleurRemplissage = null, Color? contour = null, int largeurContour = 0)
         {
             this.position = position;
@@ -111,16 +114,15 @@ namespace Carrosse.Figures
             position.Y = y;
         }
 
-        public Point Fin()
+        public Point PointOppose()
         {
             Point pointFin = new Point();
             
             // rayon du pt1 au point 3
-            double rayon = Math.Sqrt(dimension.X * dimension.X + dimension.Y * dimension.Y);
+            double distanceFin = Math.Sqrt(dimension.X * dimension.X + dimension.Y * dimension.Y);
             
             // angle du pt1 au pt 3
             double angleFin = Math.Atan((double)dimension.Y / (double)dimension.X);
-            double distanceFin = rayon;
 
             // coordonnées du pt 3 à l'état initial'
             pointFin.X = (int)(distanceFin * Math.Cos(angleFin));
@@ -129,6 +131,27 @@ namespace Carrosse.Figures
             
             
             // rajouter l'angle de l'objet
+            return RotationPoint(pointFin);
+        }
+        
+        public Point PointAdjacent(bool xy = X)
+        {
+            Point pointFin = new Point();
+
+            /*** calcul point de départ ***/
+            // si le côté dominant est en absisse
+            if (xy == X) pointFin.X += dimension.X;
+            else pointFin.Y += dimension.Y;
+            /*** fin point de départ ***/
+
+            /*** calcul angle de la figure parente ***/
+            return RotationPoint(pointFin);
+        }
+
+        private Point RotationPoint(Point point)
+        {
+            /*** calcul angle de la figure parente ***/
+            
             Point temp = new Point();
             double angleRadian = DegreToRadian(angle);
             
@@ -137,13 +160,13 @@ namespace Carrosse.Figures
              * y' = sin(theta)*(x-xc) + cos(theta)*(y-yc) + yc
              */
 
-            temp.X = (int)(Math.Cos(angleRadian) * pointFin.X - Math.Sin(angleRadian) * pointFin.Y);
-            temp.Y = (int)(Math.Sin(angleRadian) * pointFin.X + Math.Cos(angleRadian) * pointFin.Y);
+            temp.X = (int)(Math.Cos(angleRadian) * point.X - Math.Sin(angleRadian) * point.Y);
+            temp.Y = (int)(Math.Sin(angleRadian) * point.X + Math.Cos(angleRadian) * point.Y);
 
-            pointFin.X = temp.X + position.X;
-            pointFin.Y = temp.Y + position.Y;
+            point.X = temp.X + position.X;
+            point.Y = temp.Y + position.Y;
 
-            return pointFin;
+            return point;
         }
 
         protected double DegreToRadian(double angle)
