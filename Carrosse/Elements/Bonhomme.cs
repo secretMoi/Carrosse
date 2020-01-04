@@ -11,13 +11,12 @@ namespace Carrosse.Elements
             // création tête
             Point dimension = new Point(100, 100);
             AjouterDisque("tete", position, dimension, Color.Bisque);
-            
+
             // création bras gauche
             dimension = new Point(40, 80);
             position.X += elements["tete"].Dimension.X / 2 -
                           dimension.X / 2 + 5;
-            position.Y = position.Y +
-                         elements["tete"].Dimension.Y + 20;
+            position.Y += elements["tete"].Dimension.Y + 40;
             AjouterEllipse("brasG", position, dimension, Color.Brown, Color.Black, 1);
 
             // création corps
@@ -27,30 +26,61 @@ namespace Carrosse.Elements
                          elements["tete"].Dimension.Y;
             AjouterEllipse("corps", position, dimension, Color.Navy);
             
-            // création jambe gauche
+            // création haut jambe gauche
             dimension = new Point(40, 80);
             position.X = elements["brasG"].Position.X;
             position.Y = elements["corps"].Position.Y +
                          elements["corps"].Dimension.Y;
             AjouterEllipse("jambeG", position, dimension, Color.CadetBlue, Color.Black, 1);
+            elements["jambeG"].Rotation(40);
             
-            // création jambe droite
+            // genou gauche
+            dimension = new Point(30, 30);
+            position.X = elements["jambeG"].PointAdjacent(Figure.Y).X;
+            position.Y = elements["jambeG"].PointAdjacent(Figure.Y).Y
+                         - dimension.Y / 2;
+            AjouterDisque("genouG", position, dimension, Color.CadetBlue, Color.Black, 1);
+            
+            // bas jambe gauche
+            dimension = new Point(40, 80);
+            AjouterEllipse("basJambeG", elements["jambeG"].PointAdjacent(Figure.Y), dimension, Color.CadetBlue, Color.Black, 1);
+            
+            // création haut jambe droite
             position.X = elements["jambeG"].Position.X - 5;
             position.Y = elements["jambeG"].Position.Y;
             AjouterEllipse("jambeD", position, dimension, Color.CadetBlue, Color.Black, 1);
+            elements["jambeD"].Rotation(-20);
+            
+            // genou droit
+            dimension = new Point(30, 30);
+            position.X = elements["jambeD"].PointAdjacent(Figure.Y).X;
+            position.Y = elements["jambeD"].PointAdjacent(Figure.Y).Y
+                         - dimension.Y / 2;
+            AjouterDisque("genouD", position, dimension, Color.CadetBlue, Color.Black, 1);
+            
+            // bas jambe droite
+            dimension = new Point(40, 80);
+            AjouterEllipse("basJambeD", elements["jambeD"].PointAdjacent(Figure.Y), dimension, Color.CadetBlue, Color.Black, 1);
+            elements["basJambeD"].Rotation(-40);
 
             // création bras droit
             position.X = elements["brasG"].Position.X - 5;
             position.Y = elements["brasG"].Position.Y;
             AjouterEllipse("brasD", position, dimension, Color.Brown, Color.Black, 1);
-            elements["brasD"].Rotation(90);
+            elements["brasD"].Rotation(60);
 
             // création avant-bras gauche
-            //AjouterEllipse("avantBrasD", elements["brasD"].PointAdjacent(Figure.Y), dimension, Color.Brown, Color.Black, 1);
+            AjouterEllipse("avantBrasD", elements["brasD"].PointAdjacent(Figure.Y), dimension, Color.Brown, Color.Black, 1);
+            elements["avantBrasD"].Rotation(80);
             
-            AjouterRectangle("test", elements["brasD"].PointAdjacent(Figure.Y), new Point(10,10), Color.Red);
-
-            //elements["avantBrasD"].Rotation(20);
+            // création pied gauche
+            dimension = new Point(70,30);
+            AjouterEllipse("piedG", elements["basJambeG"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
+            elements["piedG"].Rotation(elements["basJambeG"].Angle);
+            
+            // création pied droit
+            AjouterEllipse("piedD", elements["basJambeD"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
+            elements["piedD"].Rotation(elements["basJambeD"].Angle);
         }
 
         public override void Centre(ref Point point)
