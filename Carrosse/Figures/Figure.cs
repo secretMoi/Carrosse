@@ -9,6 +9,7 @@ namespace Carrosse.Figures
         public Point position;
         protected Point dimension;
         protected double angle;
+        protected Rotation rotation;
         private double sensibiliteAngle;
         protected Color CouleurRemplissage;
         protected Color CouleurContour;
@@ -28,6 +29,7 @@ namespace Carrosse.Figures
             this.dimension = dimension;
             this.angle = 0.0;
             this.sensibiliteAngle = 0.1;
+            rotation = new Rotation();
 
             if (couleurRemplissage != null)
                 this.CouleurRemplissage = (Color) couleurRemplissage;
@@ -144,6 +146,7 @@ namespace Carrosse.Figures
             /*** fin point de départ ***/
 
             /*** calcul angle de la figure parente ***/
+            //return rotation.RotationPoint(position, pointFin);
             return RotationPoint(pointFin);
         }
 
@@ -152,7 +155,7 @@ namespace Carrosse.Figures
             /*** calcul angle de la figure parente ***/
             
             Point temp = new Point();
-            double angleRadian = DegreToRadian(angle);
+            double angleRadian = Figures.Rotation.DegreToRadian(angle);
             
             /*
              * x' = cos(theta)*(x-xc) - sin(theta)*(y-yc) + xc
@@ -168,10 +171,7 @@ namespace Carrosse.Figures
             return point;
         }
 
-        protected double DegreToRadian(double angle)
-        {
-            return angle * Math.PI / 180;
-        }
+        
 
         public Point Dimension => dimension;
         public Point Position => position;

@@ -64,6 +64,7 @@
     <Compile Include="Figures\Ligne.cs" />
     <Compile Include="Figures\Polygone.cs" />
     <Compile Include="Figures\Rectangle.cs" />
+    <Compile Include="Figures\Rotation.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

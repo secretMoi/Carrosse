@@ -94,5 +94,19 @@ namespace Carrosse.Elements
 
             return figures;
         }
+
+        public Figure GetFigure(string cle)
+        {
+            Figure figure;
+            // on vérifie l'existence de la clé
+            if (!elements.TryGetValue(cle, out figure)) return null;
+
+            return elements[cle];
+        }
+
+        public Dictionary<string, Figure> ListeFigures()
+        {
+            return elements;
+        }
     }
 }

@@ -44,7 +44,12 @@ namespace Carrosse
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias; // lisse les contours
             
-            animation.Affiche(e.Graphics);
+            //animation.Affiche(e.Graphics);
+            
+            foreach (Element element in Elements)
+            {
+                element.Affiche(e.Graphics);
+            }
         }
 
         #region Controles déplacement
@@ -156,7 +161,7 @@ namespace Carrosse
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            animation = new Animation();
+            //animation = new Animation(pictureBox1);
         }
     }
 }
