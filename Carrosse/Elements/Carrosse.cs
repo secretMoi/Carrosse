@@ -59,8 +59,6 @@ namespace Carrosse.Elements
             position.X = this.position.X - dimension.X / 2;
             position.Y = this.position.Y - dimension.X / 2;
             AjouterDisque("pointRef", position, dimension, Color.Black);
-
-            elements["fenetreD"].angle = 20;
         }
 
         public override void Centre(ref Point point)

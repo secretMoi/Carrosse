@@ -29,6 +29,12 @@ namespace Carrosse.Elements
             position.X += elements["corps"].Dimension.X;
             AjouterRectangle("canon", position, dimension, Color.Black);
             
+            elements["canon"].Tourne(180);
+
+            Point testPos;
+            testPos = elements["canon"].Fin();
+            AjouterRectangle("test", testPos, new Point(10,10), Color.Red);
+
             // création support lunette gauche
             position.X = elements["corps"].Position.X
                          + elements["corps"].Dimension.X / 2
@@ -74,9 +80,9 @@ namespace Carrosse.Elements
             // création crosse
             dimension = new Point(100, 40);
             position.X = elements["corps"].Position.X 
-                         - dimension.X + 5;
+                         - dimension.X + 8;
             position.Y = elements["corps"].Position.Y 
-                         + dimension.Y / 2;
+                         + dimension.Y - 6;
             AjouterRectangle("crosse", position, dimension, Color.Chocolate);
             elements["crosse"].Rotation(20);
         }

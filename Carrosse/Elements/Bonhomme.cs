@@ -12,7 +12,7 @@ namespace Carrosse.Elements
             AjouterDisque("tete", position, dimension, Color.Bisque);
             
             // création bras gauche
-            dimension = new Point(40, 160);
+            dimension = new Point(40, 80);
             position.X += elements["tete"].Dimension.X / 2 -
                           dimension.X / 2 + 5;
             position.Y = position.Y +
@@ -27,7 +27,7 @@ namespace Carrosse.Elements
             AjouterEllipse("corps", position, dimension, Color.Navy);
             
             // création jambe gauche
-            dimension = new Point(40, 160);
+            dimension = new Point(40, 80);
             position.X = elements["brasG"].Position.X;
             position.Y = elements["corps"].Position.Y +
                          elements["corps"].Dimension.Y;
@@ -43,7 +43,18 @@ namespace Carrosse.Elements
             position.Y = elements["brasG"].Position.Y;
             AjouterEllipse("brasD", position, dimension, Color.Brown, Color.Black, 1);
             
+            // création avant-bras gauche
+            // /AjouterEllipse("avantBrasD", position, dimension, Color.Brown, Color.Black, 1);
+            
             elements["brasD"].Rotation(20);
+            
+            
+            Point testPos = new Point();
+            testPos = elements["brasD"].Fin();
+            AjouterDisque("test", testPos, new Point(10,50), Color.Red);
+            
+            
+            //elements["avantBrasD"].Rotation(20);
         }
 
         public override void Centre(ref Point point)

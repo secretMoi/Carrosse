@@ -5,7 +5,6 @@ namespace Carrosse.Figures
 {
     public class Polygone : Figure
     {
-        private float angle = 10.0f;
         
         public Polygone(Point position, Point dimension, Color couleurRemplissage, Color? contour = null, int largeurContour = 0) : base(position, dimension, couleurRemplissage, contour, largeurContour)
         {

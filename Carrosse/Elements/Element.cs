@@ -33,9 +33,9 @@ namespace Carrosse.Elements
             elements.Add(cle, new Rectangle(position, dimension, remplissage, contour, largeurContour));
         }
         
-        protected void AjouterDisque(string cle, Point position, Point dimension, Color remplissage)
+        protected void AjouterDisque(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
-            elements.Add(cle, new Disque(position, dimension.X, remplissage));
+            elements.Add(cle, new Disque(position, dimension.X, remplissage, contour, largeurContour));
         }
         
         protected void AjouterCercle(string cle, Point position, Point dimension, Color contour, int largeurContour)

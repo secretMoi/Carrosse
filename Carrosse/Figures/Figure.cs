@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,10 +7,9 @@ namespace Carrosse.Figures
 {
     public abstract class Figure
     {
-        protected Point position;
+        public Point position;
         protected Point dimension;
-        protected Rotation rotation;
-        public double angle;
+        protected double angle;
         protected Color CouleurRemplissage;
         protected Color CouleurContour;
         protected int largeurContour;
@@ -24,8 +24,6 @@ namespace Carrosse.Figures
             this.position = position;
             this.dimension = dimension;
             this.angle = 0.0;
-            
-            rotation = new Rotation();
 
             if (couleurRemplissage != null)
                 this.CouleurRemplissage = (Color) couleurRemplissage;
@@ -62,13 +60,7 @@ namespace Carrosse.Figures
         public void FinDessin()
         {
             // permet de rectifier l'angle pour ne pas impacter les autres éléments
-            if (Math.Abs(angle) > 1)
-            {
-                Graphique.TranslateTransform(position.X + dimension.X / 2, position.Y);
-                // rotation
-                Graphique.RotateTransform(-(float) angle);
-                Graphique.TranslateTransform(-(position.X+ dimension.X / 2), -position.Y);
-            }
+            CorrectionAngle(true);
         }
 
         protected void PreparationAffichage(Graphics graphics = null)
@@ -81,12 +73,21 @@ namespace Carrosse.Figures
             if (graphics != null)
                 Graphique = graphics;
 
-            if (Math.Abs(angle) > 1)
+            CorrectionAngle();
+        }
+
+        protected void CorrectionAngle(bool corrige = false)
+        {
+            int inverseur = 1;
+            double tolerance = 0.1;
+            if (corrige) inverseur = -1;
+            
+            if (Math.Abs(angle) > tolerance)
             {
-                Graphique.TranslateTransform(position.X + dimension.X / 2, position.Y);
+                Graphique.TranslateTransform(position.X, position.Y);
                 // rotation
-                Graphique.RotateTransform((float) angle);
-                Graphique.TranslateTransform(-(position.X+ dimension.X / 2), -position.Y);
+                Graphique.RotateTransform((float) (inverseur * angle));
+                Graphique.TranslateTransform(-(position.X), -position.Y);
             }
         }
         
@@ -110,17 +111,47 @@ namespace Carrosse.Figures
             position.Y = y;
         }
 
+        public Point Fin()
+        {
+            Point pointFin = new Point();
+            
+            // rayon du pt1 au point 3
+            double rayon = Math.Sqrt(dimension.X * dimension.X + dimension.Y * dimension.Y);
+            
+            // angle du pt1 au pt 3
+            double angleFin = Math.Atan((double)dimension.Y / (double)dimension.X);
+            double distanceFin = rayon;
+
+            // coordonnées du pt 3 à l'état initial'
+            pointFin.X = (int)(distanceFin * Math.Cos(angleFin));
+            pointFin.Y = (int)(distanceFin * Math.Sin(angleFin));
+            // position coint opposé initiale
+            
+            
+            // rajouter l'angle de l'objet
+            Point temp = new Point();
+            double angleRadian = DegreToRadian(angle);
+            
+            /*
+             * x' = cos(theta)*(x-xc) - sin(theta)*(y-yc) + xc
+             * y' = sin(theta)*(x-xc) + cos(theta)*(y-yc) + yc
+             */
+
+            temp.X = (int)(Math.Cos(angleRadian) * pointFin.X - Math.Sin(angleRadian) * pointFin.Y);
+            temp.Y = (int)(Math.Sin(angleRadian) * pointFin.X + Math.Cos(angleRadian) * pointFin.Y);
+
+            pointFin.X = temp.X + position.X;
+            pointFin.Y = temp.Y + position.Y;
+
+            return pointFin;
+        }
+
+        protected double DegreToRadian(double angle)
+        {
+            return angle * Math.PI / 180;
+        }
+
         public Point Dimension => dimension;
         public Point Position => position;
-
-        public void SetPositionX(int positionX)
-        {
-            position.X = positionX;
-        }
-        
-        public void SetPositionY(int positionY)
-        {
-            position.Y = positionY;
-        }
     }
 }

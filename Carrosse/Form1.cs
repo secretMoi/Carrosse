@@ -33,7 +33,7 @@ namespace Carrosse
         
         private void loopTimerEvent(Object source, ElapsedEventArgs e)
         {
-            Elements[0].ListeElements()[2].Tourne(1);
+            Elements[0].ListeElements()[3].Tourne(1);
             
             pictureBox1.Invalidate();
         }
