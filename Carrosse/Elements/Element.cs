@@ -58,7 +58,7 @@ namespace Carrosse.Elements
             elements.Add(cle, new Arc(position, dimension, contour, largeurContour, angleDebut, amplitude));
         }
 
-        public virtual void Deplace(Point positionDestination)
+        public void Deplace(Point positionDestination)
         {
             positionDestination.X -= position.X;
             positionDestination.Y -= position.Y;

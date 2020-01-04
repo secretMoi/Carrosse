@@ -29,10 +29,6 @@ namespace Carrosse.Elements
             position.X += elements["corps"].Dimension.X;
             AjouterRectangle("canon", position, dimension, Color.Black);
 
-            Point testPos;
-            testPos = elements["canon"].PointOppose();
-            AjouterRectangle("test", testPos, new Point(10,10), Color.Red);
-
             // création support lunette gauche
             position.X = elements["corps"].Position.X
                          + elements["corps"].Dimension.X / 2

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -10,6 +9,7 @@ namespace Carrosse.Figures
         public Point position;
         protected Point dimension;
         protected double angle;
+        private double sensibiliteAngle;
         protected Color CouleurRemplissage;
         protected Color CouleurContour;
         protected int largeurContour;
@@ -27,6 +27,7 @@ namespace Carrosse.Figures
             this.position = position;
             this.dimension = dimension;
             this.angle = 0.0;
+            this.sensibiliteAngle = 0.1;
 
             if (couleurRemplissage != null)
                 this.CouleurRemplissage = (Color) couleurRemplissage;
@@ -81,12 +82,10 @@ namespace Carrosse.Figures
 
         protected void CorrectionAngle(bool corrige = false)
         {
-            int inverseur = 1;
-            double tolerance = 0.1;
-            if (corrige) inverseur = -1;
-            
-            if (Math.Abs(angle) > tolerance)
+            if (Math.Abs(angle) > sensibiliteAngle)
             {
+                int inverseur = 1;
+                if (corrige) inverseur = -1;
                 Graphique.TranslateTransform(position.X, position.Y);
                 // rotation
                 Graphique.RotateTransform((float) (inverseur * angle));

@@ -17,6 +17,8 @@ namespace Carrosse
         
         private static System.Timers.Timer loopTimer;
 
+        private Animation animation;
+
         #region Initialisation
 
         public Form1()
@@ -41,10 +43,8 @@ namespace Carrosse
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias; // lisse les contours
-            foreach (Element element in Elements)
-            {
-                element.Affiche(e.Graphics);
-            }
+            
+            animation.Affiche(e.Graphics);
         }
 
         #region Controles déplacement
@@ -152,6 +152,11 @@ namespace Carrosse
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
             pictureBox1.Invalidate();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            animation = new Animation();
         }
     }
 }
