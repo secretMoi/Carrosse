@@ -32,7 +32,7 @@ namespace Carrosse.Elements
             position.Y = elements["corps"].Position.Y +
                          elements["corps"].Dimension.Y;
             AjouterEllipse("jambeG", position, dimension, Color.CadetBlue, Color.Black, 1);
-            elements["jambeG"].Rotation(40);
+            elements["jambeG"].Rotation.Position(40);
             
             // genou gauche
             dimension = new Point(30, 30);
@@ -49,7 +49,7 @@ namespace Carrosse.Elements
             position.X = elements["jambeG"].Position.X - 5;
             position.Y = elements["jambeG"].Position.Y;
             AjouterEllipse("jambeD", position, dimension, Color.CadetBlue, Color.Black, 1);
-            elements["jambeD"].Rotation(-20);
+            elements["jambeD"].Rotation.Position(-20);
             
             // genou droit
             dimension = new Point(30, 30);
@@ -61,26 +61,26 @@ namespace Carrosse.Elements
             // bas jambe droite
             dimension = new Point(40, 80);
             AjouterEllipse("basJambeD", elements["jambeD"].PointAdjacent(Figure.Y), dimension, Color.CadetBlue, Color.Black, 1);
-            elements["basJambeD"].Rotation(-40);
+            elements["basJambeD"].Rotation.Position(-40);
 
             // création bras droit
             position.X = elements["brasG"].Position.X - 5;
             position.Y = elements["brasG"].Position.Y;
             AjouterEllipse("brasD", position, dimension, Color.Brown, Color.Black, 1);
-            elements["brasD"].Rotation(60);
+            elements["brasD"].Rotation.Position(60);
 
             // création avant-bras gauche
             AjouterEllipse("avantBrasD", elements["brasD"].PointAdjacent(Figure.Y), dimension, Color.Brown, Color.Black, 1);
-            elements["avantBrasD"].Rotation(80);
+            elements["avantBrasD"].Rotation.Position(80);
             
             // création pied gauche
             dimension = new Point(70,30);
             AjouterEllipse("piedG", elements["basJambeG"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
-            elements["piedG"].Rotation(elements["basJambeG"].Angle);
+            elements["piedG"].Rotation.Position(elements["basJambeG"].Angle);
             
             // création pied droit
             AjouterEllipse("piedD", elements["basJambeD"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
-            elements["piedD"].Rotation(elements["basJambeD"].Angle);
+            elements["piedD"].Rotation.Position(elements["basJambeD"].Angle);
         }
 
         public override void Centre(ref Point point)

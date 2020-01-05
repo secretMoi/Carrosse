@@ -6,11 +6,9 @@ namespace Carrosse.Figures
 {
     public abstract class Figure
     {
-        public Point position;
+        protected Point position;
         protected Point dimension;
-        protected double angle;
-        protected Rotation rotation;
-        private double sensibiliteAngle;
+        protected readonly Rotation rotation;
         protected Color CouleurRemplissage;
         protected Color CouleurContour;
         protected int largeurContour;
@@ -27,8 +25,6 @@ namespace Carrosse.Figures
         {
             this.position = position;
             this.dimension = dimension;
-            this.angle = 0.0;
-            this.sensibiliteAngle = 0.1;
             rotation = new Rotation();
 
             if (couleurRemplissage != null)
@@ -84,30 +80,24 @@ namespace Carrosse.Figures
 
         protected void CorrectionAngle(bool corrige = false)
         {
-            if (Math.Abs(angle) > sensibiliteAngle)
+            if (rotation.Angle > rotation.SensibiliteAngle)
             {
                 int inverseur = 1;
                 if (corrige) inverseur = -1;
                 Graphique.TranslateTransform(position.X, position.Y);
                 // rotation
-                Graphique.RotateTransform((float) (inverseur * angle));
+                Graphique.RotateTransform((float) (inverseur * rotation.Angle));
                 Graphique.TranslateTransform(-(position.X), -position.Y);
             }
         }
         
-        public void Rotation(double angle)
-        {
-            angle = 360 - angle;
-
-            this.angle = angle;
-        }
-        
+        /*        
         public void Tourne(double angle)
         {
             angle = -angle;
 
             this.angle += angle;
-        }
+        }*/
 
         public virtual void Deplace(int x, int y)
         {
@@ -132,7 +122,7 @@ namespace Carrosse.Figures
             
             
             // rajouter l'angle de l'objet
-            return RotationPoint(pointFin);
+            return rotation.RotationPoint(position, pointFin);
         }
         
         public Point PointAdjacent(bool xy = X)
@@ -146,36 +136,14 @@ namespace Carrosse.Figures
             /*** fin point de départ ***/
 
             /*** calcul angle de la figure parente ***/
-            //return rotation.RotationPoint(position, pointFin);
-            return RotationPoint(pointFin);
+            return rotation.RotationPoint(position, pointFin);
         }
-
-        private Point RotationPoint(Point point)
-        {
-            /*** calcul angle de la figure parente ***/
-            
-            Point temp = new Point();
-            double angleRadian = Figures.Rotation.DegreToRadian(angle);
-            
-            /*
-             * x' = cos(theta)*(x-xc) - sin(theta)*(y-yc) + xc
-             * y' = sin(theta)*(x-xc) + cos(theta)*(y-yc) + yc
-             */
-
-            temp.X = (int)(Math.Cos(angleRadian) * point.X - Math.Sin(angleRadian) * point.Y);
-            temp.Y = (int)(Math.Sin(angleRadian) * point.X + Math.Cos(angleRadian) * point.Y);
-
-            point.X = temp.X + position.X;
-            point.Y = temp.Y + position.Y;
-
-            return point;
-        }
-
-        
 
         public Point Dimension => dimension;
         public Point Position => position;
 
-        public double Angle => 360 - angle;
+        public double Angle => 360 - rotation.Angle;
+
+        public Rotation Rotation => rotation;
     }
 }

@@ -78,7 +78,7 @@ namespace Carrosse.Elements
             position.Y = elements["corps"].Position.Y 
                          + dimension.Y - 6;
             AjouterRectangle("crosse", position, dimension, Color.Chocolate);
-            elements["crosse"].Rotation(20);
+            elements["crosse"].Rotation.Position(20);
         }
 
         public override void Centre(ref Point point)

@@ -30,26 +30,24 @@ namespace Carrosse
             
             Figure.InitialiseConteneur(pictureBox1);
         }
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            animation = new Animation(pictureBox1);
+        }
 
         #endregion
-        
-        private void loopTimerEvent(Object source, ElapsedEventArgs e)
-        {
-            Elements[0].ListeElements()[3].Tourne(1);
-            
-            pictureBox1.Invalidate();
-        }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias; // lisse les contours
             
-            //animation.Affiche(e.Graphics);
+            animation.Affiche(e.Graphics);
             
-            foreach (Element element in Elements)
+            /*foreach (Element element in Elements)
             {
                 element.Affiche(e.Graphics);
-            }
+            }*/
         }
 
         #region Controles déplacement
@@ -113,16 +111,6 @@ namespace Carrosse
             pictureBox1.Invalidate();
         }
 
-        private void SetTimer()
-        {
-            // timer qui se déclenche lorsque l'on clique dans la tv et sert à déplacer une figure
-            loopTimer = new System.Timers.Timer();
-            loopTimer.Interval = 15; //interval in milliseconds
-            loopTimer.Enabled = true; // désactive par défaut pour limiter les ressources
-            loopTimer.Elapsed += loopTimerEvent; // à effectuer entre les 2 clics souris
-            loopTimer.AutoReset = true; // le ré enclenche à la fin
-        }
-
         private void Cible_Click(object sender, EventArgs e)
         {
             Elements.Add(new Cible(new Point(0, 0)));
@@ -157,11 +145,6 @@ namespace Carrosse
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
             
             pictureBox1.Invalidate();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //animation = new Animation(pictureBox1);
         }
     }
 }

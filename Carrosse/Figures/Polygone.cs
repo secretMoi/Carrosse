@@ -8,15 +8,15 @@ namespace Carrosse.Figures
         
         public Polygone(Point position, Point dimension, Color couleurRemplissage, Color? contour = null, int largeurContour = 0) : base(position, dimension, couleurRemplissage, contour, largeurContour)
         {
-            angle = 10.0f;
+            //angle = 10.0f;
         }
         
         public override void Genere()
         {
-            GraphiquePartage.FillPolygon(Remplissage, new []{ CSG, CSD, CIG, CID });
+            //GraphiquePartage.FillPolygon(Remplissage, new []{ CSG, CSD, CIG, CID });
         }
         
-        public Point CSG
+        /*public Point CSG
         {
             get { return position; }
         }
@@ -52,7 +52,7 @@ namespace Carrosse.Figures
                     (int)(position.Y - Dimension.Y * Math.Sin(angle) - dimension.Y * Math.Sin(3 * Math.PI / 2 + angle))
                     );
             }
-        }
+        }*/
 
     }
 }

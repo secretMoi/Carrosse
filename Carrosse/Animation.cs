@@ -27,7 +27,7 @@ namespace Carrosse
         
         private void loopTimerEvent(Object source, ElapsedEventArgs e)
         {
-            Elements[1].GetFigure("jambeD").Tourne(1);
+            Elements[1].GetFigure("jambeD").Rotation.Tourne(1);
             pictureBox.Invalidate();
         }
         
