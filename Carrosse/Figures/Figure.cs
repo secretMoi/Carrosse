@@ -142,7 +142,7 @@ namespace Carrosse.Figures
         public Point Dimension => dimension;
         public Point Position => position;
 
-        public double Angle => 360 - rotation.Angle;
+        public double Angle => rotation.Angle;
 
         public Rotation Rotation => rotation;
     }

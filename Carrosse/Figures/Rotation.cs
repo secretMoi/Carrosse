@@ -65,9 +65,9 @@ namespace Carrosse.Figures
         
         public void Position(double angle)
         {
-            angle = 360 - angle;
+            //angle = 360 - angle;
 
-            this.angle = angle;
+            this.Angle = angle;
         }
         
         public static double DegreToRadian(double angle)
@@ -86,7 +86,7 @@ namespace Carrosse.Figures
         public double Angle
         {
             get => angle;
-            set => angle = Math.Abs(value) % 360;
+            set => angle = 360 - value % 360;
         }
 
         public double SensibiliteAngle => sensibiliteAngle;

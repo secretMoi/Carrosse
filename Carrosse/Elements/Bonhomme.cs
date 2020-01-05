@@ -76,11 +76,9 @@ namespace Carrosse.Elements
             // création pied gauche
             dimension = new Point(70,30);
             AjouterEllipse("piedG", elements["basJambeG"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
-            elements["piedG"].Rotation.Position(elements["basJambeG"].Angle);
-            
+
             // création pied droit
             AjouterEllipse("piedD", elements["basJambeD"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
-            elements["piedD"].Rotation.Position(elements["basJambeD"].Angle);
         }
 
         public override void Centre(ref Point point)
