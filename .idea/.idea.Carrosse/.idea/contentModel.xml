@@ -5,7 +5,11 @@
     <e p="C:\Users\winmo\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Carrosse.2016042679.00" t="ExcludeRecursive" />
     <e p="C:\Users\winmo\RiderProjects\Carrosse" t="IncludeFlat">
       <e p="Carrosse" t="IncludeRecursive">
-        <e p="Animation.cs" t="Include" />
+        <e p="Animations" t="Include">
+          <e p="Animateur.cs" t="Include" />
+          <e p="Animation.cs" t="Include" />
+          <e p="Tireur.cs" t="Include" />
+        </e>
         <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Carrosse.csproj" t="IncludeRecursive" />
@@ -27,7 +31,6 @@
           <e p="Ellipse.cs" t="Include" />
           <e p="Figure.cs" t="Include" />
           <e p="Ligne.cs" t="Include" />
-          <e p="Polygone.cs" t="Include" />
           <e p="Rectangle.cs" t="Include" />
           <e p="Rotation.cs" t="Include" />
         </e>
@@ -60,7 +63,6 @@
             <e p="shot.mp3" t="Include" />
           </e>
         </e>
-        <e p="TestPolygone.cs" t="Include" />
       </e>
       <e p="Carrosse.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />

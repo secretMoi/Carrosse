@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using Carrosse.Animations;
 using Carrosse.Elements;
 using Carrosse.Figures;
 
@@ -14,7 +15,7 @@ namespace Carrosse
         private Element elementCourant;
         private bool drag;
 
-        private Animation animation;
+        private Animateur animateur;
 
         #region Initialisation
 
@@ -30,7 +31,7 @@ namespace Carrosse
         
         private void Form1_Load(object sender, EventArgs e)
         {
-            animation = new Animation(pictureBox1);
+            animateur = new Animateur(pictureBox1);
         }
 
         #endregion
@@ -39,7 +40,7 @@ namespace Carrosse
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias; // lisse les contours
             
-            animation.Affiche(e.Graphics);
+            animateur.Affiche(e.Graphics);
             
             /*foreach (Element element in Elements)
             {

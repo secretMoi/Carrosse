@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
 using Carrosse.Elements;
 
-namespace Carrosse
+namespace Carrosse.Animations
 {
-    public class Animation
+    public class Animateur
     {
         private Dictionary<string, Element> Elements;
         private static System.Timers.Timer loopTimer;
 
-        private readonly PictureBox pictureBox;
+        protected readonly PictureBox pictureBox;
 
-        private const bool ON = true;
-        private const bool OFF = false;
-        public Animation(PictureBox pictureBox)
+        protected const bool ON = true;
+        protected const bool OFF = false;
+        public Animateur(PictureBox pictureBox)
         {
             this.pictureBox = pictureBox;
             
@@ -28,9 +27,8 @@ namespace Carrosse
         
         private void loopTimerEvent(Object source, ElapsedEventArgs e)
         {
-            Elements["tireur"].GetFigure("corps").Rotation.SetRotation(0, 90);
-            Elements["tireur"].GetFigure("corps").Rotation.Tourne(1);
-            //Elements["tireur"].GetFigure("corps").Rotation.Position(90);
+            /*Elements["tireur"].GetFigure("corps").Rotation.SetRotation(45, 90);
+            Elements["tireur"].GetFigure("corps").Rotation.Tourne(1);*/
             
             pictureBox.Invalidate();
         }
