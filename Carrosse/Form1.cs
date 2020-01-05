@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Timers;
 using System.Windows.Forms;
 using Carrosse.Elements;
 using Carrosse.Figures;
@@ -14,8 +13,6 @@ namespace Carrosse
         private readonly List<Element> Elements;
         private Element elementCourant;
         private bool drag;
-        
-        private static System.Timers.Timer loopTimer;
 
         private Animation animation;
 
@@ -90,8 +87,6 @@ namespace Carrosse
             Elements.Add(new Bonhomme(new Point(50, 100)));
             elementCourant = Elements[Elements.Count - 1] as Bonhomme;
             listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
-            
-            //SetTimer();
             
             pictureBox1.Invalidate();
         }

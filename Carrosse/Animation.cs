@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
@@ -9,10 +10,12 @@ namespace Carrosse
 {
     public class Animation
     {
-        private readonly List<Element> Elements;
+        private Dictionary<string, Element> Elements;
+        //private List<Element> Elements;
         private static System.Timers.Timer loopTimer;
 
         private readonly PictureBox pictureBox;
+        private double angle = 0;
 
         private const bool ON = true;
         private const bool OFF = false;
@@ -20,39 +23,59 @@ namespace Carrosse
         {
             this.pictureBox = pictureBox;
             
-            Elements = new List<Element>();
+            Elements = new Dictionary<string, Element>();
             
             SceneDepart();
         }
         
         private void loopTimerEvent(Object source, ElapsedEventArgs e)
         {
-            Elements[1].GetFigure("jambeD").Rotation.Tourne(1);
+            Elements["tireur"].GetFigure("corps").Rotation.SetRotation(90, 270);
+            Elements["tireur"].GetFigure("corps").Rotation.Position(angle);
+            angle++;
+            
             pictureBox.Invalidate();
         }
         
         private void SetTimer(bool etat)
         {
             // timer qui se déclenche lorsque l'on clique dans la tv et sert à déplacer une figure
-            loopTimer = new System.Timers.Timer();
-            loopTimer.Interval = 15; //interval in milliseconds
+            if (loopTimer == null)
+            {
+                loopTimer = new System.Timers.Timer();
+                loopTimer.Interval = 15; //interval in milliseconds
+                
+                loopTimer.Elapsed += loopTimerEvent; // à effectuer entre les 2 clics souris
+                loopTimer.AutoReset = true; // le ré enclenche à la fin
+            }
+            
             loopTimer.Enabled = etat; // désactive par défaut pour limiter les ressources
-            loopTimer.Elapsed += loopTimerEvent; // à effectuer entre les 2 clics souris
-            loopTimer.AutoReset = true; // le ré enclenche à la fin
         }
 
         public void Affiche(Graphics graphics)
         {
-            foreach (Element element in Elements)
+            foreach (Element element in ListeElements())
             {
                 element.Affiche(graphics);
             }
         }
+        
+        private List<Element> ListeElements()
+        {
+            List<Element> figures = new List<Element>();
+
+            foreach (Element figure in Elements.Values)
+            {
+                figures.Add(figure);
+            }
+
+            return figures;
+        }
 
         public void SceneDepart()
         {
-            Elements.Add(new Carabine(new Point(300, 250)));
-            Elements.Add(new Bonhomme(new Point(100, 100)));
+            Elements.Add("carabine", new Carabine(new Point(300, 250)));
+            Elements.Add("tireur", new Bonhomme(new Point(100, 100)));
             
             SetTimer(ON);
         }

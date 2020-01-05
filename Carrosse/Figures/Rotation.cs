@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 
 namespace Carrosse.Figures
@@ -10,11 +11,20 @@ namespace Carrosse.Figures
         private double angleFin;
         private bool sensRotation;
         private readonly double sensibiliteAngle;
+
+        private const bool HORLOGIQUE = true;
+        private const bool ANTI_HORLOGIQUE = false;
         
         public Rotation()
         {
-            sensRotation = true;
+            sensRotation = HORLOGIQUE;
             sensibiliteAngle = 0.1;
+        }
+        
+        public void SetRotation (double angleDebut, double angleFin)
+        {
+            this.angleFin = angleFin;
+            this.angleDebut = angleDebut;
         }
         
         public Point RotationPoint(Point positionDepart, Point point)
@@ -22,7 +32,7 @@ namespace Carrosse.Figures
             /*** calcul angle de la figure parente ***/
             
             Point temp = new Point();
-            double angleRadian = Figures.Rotation.DegreToRadian(angle);
+            double angleRadian = DegreToRadian(angle);
             
             /*
              * x' = cos(theta)*(x-xc) - sin(theta)*(y-yc) + xc
@@ -37,29 +47,20 @@ namespace Carrosse.Figures
 
             return point;
         }
-        
-        public void SetRotation (double angleDebut, double angleFin)
-        {
-            this.angleFin = DegreToRadian(angleFin);
-            this.angleDebut = DegreToRadian(angleDebut);
-        }
 
-        // todo ne marche pas
-        public double Tourne(double pas)
+        public void Tourne(double pas)
         {
-            pas = -pas;
-            
-            if(sensRotation)
+            if(sensRotation == HORLOGIQUE)
                 angle += pas;
             else
-                angle -= pas;
-
-            if (angle >= angleFin)
-                sensRotation = false;
-            if (angle <= angleDebut)
-                sensRotation = true;
+                angle += pas;
             
-            return angle;
+            
+
+            /*if (angle >= 360 - angleFin)
+                sensRotation = ANTI_HORLOGIQUE;
+            if (angle <= 360 - angleDebut)
+                sensRotation = HORLOGIQUE;*/
         }
         
         public void Position(double angle)
@@ -74,10 +75,18 @@ namespace Carrosse.Figures
             return angle * Math.PI / 180;
         }
 
+        private double CorrigeAngle(double angle)
+        {
+            if (angle < 0 || angle >= 360)
+                angle = Math.Abs(angle) % 360;
+
+            return angle;
+        }
+
         public double Angle
         {
             get => angle;
-            set => angle = value;
+            set => angle = Math.Abs(value) % 360;
         }
 
         public double SensibiliteAngle => sensibiliteAngle;
