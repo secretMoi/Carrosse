@@ -34,24 +34,11 @@ namespace Carrosse.Elements
             {
                 figure.Afficher(graphics);
 
-                if (figure.ListeEnfants().Count > 0)
+                foreach (string enfant in figure.ListeEnfants())
                 {
-                    for (int i = 0; i < figure.ListeEnfants().Count; i++)
-                    {
-                        string enfant = figure.ListeEnfants()[i];
-                        //Debug.WriteLine(figure.ListeEnfants());
-                        
-                        // Get the Type for the class
-                        Type calledType = Type.GetType(type);
-                        
-                        
-                        //Type t = Type.GetType("Reflection.Order" + "1");
-                        MethodInfo method = Type.GetType("Carrosse.Elements.Bonhomme").GetMethod(enfant, BindingFlags.Instance | BindingFlags.Public);
-                        method?.Invoke(this, null);
-                    }
+                    MethodInfo method = GetType().GetMethod(enfant, BindingFlags.Instance | BindingFlags.Public);
+                    method?.Invoke(this, null);
                 }
-                
-
             }
         }
         
@@ -63,11 +50,13 @@ namespace Carrosse.Elements
         
         protected void AjouterDisque(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
+            if (elements.ContainsKey(cle)) return;
             elements.Add(cle, new Disque(position, dimension.X, remplissage, contour, largeurContour));
         }
         
         protected void AjouterCercle(string cle, Point position, Point dimension, Color contour, int largeurContour)
         {
+            if (elements.ContainsKey(cle)) return;
             elements.Add(cle, new Cercle(position, dimension.X, contour, largeurContour));
         }
         
@@ -79,11 +68,13 @@ namespace Carrosse.Elements
         
         protected void AjouterLigne(string cle, Point positionSource, Point positionDestination, Color contour, int largeurContour)
         {
+            if (elements.ContainsKey(cle)) return;
             elements.Add(cle, new Ligne(positionSource, positionDestination, contour, largeurContour));
         }
 
         protected void AjouterArc(string cle, Point position, Point dimension, Color contour, int largeurContour, float angleDebut, float amplitude)
         {
+            if (elements.ContainsKey(cle)) return;
             elements.Add(cle, new Arc(position, dimension, contour, largeurContour, angleDebut, amplitude));
         }
 
@@ -140,6 +131,11 @@ namespace Carrosse.Elements
                     elements[parent].AjoutEnfant(enfant);
             }
                 
+        }
+        
+        protected void AjustePosition(string enfant, string parent)
+        {
+            elements[enfant].Position = elements[parent].PointAdjacent(Figure.Y);
         }
 
         public Figure GetFigure(string cle)
