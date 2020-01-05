@@ -145,7 +145,12 @@ namespace Carrosse.Figures
         }
 
         public Point Dimension => dimension;
-        public Point Position => position;
+
+        public Point Position
+        {
+            get => position;
+            set => position = value;
+        }
 
         public double Angle => rotation.Angle;
 

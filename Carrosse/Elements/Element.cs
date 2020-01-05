@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
 using Carrosse.Figures;
 using Rectangle = Carrosse.Figures.Rectangle;
 
@@ -33,8 +32,6 @@ namespace Carrosse.Elements
             // redessine toutes les parties des éléments
             foreach (Figure figure in ListeElements())
             {
-                Debug.WriteLine(figure.ListeEnfants().Count);
-
                 figure.Afficher(graphics);
 
                 if (figure.ListeEnfants().Count > 0)

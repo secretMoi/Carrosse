@@ -93,9 +93,9 @@ namespace Carrosse.Elements
         public void avantBrasD() //todo créer un système de dépendances, propageant le message que les figures enfantes doivent bouger selon la parente
         {
             Point dimension = new Point(40, 80);
-            
+
             AjouterEllipse("avantBrasD", elements["brasD"].PointAdjacent(Figure.Y), dimension, Color.Brown, Color.Black, 1);
-            
+            elements["avantBrasD"].Position = elements["brasD"].PointAdjacent(Figure.Y);
             RotationFigure("avantBrasD", 80);
             
             AjoutEnfant("brasD", "avantBrasD");
