@@ -17,14 +17,14 @@ namespace Carrosse.Figures
         
         public Rotation()
         {
-            sensRotation = HORLOGIQUE;
+            sensRotation = ANTI_HORLOGIQUE;
             sensibiliteAngle = 0.1;
         }
         
         public void SetRotation (double angleDebut, double angleFin)
         {
-            this.angleFin = angleFin;
-            this.angleDebut = angleDebut;
+            this.angleFin = 360 - angleFin;
+            this.angleDebut = 360 - angleDebut;
         }
         
         public Point RotationPoint(Point positionDepart, Point point)
@@ -50,24 +50,22 @@ namespace Carrosse.Figures
 
         public void Tourne(double pas)
         {
-            if(sensRotation == HORLOGIQUE)
+            if (sensRotation == HORLOGIQUE)
                 angle += pas;
-            else
-                angle += pas;
-            
-            
+            else if(sensRotation == ANTI_HORLOGIQUE)
+                angle -= pas;
 
-            /*if (angle >= 360 - angleFin)
-                sensRotation = ANTI_HORLOGIQUE;
-            if (angle <= 360 - angleDebut)
-                sensRotation = HORLOGIQUE;*/
+            angle = CorrigeAngle(angle);
+            
+            Debug.WriteLine(angle);
+
+            if (angle < angleFin)
+                sensRotation = HORLOGIQUE;
         }
         
         public void Position(double angle)
         {
-            //angle = 360 - angle;
-
-            this.Angle = angle;
+            Angle = angle;
         }
         
         public static double DegreToRadian(double angle)
@@ -77,8 +75,10 @@ namespace Carrosse.Figures
 
         private double CorrigeAngle(double angle)
         {
-            if (angle < 0 || angle >= 360)
-                angle = Math.Abs(angle) % 360;
+            if (angle < 0.0)
+                angle = 360.0 + angle;
+            if (angle > 360.0)
+                angle = angle - 360;
 
             return angle;
         }
@@ -86,7 +86,7 @@ namespace Carrosse.Figures
         public double Angle
         {
             get => angle;
-            set => angle = 360 - value % 360;
+            set => angle = (360 - value) % 360;
         }
 
         public double SensibiliteAngle => sensibiliteAngle;

@@ -11,11 +11,9 @@ namespace Carrosse
     public class Animation
     {
         private Dictionary<string, Element> Elements;
-        //private List<Element> Elements;
         private static System.Timers.Timer loopTimer;
 
         private readonly PictureBox pictureBox;
-        private double angle = 0;
 
         private const bool ON = true;
         private const bool OFF = false;
@@ -30,9 +28,9 @@ namespace Carrosse
         
         private void loopTimerEvent(Object source, ElapsedEventArgs e)
         {
-            Elements["tireur"].GetFigure("corps").Rotation.SetRotation(90, 270);
-            Elements["tireur"].GetFigure("corps").Rotation.Position(angle);
-            angle++;
+            Elements["tireur"].GetFigure("corps").Rotation.SetRotation(0, 90);
+            Elements["tireur"].GetFigure("corps").Rotation.Tourne(1);
+            //Elements["tireur"].GetFigure("corps").Rotation.Position(90);
             
             pictureBox.Invalidate();
         }
