@@ -59,8 +59,10 @@ namespace Carrosse.Figures
             
             Debug.WriteLine(angle);
 
-            if (angle < angleFin)
+            if (angle <= angleFin)
                 sensRotation = HORLOGIQUE;
+            if (angle >= angleDebut)
+                sensRotation = ANTI_HORLOGIQUE;
         }
         
         public void Position(double angle)
