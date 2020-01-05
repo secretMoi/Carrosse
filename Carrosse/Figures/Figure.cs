@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -6,6 +7,7 @@ namespace Carrosse.Figures
 {
     public abstract class Figure
     {
+        protected List<string> enfants;
         protected Point position;
         protected Point dimension;
         protected readonly Rotation rotation;
@@ -26,6 +28,7 @@ namespace Carrosse.Figures
             this.position = position;
             this.dimension = dimension;
             rotation = new Rotation();
+            enfants = new List<string>();
 
             if (couleurRemplissage != null)
                 this.CouleurRemplissage = (Color) couleurRemplissage;
@@ -90,14 +93,6 @@ namespace Carrosse.Figures
                 Graphique.TranslateTransform(-(position.X), -position.Y);
             }
         }
-        
-        /*        
-        public void Tourne(double angle)
-        {
-            angle = -angle;
-
-            this.angle += angle;
-        }*/
 
         public virtual void Deplace(int x, int y)
         {
@@ -137,6 +132,16 @@ namespace Carrosse.Figures
 
             /*** calcul angle de la figure parente ***/
             return rotation.RotationPoint(position, pointFin);
+        }
+
+        public void AjoutEnfant(string enfant)
+        {
+            enfants.Add(enfant);
+        }
+
+        public List<string> ListeEnfants()
+        {
+            return enfants;
         }
 
         public Point Dimension => dimension;

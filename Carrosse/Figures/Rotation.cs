@@ -56,8 +56,6 @@ namespace Carrosse.Figures
                 angle -= pas;
 
             angle = CorrigeAngle(angle);
-            
-            Debug.WriteLine(angle);
 
             if (angle <= angleFin)
                 sensRotation = HORLOGIQUE;

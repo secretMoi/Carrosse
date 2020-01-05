@@ -9,8 +9,9 @@ namespace Carrosse.Animations
 {
     public class Animateur
     {
-        private Dictionary<string, Element> Elements;
+        private Dictionary<string, Animation> Elements;
         private static System.Timers.Timer loopTimer;
+        private const int INTERVAL_TIMER = 15;
 
         protected readonly PictureBox pictureBox;
 
@@ -20,32 +21,32 @@ namespace Carrosse.Animations
         {
             this.pictureBox = pictureBox;
             
-            Elements = new Dictionary<string, Element>();
+            Elements = new Dictionary<string, Animation>();
             
             SceneDepart();
         }
         
         private void loopTimerEvent(Object source, ElapsedEventArgs e)
         {
-            /*Elements["tireur"].GetFigure("corps").Rotation.SetRotation(45, 90);
-            Elements["tireur"].GetFigure("corps").Rotation.Tourne(1);*/
+            /*Elements["tireur"].GetFigure("corps").Rotation.SetRotation(45, 90);*/
+            Elements["tireur"].Element.GetFigure("brasD").Rotation.Tourne(1);
             
             pictureBox.Invalidate();
         }
         
         private void SetTimer(bool etat)
         {
-            // timer qui se déclenche lorsque l'on clique dans la tv et sert à déplacer une figure
             if (loopTimer == null)
             {
                 loopTimer = new System.Timers.Timer();
-                loopTimer.Interval = 15; //interval in milliseconds
-                
-                loopTimer.Elapsed += loopTimerEvent; // à effectuer entre les 2 clics souris
+                loopTimer.Interval = INTERVAL_TIMER; //interval in milliseconds
+                loopTimer.Elapsed += loopTimerEvent; // à effectuer à toutes les intervalles
                 loopTimer.AutoReset = true; // le ré enclenche à la fin
+                
+                Animation.SetPeriode(INTERVAL_TIMER);
             }
             
-            loopTimer.Enabled = etat; // désactive par défaut pour limiter les ressources
+            loopTimer.Enabled = etat;
         }
 
         public void Affiche(Graphics graphics)
@@ -60,9 +61,9 @@ namespace Carrosse.Animations
         {
             List<Element> figures = new List<Element>();
 
-            foreach (Element figure in Elements.Values)
+            foreach (Animation animation in Elements.Values)
             {
-                figures.Add(figure);
+                figures.Add(animation.Element);
             }
 
             return figures;
@@ -70,8 +71,8 @@ namespace Carrosse.Animations
 
         public void SceneDepart()
         {
-            Elements.Add("carabine", new Carabine(new Point(300, 250)));
-            Elements.Add("tireur", new Bonhomme(new Point(100, 100)));
+            //Elements.Add("carabine", new Carabine(new Point(300, 250)));
+            Elements.Add("tireur", new Tireur(new Point(100, 100)));
             
             SetTimer(ON);
         }

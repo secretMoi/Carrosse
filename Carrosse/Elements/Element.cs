@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Windows.Forms;
 using Carrosse.Figures;
 using Rectangle = Carrosse.Figures.Rectangle;
 
@@ -12,11 +16,16 @@ namespace Carrosse.Elements
         protected Point position; // position courante du carrosse
         protected Point dimensions; // tailles du carrosse
 
+        protected string type;
+        protected bool objetFini;
+
         public Element(Point position)
         {
             elements = new Dictionary<string, Figure>();
             
             this.position = position;
+
+            objetFini = false;
         }
 
         public virtual void Affiche(Graphics graphics)
@@ -24,12 +33,34 @@ namespace Carrosse.Elements
             // redessine toutes les parties des éléments
             foreach (Figure figure in ListeElements())
             {
+                Debug.WriteLine(figure.ListeEnfants().Count);
+
                 figure.Afficher(graphics);
+
+                if (figure.ListeEnfants().Count > 0)
+                {
+                    for (int i = 0; i < figure.ListeEnfants().Count; i++)
+                    {
+                        string enfant = figure.ListeEnfants()[i];
+                        //Debug.WriteLine(figure.ListeEnfants());
+                        
+                        // Get the Type for the class
+                        Type calledType = Type.GetType(type);
+                        
+                        
+                        //Type t = Type.GetType("Reflection.Order" + "1");
+                        MethodInfo method = Type.GetType("Carrosse.Elements.Bonhomme").GetMethod(enfant, BindingFlags.Instance | BindingFlags.Public);
+                        method?.Invoke(this, null);
+                    }
+                }
+                
+
             }
         }
         
         protected void AjouterRectangle(string cle, Point position, Point dimension, Color? remplissage = null, Color? contour = null, int largeurContour = 0)
         {
+            if (elements.ContainsKey(cle)) return;
             elements.Add(cle, new Rectangle(position, dimension, remplissage, contour, largeurContour));
         }
         
@@ -45,6 +76,7 @@ namespace Carrosse.Elements
         
         protected void AjouterEllipse(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
+            if (elements.ContainsKey(cle)) return;
             elements.Add(cle, new Ellipse(position, dimension, remplissage, contour, largeurContour));
         }
         
@@ -93,6 +125,24 @@ namespace Carrosse.Elements
             }
 
             return figures;
+        }
+
+        public void RotationFigure(string cle, int angle)
+        {
+            if(elements.ContainsKey(cle))
+                elements[cle].Rotation.Position(angle);
+        }
+
+        protected void AjoutEnfant(string parent, string enfant)
+        {
+            // si les clés existent
+            if (elements.ContainsKey(parent) && elements.ContainsKey(enfant))
+            {
+                // si la clé n'est pa déjà enregistrée
+                if(objetFini == false)
+                    elements[parent].AjoutEnfant(enfant);
+            }
+                
         }
 
         public Figure GetFigure(string cle)

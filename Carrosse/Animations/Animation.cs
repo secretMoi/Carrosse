@@ -5,7 +5,7 @@ namespace Carrosse.Animations
 {
     public class Animation
     {
-        protected static int toursCycle;
+        protected static int tempsPourCycle;
         
         protected Element element;
         protected Point position;
@@ -17,7 +17,9 @@ namespace Carrosse.Animations
 
         public static void SetPeriode(int periode)
         {
-            toursCycle = periode;
+            tempsPourCycle = periode;
         }
+
+        public Element Element => element;
     }
 }
