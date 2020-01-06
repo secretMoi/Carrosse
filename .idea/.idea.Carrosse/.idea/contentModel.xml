@@ -65,6 +65,7 @@
             <e p="shot.mp3" t="Include" />
           </e>
         </e>
+        <e p="Son.cs" t="Include" />
       </e>
       <e p="Carrosse.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />

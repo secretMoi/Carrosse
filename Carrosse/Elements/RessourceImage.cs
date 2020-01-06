@@ -12,7 +12,7 @@ namespace Carrosse.Elements
         
         public RessourceImage(Point position) : base(position)
         {
-            
+            elements.Add("Image", null);
         }
 
         protected void ChargeImage()

@@ -115,7 +115,7 @@ namespace Carrosse.Elements
             {
                 figure = elements.ElementAt(id).Value;
 
-                figure.Deplace(figure.Position.X + x, figure.Position.Y + y);
+                figure?.Deplace(figure.Position.X + x, figure.Position.Y + y);
             }
         }
 

@@ -33,6 +33,8 @@ namespace Carrosse.Animations
             
             SetTimerReference(95);
             
+            loopTimer = new Timer();
+            
             SceneDepart();
         }
         
@@ -70,17 +72,12 @@ namespace Carrosse.Animations
         // initialise le timer de la scène courante
         private void SetTimer(bool etat, int intervalle = INTERVAL_TIMER, bool autoReset = true)
         {
-            if (loopTimer == null)
-            {
-                loopTimer = new Timer();
-                loopTimer.Interval = intervalle; //interval in milliseconds
-                loopTimer.Elapsed += LoopTimerEvent; // à effectuer à toutes les intervalles
-                loopTimer.AutoReset = autoReset; // le ré enclenche à la fin
-                
-                Animation.SetPeriode(intervalle);
-            }
-            
+            loopTimer.Interval = intervalle; //interval in milliseconds
             loopTimer.Enabled = etat;
+            loopTimer.Elapsed += LoopTimerEvent; // à effectuer à toutes les intervalles
+            loopTimer.AutoReset = autoReset; // le ré enclenche à la fin
+            
+            Animation.SetPeriode(intervalle);
         }
         
         // initialise le timer de référence
@@ -130,8 +127,8 @@ namespace Carrosse.Animations
         {
             tempsExpirationScene = 0;
 
-            Elements.Add("cible", new Cible(new Point(300, 300)));
-            Elements.Add("lunette", new Lunette(new Point(300, 300)));
+            Elements.Add("cible", new Cible(new Point(400, 300)));
+            Elements.Add("lunette", new Lunette(new Point(300, 200)));
             
             SetTimer(ON);
         }
