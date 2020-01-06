@@ -6,7 +6,7 @@ namespace Carrosse.Elements
 {
     public abstract class RessourceImage : Element
     {
-        protected string imageChemin = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"\ressources\images\";
+        protected string imageChemin = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName) + @"\ressources\images\";
         protected string nomFichier;
         protected Bitmap image;
         

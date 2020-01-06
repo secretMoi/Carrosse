@@ -6,12 +6,13 @@ namespace Carrosse.Animations
 {
     public abstract class Animation
     {
-        protected static int tempsPourCycle;
+        //todo inutile vu l'imprécision du timer par défaut
+        protected static int tempsPourCycle; // temps pour réaliser un cycle complet
         
-        protected Element element;
-        protected Point position;
-        protected bool animationInitialisee;
-        protected Figure parente;
+        protected Element element; // élément couramment animé
+        protected Point position; // position de l' élément couramment animé
+        protected bool animationInitialisee; // vérifie que l'animation soit initialisée'
+        protected Figure parente; // contient la figure parente pour les déplacements en chaine
         
         public Animation(Point position = default)
         {
@@ -19,10 +20,12 @@ namespace Carrosse.Animations
             animationInitialisee = false;
         }
 
+        // permet d'hydrater l'objet après le constructeur
         public virtual void Hydrate(Figure parente)
         {
         }
 
+        // contient l'animation de l'élément
         public abstract void Anime();
 
         public static void SetPeriode(int periode)

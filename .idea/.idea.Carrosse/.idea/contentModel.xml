@@ -10,6 +10,7 @@
           <e p="Animation.cs" t="Include" />
           <e p="Carabine.cs" t="Include" />
           <e p="Cible.cs" t="Include" />
+          <e p="Lunette.cs" t="Include" />
           <e p="Tireur.cs" t="Include" />
         </e>
         <e p="App.config" t="Include" />

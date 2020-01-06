@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
 using System.Timers;
 using System.Windows.Forms;
 using Carrosse.Elements;
@@ -13,10 +14,12 @@ namespace Carrosse.Animations
     {
         private Dictionary<string, Animation> Elements;
         // todo remplacer le timer par un multimedia timer, windows étant fort parallélisé, il n'est pas toujours occupé sur cette application et l interval est peut etre de 50ms
-        private static Timer loopTimer;
-        private static Timer timerReference;
-        private const int INTERVAL_TIMER = 5;
-        private long tempsProgramme;
+        private static Timer loopTimer; // timer qui gère la scène courante
+        private static Timer timerReference; // timer qui coordonne les changements de scène
+        private const int INTERVAL_TIMER = 5; // temps pour le timer par défaut
+        private long tempsProgramme; // temps depuis le démarrage du programme, utilisé par le timer de référence
+        private long tempsExpirationScene; // définit combien de temps une scène va s'exécuter
+        private int numeroSceneSuivante;
 
         protected readonly PictureBox pictureBox;
 
@@ -33,6 +36,7 @@ namespace Carrosse.Animations
             SceneDepart();
         }
         
+        // gère les actions de la scène courante
         private void LoopTimerEvent(Object source, ElapsedEventArgs e)
         {
             foreach (Animation animation in Elements.Values)
@@ -41,16 +45,29 @@ namespace Carrosse.Animations
             }
             
             pictureBox.Invalidate();
-            
-            if(tempsProgramme >= 3000){}
-                Debug.WriteLine("coucou");
+
+            // si le temps est expière, sauf si le temps est illimité
+            if (tempsProgramme >= tempsExpirationScene && tempsExpirationScene != 0)
+            {
+                SetTimer(OFF); // arrête le timer de scène
+                Elements = new Dictionary<string, Animation>(); // vide la liste pour préparer la nouvelle scène
+                numeroSceneSuivante++;
+                
+                // récupère le nom de la méthode dynamiquement
+                MethodInfo method = GetType().GetMethod("Scene" + numeroSceneSuivante,
+                    BindingFlags.Instance | BindingFlags.Public);
+                method?.Invoke(this, null);
+            }
         }
         
+        // actualise le temps du timer de référence
         private void TimerReferenceEvent(Object source, ElapsedEventArgs e)
         {
             tempsProgramme += (long)(timerReference.Interval + 5);
         }
         
+        
+        // initialise le timer de la scène courante
         private void SetTimer(bool etat, int intervalle = INTERVAL_TIMER, bool autoReset = true)
         {
             if (loopTimer == null)
@@ -66,6 +83,7 @@ namespace Carrosse.Animations
             loopTimer.Enabled = etat;
         }
         
+        // initialise le timer de référence
         private void SetTimerReference(int intervalle = INTERVAL_TIMER, bool autoReset = true)
         {
             timerReference = new Timer();
@@ -76,6 +94,7 @@ namespace Carrosse.Animations
             timerReference.Enabled = true;
         }
 
+        // affiche la scène et ses éléments
         public void Affiche(Graphics graphics)
         {
             foreach (Element element in ListeElements())
@@ -98,6 +117,8 @@ namespace Carrosse.Animations
 
         public void SceneDepart()
         {
+            tempsExpirationScene = 1000;
+            
             Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
             Elements["carabine"].Hydrate(Elements["tireur"].Element.GetFigure("AvantBrasDroit"));
@@ -107,7 +128,12 @@ namespace Carrosse.Animations
 
         public void Scene1()
         {
-            Elements.Add("lunette", new Cible(new Point(300, 300)));
+            tempsExpirationScene = 0;
+
+            Elements.Add("cible", new Cible(new Point(300, 300)));
+            Elements.Add("lunette", new Lunette(new Point(300, 300)));
+            
+            SetTimer(ON);
         }
     }
 }

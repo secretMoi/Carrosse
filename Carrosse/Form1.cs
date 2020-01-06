@@ -8,6 +8,7 @@ using Carrosse.Elements;
 using Carrosse.Figures;
 using Carabine = Carrosse.Elements.Carabine;
 using Cible = Carrosse.Elements.Cible;
+using Lunette = Carrosse.Elements.Lunette;
 
 namespace Carrosse
 {

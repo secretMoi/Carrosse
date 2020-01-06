@@ -25,16 +25,19 @@ namespace Carrosse.Elements
             this.zoom = 1;
         }
 
+        // change la mise à l'échelle'
         public void Zoom(double zoom)
         {
             this.zoom = zoom;
         }
 
+        // permet de mettre à l'échelle un élément
         protected void Dimensionne(int x, int y)
         {
             dimensionFigure = new Point((int) (x * zoom), (int) (y * zoom));
         }
 
+        // affiche toutes les figures de l'élément
         public virtual void Affiche(Graphics graphics)
         {
             // redessine toutes les parties des éléments
@@ -42,8 +45,10 @@ namespace Carrosse.Elements
             {
                 figure.Afficher(graphics);
 
+                // indique aux enfants de redéfinir leur position selon la rotation du parent
                 foreach (string enfant in figure.ListeEnfants())
                 {
+                    // récupère le nom de la méthode dynamiquement
                     MethodInfo method = GetType().GetMethod(enfant, BindingFlags.Instance | BindingFlags.Public);
                     method?.Invoke(this, null);
                 }
