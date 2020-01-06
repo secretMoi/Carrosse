@@ -4,7 +4,6 @@ using Carrosse.Figures;
 
 namespace Carrosse.Elements
 {
-    // todo supprimer les params position/dimension vu qu'ils sont connus de l'objet'
     public class Bonhomme : Element
     {
         private static int compteur;

@@ -73,8 +73,9 @@ namespace Carrosse.Animations
 
         public void SceneDepart()
         {
-            Elements.Add("carabine", new Carabine(new Point(300, 250)));
+            Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
+            Elements["carabine"].Hydrate(Elements["tireur"].Element.GetFigure("AvantBrasDroit"));
             
             SetTimer(ON);
         }

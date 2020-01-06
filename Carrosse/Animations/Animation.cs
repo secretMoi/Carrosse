@@ -11,11 +11,17 @@ namespace Carrosse.Animations
         protected Element element;
         protected Point position;
         protected bool animationInitialisee;
+        protected Figure parente;
         
-        public Animation(Point position)
+        public Animation(Point position = default)
         {
             this.position = position;
             animationInitialisee = false;
+        }
+
+        public virtual void Hydrate(Figure parente)
+        {
+            
         }
 
         public abstract void Anime();

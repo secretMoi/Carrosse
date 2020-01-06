@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -77,6 +76,7 @@ namespace Carrosse.Elements
             elements.Add(cle, new Arc(position, dimensionFigure, contour, largeurContour, angleDebut, amplitude));
         }
 
+        // déplace à une position donnée
         public void Deplace(Point positionDestination)
         {
             positionDestination.X -= position.X;
@@ -85,6 +85,7 @@ namespace Carrosse.Elements
             Deplace(positionDestination.X, positionDestination.Y);
         }
 
+        // déplace en translation
         public void Deplace(int x, int y = 0)
         {
             Figure figure;
@@ -140,9 +141,8 @@ namespace Carrosse.Elements
 
         public Figure GetFigure(string cle)
         {
-            Figure figure;
             // on vérifie l'existence de la clé
-            if (!elements.TryGetValue(cle, out figure)) return null;
+            if (!elements.ContainsKey(cle)) return null;
 
             return elements[cle];
         }
