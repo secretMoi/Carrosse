@@ -11,19 +11,16 @@ namespace Carrosse.Elements
 {
     public abstract class Element
     {
-        protected readonly Dictionary<string, Figure> elements; // contient les éléments du carrosse
-        protected Point position; // position courante du carrosse
-        protected Point dimensions; // tailles du carrosse
-        
-        protected bool objetFini;
+        protected readonly Dictionary<string, Figure> elements; // contient les éléments de l'élément
+        protected Point position; // position courante de l'élément
+        protected Point dimensions; // tailles de l'élément
+        protected Point dimensionFigure; // utlisé lors de la création de chaque figure
 
         public Element(Point position)
         {
             elements = new Dictionary<string, Figure>();
             
             this.position = position;
-
-            objetFini = false;
         }
 
         public virtual void Affiche(Graphics graphics)
@@ -120,21 +117,22 @@ namespace Carrosse.Elements
                 elements[cle].Rotation.Position(angle);
         }
 
-        protected void AjoutEnfant(string parent, string enfant)
+        protected void AjoutEnfant(string enfant, string parent)
         {
             // si les clés existent
             if (elements.ContainsKey(parent) && elements.ContainsKey(enfant))
-            {
-                // si la clé n'est pas déjà enregistrée
-                if(objetFini == false)
-                    elements[parent].AjoutEnfant(enfant);
-            }
+                elements[parent].AjoutEnfant(enfant);
         }
         
         // rectifie la position par rapport au parent
-        protected void AjustePosition(string enfant, string parent)
+        protected void AjustePosition(string enfant, string parent, Point positionPreCalculee = default)
         {
-            elements[enfant].Position = elements[parent].PointAdjacent(Figure.Y);
+            if (positionPreCalculee == default)
+                elements[enfant].Position = elements[parent].PointAdjacent(Figure.Y);
+            else
+                elements[enfant].Position = positionPreCalculee;
+            
+            AjoutEnfant(enfant, parent);
         }
 
         public Figure GetFigure(string cle)

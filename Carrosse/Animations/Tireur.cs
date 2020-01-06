@@ -8,20 +8,24 @@ namespace Carrosse.Animations
         {
             element = new Elements.Bonhomme(position);
         }
+        
+        private void SetAnime()
+        {
+            element.GetFigure("BrasDroit").Rotation.SetRotation(40, 70);
+            element.GetFigure("JambeGauche").Rotation.SetRotation(40, 50);
+            element.GetFigure("JambeDroite").Rotation.SetRotation(330, 340);
+
+            animationInitialisee = true;
+        }
 
         public override void Anime()
         {
             if(!animationInitialisee)
                 SetAnime();
             
-            element.GetFigure("BrasDroit").Rotation.Tourne(0.4);
-        }
-
-        private void SetAnime()
-        {
-            element.GetFigure("BrasDroit").Rotation.SetRotation(40, 70);
-
-            animationInitialisee = true;
+            element.GetFigure("BrasDroit").Rotation.Tourne(0.2);
+            element.GetFigure("JambeGauche").Rotation.Tourne(0.2);
+            element.GetFigure("JambeDroite").Rotation.Tourne(0.2); // todo rotation négative impossible
         }
     }
 }

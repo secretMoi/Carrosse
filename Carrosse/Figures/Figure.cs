@@ -136,7 +136,9 @@ namespace Carrosse.Figures
 
         public void AjoutEnfant(string enfant)
         {
-            enfants.Add(enfant);
+            // si la liste ne contient pas déjà l'élément
+            if(!enfants.Contains(enfant))
+                enfants.Add(enfant);
         }
 
         public List<string> ListeEnfants()
