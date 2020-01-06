@@ -7,6 +7,7 @@ using Carrosse.Animations;
 using Carrosse.Elements;
 using Carrosse.Figures;
 using Carabine = Carrosse.Elements.Carabine;
+using Cible = Carrosse.Elements.Cible;
 
 namespace Carrosse
 {

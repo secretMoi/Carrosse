@@ -4,7 +4,7 @@ namespace Carrosse.Elements
 {
     public class Carabine : Element
     {
-        public Carabine(Point positionConstrcuteur) : base(positionConstrcuteur)
+        public Carabine(Point positionConstructeur) : base(positionConstructeur)
         {
             // création gachette
             dimensionFigure = new Point(10, 10);

@@ -21,7 +21,6 @@ namespace Carrosse.Animations
 
         public virtual void Hydrate(Figure parente)
         {
-            
         }
 
         public abstract void Anime();
