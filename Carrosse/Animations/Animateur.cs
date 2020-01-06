@@ -114,7 +114,7 @@ namespace Carrosse.Animations
 
         public void SceneDepart()
         {
-            tempsExpirationScene = 1000;
+            tempsExpirationScene = 500;
             
             Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
@@ -125,10 +125,26 @@ namespace Carrosse.Animations
 
         public void Scene1()
         {
-            tempsExpirationScene = 0;
+            tempsExpirationScene = 500;
 
             Elements.Add("cible", new Cible(new Point(400, 300)));
             Elements.Add("lunette", new Lunette(new Point(300, 200)));
+            
+            Son son = new Son("breath");
+            son.Joue();
+            
+            SetTimer(ON);
+        }
+        
+        public void Scene2()
+        {
+            tempsExpirationScene = 0;
+
+            Elements.Add("balle", new Balle(new Point(400, 300)));
+            Elements.Add("barney", new Barney(new Point(400, 300)));
+
+            Son son = new Son("oh_No");
+            son.Joue();
             
             SetTimer(ON);
         }
