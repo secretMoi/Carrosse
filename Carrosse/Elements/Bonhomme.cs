@@ -51,14 +51,14 @@ namespace Carrosse.Elements
 
         public void Tete()
         {
-            dimensionFigure = new Point(100, 100);
+            Dimensionne(100,100);
             
             AjouterDisque("Tete", Color.Bisque);
         }
 
         public void BrasGauche()
         {
-            dimensionFigure = new Point(40, 80);
+            Dimensionne(40,80);
             position.X += elements["Tete"].Dimension.X / 2 -
                           dimensionFigure.X / 2 + 5;
             position.Y += elements["Tete"].Dimension.Y + 40;
@@ -67,7 +67,7 @@ namespace Carrosse.Elements
 
         public void BrasDroit()
         {
-            dimensionFigure = new Point(40, 80);
+            Dimensionne(40,80);
             position.X = elements["BrasGauche"].Position.X - 5;
             position.Y = elements["BrasGauche"].Position.Y;
             AjouterEllipse("BrasDroit", Color.Brown, Color.Black, 1);
@@ -77,7 +77,7 @@ namespace Carrosse.Elements
 
         public void AvantBrasDroit()
         {
-            dimensionFigure = new Point(40, 80);
+            Dimensionne(40,80);
             position = elements["BrasDroit"].PointAdjacent(Figure.Y);
             AjouterEllipse("AvantBrasDroit", Color.Brown, Color.Black, 1);
             
@@ -88,8 +88,7 @@ namespace Carrosse.Elements
         
         public void Corps()
         {
-            dimensionFigure = new Point(80, 160);
-            
+            Dimensionne(80,160);
             position.X = elements["Tete"].Position.X + 5;
             position.Y = elements["Tete"].Position.Y +
                          elements["Tete"].Dimension.Y;
@@ -99,7 +98,7 @@ namespace Carrosse.Elements
 
         public void JambeGauche()
         {
-            dimensionFigure = new Point(40, 80);
+            Dimensionne(40,80);
             position.X = elements["BrasGauche"].Position.X;
             position.Y = elements["Corps"].Position.Y +
                          elements["Corps"].Dimension.Y;
@@ -108,8 +107,8 @@ namespace Carrosse.Elements
         }
 
         public void GenouGauche()
-        { 
-            dimensionFigure = new Point(30, 30);
+        {
+            Dimensionne(30,30);
             position.X = elements["JambeGauche"].PointAdjacent(Figure.Y).X;
             position.Y = elements["JambeGauche"].PointAdjacent(Figure.Y).Y
                          - dimensionFigure.Y / 2;
@@ -121,7 +120,7 @@ namespace Carrosse.Elements
 
         public void JambeGaucheBas()
         {
-            dimensionFigure = new Point(40, 80);
+            Dimensionne(40,80);
             position = elements["JambeGauche"].PointAdjacent(Figure.Y);
             
             AjouterEllipse("JambeGaucheBas", Color.CadetBlue, Color.Black, 1);
@@ -130,7 +129,7 @@ namespace Carrosse.Elements
 
         public void JambeDroite()
         {
-            dimensionFigure = new Point(40, 80);
+            Dimensionne(40,80);
             position.X = elements["JambeGauche"].Position.X - 5;
             position.Y = elements["JambeGauche"].Position.Y - 15;
             
@@ -140,7 +139,7 @@ namespace Carrosse.Elements
         
         public void GenouDroit()
         {
-            dimensionFigure = new Point(30, 30);
+            Dimensionne(30,30);
             position.X = elements["JambeDroite"].PointAdjacent(Figure.Y).X;
             position.Y = elements["JambeDroite"].PointAdjacent(Figure.Y).Y
                          - dimensionFigure.Y / 2;
@@ -152,7 +151,7 @@ namespace Carrosse.Elements
 
         public void JambeDroiteBas()
         {
-            dimensionFigure = new Point(40, 80);
+            Dimensionne(40,80);
             position = elements["JambeDroite"].PointAdjacent(Figure.Y);
             
             AjouterEllipse("JambeDroiteBas", Color.CadetBlue, Color.Black, 1);
@@ -163,7 +162,7 @@ namespace Carrosse.Elements
 
         public void PiedGauche()
         {
-            dimensionFigure = new Point(70,30);
+            Dimensionne(70,30);
             position = elements["JambeGaucheBas"].PointAdjacent(Figure.Y);
             
             AjouterEllipse("PiedGauche", Color.Wheat, Color.Black, 1);
@@ -173,7 +172,7 @@ namespace Carrosse.Elements
 
         public void PiedDroit()
         {
-            dimensionFigure = new Point(70,30);
+            Dimensionne(70,30);
             position = elements["JambeDroiteBas"].PointAdjacent(Figure.Y);
             
             AjouterEllipse("PiedDroit", Color.Wheat, Color.Black, 1);

@@ -14,12 +14,25 @@ namespace Carrosse.Elements
         protected Point position; // position courante de l'élément
         protected Point dimensions; // tailles de l'élément
         protected Point dimensionFigure; // utlisé lors de la création de chaque figure
+        protected double zoom;
 
         public Element(Point position)
         {
             elements = new Dictionary<string, Figure>();
             
             this.position = position;
+
+            this.zoom = 1;
+        }
+
+        public void Zoom(double zoom)
+        {
+            this.zoom = zoom;
+        }
+
+        protected void Dimensionne(int x, int y)
+        {
+            dimensionFigure = new Point((int) (x * zoom), (int) (y * zoom));
         }
 
         public virtual void Affiche(Graphics graphics)

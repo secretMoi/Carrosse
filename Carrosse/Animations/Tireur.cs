@@ -11,7 +11,7 @@ namespace Carrosse.Animations
         
         private void SetAnime()
         {
-            element.GetFigure("BrasDroit").Rotation.SetRotation(40, 70);
+            element.GetFigure("BrasDroit").Rotation.SetRotation(70, 85);
             element.GetFigure("JambeGauche").Rotation.SetRotation(40, 50);
             element.GetFigure("JambeDroite").Rotation.SetRotation(330, 340);
 

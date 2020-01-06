@@ -98,7 +98,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 16;
+            this.timer1.Interval = 5;
             // 
             // Cible
             // 

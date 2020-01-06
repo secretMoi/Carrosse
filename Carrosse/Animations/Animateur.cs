@@ -10,8 +10,9 @@ namespace Carrosse.Animations
     public class Animateur
     {
         private Dictionary<string, Animation> Elements;
+        // todo remplacer le timer par un multimedia timer, windows étant fort parallélisé, il n'est pas toujours occupé sur cette application et l interval est peut etre de 50ms
         private static System.Timers.Timer loopTimer;
-        private const int INTERVAL_TIMER = 15;
+        private const int INTERVAL_TIMER = 5;
 
         protected readonly PictureBox pictureBox;
 
