@@ -54,7 +54,6 @@
     <Compile Include="Elements\Balle.cs" />
     <Compile Include="Elements\Bonhomme.cs" />
     <Compile Include="Elements\Carabine.cs" />
-    <Compile Include="Elements\Carrosse.cs" />
     <Compile Include="Elements\Cible.cs" />
     <Compile Include="Elements\Element.cs" />
     <Compile Include="Elements\RessourceImage.cs" />

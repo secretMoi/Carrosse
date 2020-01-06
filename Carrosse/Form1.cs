@@ -43,10 +43,10 @@ namespace Carrosse
             
             animateur.Affiche(e.Graphics);
             
-            /*foreach (Element element in Elements)
+            foreach (Element element in Elements)
             {
                 element.Affiche(e.Graphics);
-            }*/
+            }
         }
 
         #region Controles déplacement
@@ -77,11 +77,7 @@ namespace Carrosse
         
         private void button1_Click(object sender, EventArgs e)
         {
-            Elements.Add(new Elements.Carrosse(new Point(50, 100)));
-            elementCourant = Elements[Elements.Count - 1] as Elements.Carrosse;
-            listBox1.Items.Add(elementCourant.ToString()); // ajoute la figure dans la listbox
-            
-            pictureBox1.Invalidate();
+           
         }
 
         private void button2_Click(object sender, EventArgs e)

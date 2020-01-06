@@ -54,7 +54,7 @@ namespace Carrosse.Elements
         {
             dimensionFigure = new Point(100, 100);
             
-            AjouterDisque("Tete", position, dimensionFigure, Color.Bisque);
+            AjouterDisque("Tete", Color.Bisque);
         }
 
         public void BrasGauche()
@@ -63,7 +63,7 @@ namespace Carrosse.Elements
             position.X += elements["Tete"].Dimension.X / 2 -
                           dimensionFigure.X / 2 + 5;
             position.Y += elements["Tete"].Dimension.Y + 40;
-            AjouterEllipse("BrasGauche", position, dimensionFigure, Color.Brown, Color.Black, 1);
+            AjouterEllipse("BrasGauche", Color.Brown, Color.Black, 1);
         }
 
         public void BrasDroit()
@@ -71,7 +71,7 @@ namespace Carrosse.Elements
             dimensionFigure = new Point(40, 80);
             position.X = elements["BrasGauche"].Position.X - 5;
             position.Y = elements["BrasGauche"].Position.Y;
-            AjouterEllipse("BrasDroit", position, dimensionFigure, Color.Brown, Color.Black, 1);
+            AjouterEllipse("BrasDroit", Color.Brown, Color.Black, 1);
             
             RotationFigure("BrasDroit", 60);
         }
@@ -80,7 +80,7 @@ namespace Carrosse.Elements
         {
             dimensionFigure = new Point(40, 80);
             position = elements["BrasDroit"].PointAdjacent(Figure.Y);
-            AjouterEllipse("AvantBrasDroit", position, dimensionFigure, Color.Brown, Color.Black, 1);
+            AjouterEllipse("AvantBrasDroit", Color.Brown, Color.Black, 1);
             
             AjustePosition("AvantBrasDroit", "BrasDroit");
             
@@ -95,7 +95,7 @@ namespace Carrosse.Elements
             position.Y = elements["Tete"].Position.Y +
                          elements["Tete"].Dimension.Y;
             
-            AjouterEllipse("Corps", position, dimensionFigure, Color.Navy);
+            AjouterEllipse("Corps", Color.Navy);
         }
 
         public void JambeGauche()
@@ -104,7 +104,7 @@ namespace Carrosse.Elements
             position.X = elements["BrasGauche"].Position.X;
             position.Y = elements["Corps"].Position.Y +
                          elements["Corps"].Dimension.Y;
-            AjouterEllipse("JambeGauche", position, dimensionFigure, Color.CadetBlue, Color.Black, 1);
+            AjouterEllipse("JambeGauche", Color.CadetBlue, Color.Black, 1);
             RotationFigure("JambeGauche", 40);
         }
 
@@ -114,33 +114,28 @@ namespace Carrosse.Elements
             position.X = elements["JambeGauche"].PointAdjacent(Figure.Y).X;
             position.Y = elements["JambeGauche"].PointAdjacent(Figure.Y).Y
                          - dimensionFigure.Y / 2;
-            AjouterDisque("GenouGauche", position, dimensionFigure, Color.CadetBlue, Color.Black, 1);
+            
+            AjouterDisque("GenouGauche", Color.CadetBlue, Color.Black, 1);
             
             AjustePosition("GenouGauche", "JambeGauche", position);
         }
 
-        public override void Centre(ref Point point)
-        {
-            point.X = point.X - 
-                      elements["Corps"].Dimension.X / 2;
-            point.Y = point.Y - 
-                      elements["Tete"].Dimension.Y - elements["Corps"].Dimension.Y / 2;
-        }
-        
         public void JambeGaucheBas()
         {
             dimensionFigure = new Point(40, 80);
             position = elements["JambeGauche"].PointAdjacent(Figure.Y);
-            AjouterEllipse("JambeGaucheBas", position, dimensionFigure, Color.CadetBlue, Color.Black, 1);
             
+            AjouterEllipse("JambeGaucheBas", Color.CadetBlue, Color.Black, 1);
             AjustePosition("JambeGaucheBas", "JambeGauche", position);
         }
 
         public void JambeDroite()
         {
+            dimensionFigure = new Point(40, 80);
             position.X = elements["JambeGauche"].Position.X - 5;
             position.Y = elements["JambeGauche"].Position.Y - 15;
-            AjouterEllipse("JambeDroite", position, dimensionFigure, Color.CadetBlue, Color.Black, 1);
+            
+            AjouterEllipse("JambeDroite", Color.CadetBlue, Color.Black, 1);
             RotationFigure("JambeDroite", -20);
         }
         
@@ -150,7 +145,8 @@ namespace Carrosse.Elements
             position.X = elements["JambeDroite"].PointAdjacent(Figure.Y).X;
             position.Y = elements["JambeDroite"].PointAdjacent(Figure.Y).Y
                          - dimensionFigure.Y / 2;
-            AjouterDisque("GenouDroit", position, dimensionFigure, Color.CadetBlue, Color.Black, 1);
+            
+            AjouterDisque("GenouDroit", Color.CadetBlue, Color.Black, 1);
             
             AjustePosition("GenouDroit", "JambeDroite", position);
         }
@@ -159,7 +155,8 @@ namespace Carrosse.Elements
         {
             dimensionFigure = new Point(40, 80);
             position = elements["JambeDroite"].PointAdjacent(Figure.Y);
-            AjouterEllipse("JambeDroiteBas", position, dimensionFigure, Color.CadetBlue, Color.Black, 1);
+            
+            AjouterEllipse("JambeDroiteBas", Color.CadetBlue, Color.Black, 1);
             RotationFigure("JambeDroiteBas", -40);
             
             AjustePosition("JambeDroiteBas", "JambeDroite", position);
@@ -169,15 +166,18 @@ namespace Carrosse.Elements
         {
             dimensionFigure = new Point(70,30);
             position = elements["JambeGaucheBas"].PointAdjacent(Figure.Y);
-            AjouterEllipse("PiedGauche", position, dimensionFigure, Color.Wheat, Color.Black, 1);
+            
+            AjouterEllipse("PiedGauche", Color.Wheat, Color.Black, 1);
             
             AjustePosition("PiedGauche", "JambeGaucheBas", position);
         }
 
         public void PiedDroit()
         {
+            dimensionFigure = new Point(70,30);
             position = elements["JambeDroiteBas"].PointAdjacent(Figure.Y);
-            AjouterEllipse("PiedDroit", position, dimensionFigure, Color.Wheat, Color.Black, 1);
+            
+            AjouterEllipse("PiedDroit", Color.Wheat, Color.Black, 1);
             
             AjustePosition("PiedDroit", "JambeDroiteBas", position);
         }
@@ -186,6 +186,14 @@ namespace Carrosse.Elements
         {
             compteur++;
             return "Bonhomme - " + compteur;
+        }
+        
+        public override void Centre(ref Point point)
+        {
+            point.X = point.X - 
+                      elements["Corps"].Dimension.X / 2;
+            point.Y = point.Y - 
+                      elements["Tete"].Dimension.Y - elements["Corps"].Dimension.Y / 2;
         }
     }
 }

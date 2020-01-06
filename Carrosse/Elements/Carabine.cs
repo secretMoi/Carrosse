@@ -4,80 +4,80 @@ namespace Carrosse.Elements
 {
     public class Carabine : Element
     {
-        public Carabine(Point position) : base(position)
+        public Carabine(Point positionConstrcuteur) : base(positionConstrcuteur)
         {
             // création gachette
-            Point dimension = new Point(10, 10);
-            AjouterArc("gachette", position, dimension, Color.Red, 3, 90, 180);
+            dimensionFigure = new Point(10, 10);
+            AjouterArc("gachette", Color.Red, 3, 90, 180);
             
             // création anneau gachette
-            dimension = new Point(30, 30);
-            position.X = position.X - dimension.X / 2 
+            dimensionFigure = new Point(30, 30);
+            position.X = position.X - dimensionFigure.X / 2 
                          + elements["gachette"].Dimension.X / 2;
             position.Y -= (int)(elements["gachette"].Dimension.Y * 1.5);
-            AjouterArc("anneauGachette", position, dimension, Color.Black, 3, 0, 180);
+            AjouterArc("anneauGachette", Color.Black, 3, 0, 180);
 
             // création corps
-            dimension = new Point(150, 40);
-            position.X -= dimension.X / 3;
+            dimensionFigure = new Point(150, 40);
+            position.X -= dimensionFigure.X / 3;
             position.Y = elements["gachette"].Position.Y 
-                         - dimension.Y;
-            AjouterRectangle("corps", position, dimension, Color.Chocolate);
+                         - dimensionFigure.Y;
+            AjouterRectangle("corps", Color.Chocolate);
 
             // création canon
-            dimension = new Point(150, 10);
+            dimensionFigure = new Point(150, 10);
             position.X += elements["corps"].Dimension.X;
-            AjouterRectangle("canon", position, dimension, Color.Black);
+            AjouterRectangle("canon", Color.Black);
 
             // création support lunette gauche
             position.X = elements["corps"].Position.X
                          + elements["corps"].Dimension.X / 2
                          - 10;
-            dimension.X = position.X;
-            dimension.Y = position.Y - 15;
-            AjouterLigne("supportLunetteGauche", position, dimension, Color.Black, 1);
+            dimensionFigure.X = position.X;
+            dimensionFigure.Y = position.Y - 15;
+            AjouterLigne("supportLunetteGauche", Color.Black, 1);
             
             // création support lunette droite
             position.X = elements["corps"].Position.X
                          + elements["corps"].Dimension.X / 2
                          + 10;
-            dimension.X = position.X;
-            AjouterLigne("supportLunetteDroite", position, dimension, Color.Black, 1);
+            dimensionFigure.X = position.X;
+            AjouterLigne("supportLunetteDroite", Color.Black, 1);
             
             // création lunette
-            dimension = new Point(40, 15);
+            dimensionFigure = new Point(40, 15);
             position.X = elements["supportLunetteGauche"].Dimension.X - 10;
             position.Y = elements["supportLunetteGauche"].Dimension.Y
-                - dimension.Y;
-            AjouterRectangle("lunette", position, dimension, Color.Black);
+                - dimensionFigure.Y;
+            AjouterRectangle("lunette", Color.Black);
             
             // création entrée lunette
-            dimension = new Point(8, 20);
-            position.X -= dimension.X;
-            position.Y -= (int)(dimension.Y - elements["lunette"].Dimension.Y) / 2;
-            AjouterRectangle("entreeLunette", position, dimension, Color.Black);
+            dimensionFigure = new Point(8, 20);
+            position.X -= dimensionFigure.X;
+            position.Y -= (int)(dimensionFigure.Y - elements["lunette"].Dimension.Y) / 2;
+            AjouterRectangle("entreeLunette", Color.Black);
             
             // création sortie lunette
             position.X = elements["lunette"].Position.X
                          + elements["lunette"].Dimension.X;
-            AjouterRectangle("sortieLunette", position, dimension, Color.Black);
+            AjouterRectangle("sortieLunette", Color.Black);
             
             // création mollette lunette
-            dimension = new Point(20, 8);
+            dimensionFigure = new Point(20, 8);
             position.X = elements["lunette"].Position.X
                          + elements["lunette"].Dimension.X / 2
-                         - dimension.X / 2;
+                         - dimensionFigure.X / 2;
             position.Y = elements["lunette"].Position.Y
-                         - dimension.Y;
-            AjouterRectangle("molletteLunette", position, dimension, Color.Black);
+                         - dimensionFigure.Y;
+            AjouterRectangle("molletteLunette", Color.Black);
             
             // création crosse
-            dimension = new Point(100, 40);
+            dimensionFigure = new Point(100, 40);
             position.X = elements["corps"].Position.X 
-                         - dimension.X + 8;
+                         - dimensionFigure.X + 8;
             position.Y = elements["corps"].Position.Y 
-                         + dimension.Y - 6;
-            AjouterRectangle("crosse", position, dimension, Color.Chocolate);
+                         + dimensionFigure.Y - 6;
+            AjouterRectangle("crosse", Color.Chocolate);
             elements["crosse"].Rotation.Position(20);
         }
 

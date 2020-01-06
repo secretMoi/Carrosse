@@ -38,40 +38,43 @@ namespace Carrosse.Elements
             }
         }
         
-        protected void AjouterRectangle(string cle, Point position, Point dimension, Color? remplissage = null, Color? contour = null, int largeurContour = 0)
+        protected void AjouterRectangle(string cle, Color? remplissage = null, Color? contour = null, int largeurContour = 0)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Rectangle(position, dimension, remplissage, contour, largeurContour));
+            elements.Add(cle, new Rectangle(position, dimensionFigure, remplissage, contour, largeurContour));
         }
         
-        protected void AjouterDisque(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
+        protected void AjouterDisque(string cle, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Disque(position, dimension.X, remplissage, contour, largeurContour));
+            elements.Add(cle, new Disque(position, dimensionFigure.X, remplissage, contour, largeurContour));
         }
         
-        protected void AjouterCercle(string cle, Point position, Point dimension, Color contour, int largeurContour)
+        protected void AjouterCercle(string cle, Color contour, int largeurContour)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Cercle(position, dimension.X, contour, largeurContour));
+            elements.Add(cle, new Cercle(position, dimensionFigure.X, contour, largeurContour));
         }
         
-        protected void AjouterEllipse(string cle, Point position, Point dimension, Color remplissage, Color? contour = null, int largeurContour = 0)
+        protected void AjouterEllipse(string cle, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Ellipse(position, dimension, remplissage, contour, largeurContour));
+            elements.Add(cle, new Ellipse(position, dimensionFigure, remplissage, contour, largeurContour));
         }
         
-        protected void AjouterLigne(string cle, Point positionSource, Point positionDestination, Color contour, int largeurContour)
+        protected void AjouterLigne(string cle, Color contour, int largeurContour)
         {
             if (elements.ContainsKey(cle)) return;
+
+            Point positionSource = position;
+            Point positionDestination = dimensionFigure;
             elements.Add(cle, new Ligne(positionSource, positionDestination, contour, largeurContour));
         }
 
-        protected void AjouterArc(string cle, Point position, Point dimension, Color contour, int largeurContour, float angleDebut, float amplitude)
+        protected void AjouterArc(string cle, Color contour, int largeurContour, float angleDebut, float amplitude)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Arc(position, dimension, contour, largeurContour, angleDebut, amplitude));
+            elements.Add(cle, new Arc(position, dimensionFigure, contour, largeurContour, angleDebut, amplitude));
         }
 
         public void Deplace(Point positionDestination)

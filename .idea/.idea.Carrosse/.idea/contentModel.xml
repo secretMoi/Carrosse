@@ -19,7 +19,6 @@
           <e p="Balle.cs" t="Include" />
           <e p="Bonhomme.cs" t="Include" />
           <e p="Carabine.cs" t="Include" />
-          <e p="Carrosse.cs" t="Include" />
           <e p="Cible.cs" t="Include" />
           <e p="Element.cs" t="Include" />
           <e p="Lunette.cs" t="Include" />
