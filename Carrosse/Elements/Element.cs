@@ -14,8 +14,7 @@ namespace Carrosse.Elements
         protected readonly Dictionary<string, Figure> elements; // contient les éléments du carrosse
         protected Point position; // position courante du carrosse
         protected Point dimensions; // tailles du carrosse
-
-        protected string type;
+        
         protected bool objetFini;
 
         public Element(Point position)
@@ -126,13 +125,13 @@ namespace Carrosse.Elements
             // si les clés existent
             if (elements.ContainsKey(parent) && elements.ContainsKey(enfant))
             {
-                // si la clé n'est pa déjà enregistrée
+                // si la clé n'est pas déjà enregistrée
                 if(objetFini == false)
                     elements[parent].AjoutEnfant(enfant);
             }
-                
         }
         
+        // rectifie la position par rapport au parent
         protected void AjustePosition(string enfant, string parent)
         {
             elements[enfant].Position = elements[parent].PointAdjacent(Figure.Y);

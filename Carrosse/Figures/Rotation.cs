@@ -89,6 +89,11 @@ namespace Carrosse.Figures
             set => angle = (360 - value) % 360;
         }
 
+        public double AngleInverse()
+        {
+            return 360 - angle;
+        }
+
         public double SensibiliteAngle => sensibiliteAngle;
     }
 }

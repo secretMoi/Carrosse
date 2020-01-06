@@ -28,8 +28,10 @@ namespace Carrosse.Animations
         
         private void loopTimerEvent(Object source, ElapsedEventArgs e)
         {
-            /*Elements["tireur"].GetFigure("corps").Rotation.SetRotation(45, 90);*/
-            Elements["tireur"].Element.GetFigure("brasD").Rotation.Tourne(1);
+            foreach (Animation animation in Elements.Values)
+            {
+                animation.Anime();
+            }
             
             pictureBox.Invalidate();
         }
@@ -71,7 +73,7 @@ namespace Carrosse.Animations
 
         public void SceneDepart()
         {
-            //Elements.Add("carabine", new Carabine(new Point(300, 250)));
+            Elements.Add("carabine", new Carabine(new Point(300, 250)));
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
             
             SetTimer(ON);

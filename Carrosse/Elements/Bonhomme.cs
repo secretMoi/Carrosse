@@ -7,121 +7,170 @@ namespace Carrosse.Elements
     public class Bonhomme : Element
     {
         private static int compteur;
+        private Point dimension;
         public Bonhomme(Point position) : base(position)
         {
-            type = "Bonhomme";
             // création tête
-            Point dimension = new Point(100, 100);
-            AjouterDisque("tete", position, dimension, Color.Bisque);
+            Tete();
 
             // création bras gauche
-            dimension = new Point(40, 80);
-            position.X += elements["tete"].Dimension.X / 2 -
-                          dimension.X / 2 + 5;
-            position.Y += elements["tete"].Dimension.Y + 40;
-            AjouterEllipse("brasG", position, dimension, Color.Brown, Color.Black, 1);
+            BrasGauche();
 
-            // création corps
+            // création Corps
             Corps();
             
             // création haut jambe gauche
-            dimension = new Point(40, 80);
-            position.X = elements["brasG"].Position.X;
-            position.Y = elements["corps"].Position.Y +
-                         elements["corps"].Dimension.Y;
-            AjouterEllipse("jambeG", position, dimension, Color.CadetBlue, Color.Black, 1);
-            RotationFigure("jambeG", 40);
+            JambeGauche();
             
             // genou gauche
-            dimension = new Point(30, 30);
-            position.X = elements["jambeG"].PointAdjacent(Figure.Y).X;
-            position.Y = elements["jambeG"].PointAdjacent(Figure.Y).Y
-                         - dimension.Y / 2;
-            AjouterDisque("genouG", position, dimension, Color.CadetBlue, Color.Black, 1);
+            GenouGauche();
             
             // bas jambe gauche
-            dimension = new Point(40, 80);
-            AjouterEllipse("basJambeG", elements["jambeG"].PointAdjacent(Figure.Y), dimension, Color.CadetBlue, Color.Black, 1);
+            JambeGaucheBas();
             
             // création haut jambe droite
-            position.X = elements["jambeG"].Position.X - 5;
-            position.Y = elements["jambeG"].Position.Y;
-            AjouterEllipse("jambeD", position, dimension, Color.CadetBlue, Color.Black, 1);
-            RotationFigure("jambeD", -20);
+            JambeDroite();
             
             // genou droit
-            dimension = new Point(30, 30);
-            position.X = elements["jambeD"].PointAdjacent(Figure.Y).X;
-            position.Y = elements["jambeD"].PointAdjacent(Figure.Y).Y
-                         - dimension.Y / 2;
-            AjouterDisque("genouD", position, dimension, Color.CadetBlue, Color.Black, 1);
+            GenouDroit();
             
             // bas jambe droite
-            dimension = new Point(40, 80);
-            AjouterEllipse("basJambeD", elements["jambeD"].PointAdjacent(Figure.Y), dimension, Color.CadetBlue, Color.Black, 1);
-            RotationFigure("basJambeD", -40);
+            JambeDroiteBas();
 
             // création bras droit
             BrasDroit();
 
             // création avant-bras droit
-            avantBrasD();
+            AvantBrasDroit();
             
             // création pied gauche
-            dimension = new Point(70,30);
-            AjouterEllipse("piedG", elements["basJambeG"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
+            PiedGauche();
 
             // création pied droit
-            AjouterEllipse("piedD", elements["basJambeD"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
+            PiedDroit();
 
 
             objetFini = true;
         }
 
-        public void BrasDroit()
+        public void Tete()
         {
-            Point dimension = new Point(40, 80);
+            dimension = new Point(100, 100);
             
-            position.X = elements["brasG"].Position.X - 5;
-            position.Y = elements["brasG"].Position.Y;
-            
-            AjouterEllipse("brasD", position, dimension, Color.Brown, Color.Black, 1);
-            
-            RotationFigure("brasD", 60);
+            AjouterDisque("Tete", position, dimension, Color.Bisque);
         }
 
-        public void avantBrasD() //todo créer un système de dépendances, propageant le message que les figures enfantes doivent bouger selon la parente
+        public void BrasGauche()
         {
-            Point dimension = new Point(40, 80);
+            dimension = new Point(40, 80);
+            position.X += elements["Tete"].Dimension.X / 2 -
+                          dimension.X / 2 + 5;
+            position.Y += elements["Tete"].Dimension.Y + 40;
+            AjouterEllipse("BrasGauche", position, dimension, Color.Brown, Color.Black, 1);
+        }
 
-            AjouterEllipse("avantBrasD", elements["brasD"].PointAdjacent(Figure.Y), dimension, Color.Brown, Color.Black, 1);
+        public void BrasDroit()
+        {
+            dimension = new Point(40, 80);
+            position.X = elements["BrasGauche"].Position.X - 5;
+            position.Y = elements["BrasGauche"].Position.Y;
+            AjouterEllipse("BrasDroit", position, dimension, Color.Brown, Color.Black, 1);
             
-            AjustePosition("avantBrasD", "brasD");
+            RotationFigure("BrasDroit", 60);
+        }
+
+        public void AvantBrasDroit()
+        {
+            dimension = new Point(40, 80);
+
+            AjouterEllipse("AvantBrasDroit", elements["BrasDroit"].PointAdjacent(Figure.Y), dimension, Color.Brown, Color.Black, 1);
             
-            RotationFigure("avantBrasD", 80);
+            AjustePosition("AvantBrasDroit", "BrasDroit");
             
-            AjoutEnfant("brasD", "avantBrasD");
+            RotationFigure("AvantBrasDroit", 80);
+            
+            AjoutEnfant("BrasDroit", "AvantBrasDroit");
         }
         
         public void Corps()
         {
-            Point dimension = new Point(80, 160);
+            dimension = new Point(80, 160);
             
-            position.X = elements["tete"].Position.X + 5;
-            position.Y = elements["tete"].Position.Y +
-                         elements["tete"].Dimension.Y;
+            position.X = elements["Tete"].Position.X + 5;
+            position.Y = elements["Tete"].Position.Y +
+                         elements["Tete"].Dimension.Y;
             
-            AjouterEllipse("corps", position, dimension, Color.Navy);
+            AjouterEllipse("Corps", position, dimension, Color.Navy);
+        }
+
+        public void JambeGauche()
+        {
+            dimension = new Point(40, 80);
+            position.X = elements["BrasGauche"].Position.X;
+            position.Y = elements["Corps"].Position.Y +
+                         elements["Corps"].Dimension.Y;
+            AjouterEllipse("JambeGauche", position, dimension, Color.CadetBlue, Color.Black, 1);
+            RotationFigure("JambeGauche", 40);
+        }
+
+        public void GenouGauche()
+        {
+            dimension = new Point(30, 30);
+            position.X = elements["JambeGauche"].PointAdjacent(Figure.Y).X;
+            position.Y = elements["JambeGauche"].PointAdjacent(Figure.Y).Y
+                         - dimension.Y / 2;
+            AjouterDisque("GenouGauche", position, dimension, Color.CadetBlue, Color.Black, 1);
         }
 
         public override void Centre(ref Point point)
         {
             point.X = point.X - 
-                      elements["corps"].Dimension.X / 2;
+                      elements["Corps"].Dimension.X / 2;
             point.Y = point.Y - 
-                      elements["tete"].Dimension.Y - elements["corps"].Dimension.Y / 2;
+                      elements["Tete"].Dimension.Y - elements["Corps"].Dimension.Y / 2;
+        }
+        
+        public void JambeGaucheBas()
+        {
+            dimension = new Point(40, 80);
+            AjouterEllipse("JambeGaucheBas", elements["JambeGauche"].PointAdjacent(Figure.Y), dimension, Color.CadetBlue, Color.Black, 1);
         }
 
+        public void JambeDroite()
+        {
+            position.X = elements["JambeGauche"].Position.X - 5;
+            position.Y = elements["JambeGauche"].Position.Y;
+            AjouterEllipse("JambeDroite", position, dimension, Color.CadetBlue, Color.Black, 1);
+            RotationFigure("JambeDroite", -20);
+        }
+        
+        public void GenouDroit()
+        {
+            dimension = new Point(30, 30);
+            position.X = elements["JambeDroite"].PointAdjacent(Figure.Y).X;
+            position.Y = elements["JambeDroite"].PointAdjacent(Figure.Y).Y
+                         - dimension.Y / 2;
+            AjouterDisque("GenouDroit", position, dimension, Color.CadetBlue, Color.Black, 1);
+        }
+
+        public void JambeDroiteBas()
+        {
+            dimension = new Point(40, 80);
+            AjouterEllipse("JambeDroiteBas", elements["JambeDroite"].PointAdjacent(Figure.Y), dimension, Color.CadetBlue, Color.Black, 1);
+            RotationFigure("JambeDroiteBas", -40);
+        }
+
+        public void PiedGauche()
+        {
+            dimension = new Point(70,30);
+            AjouterEllipse("PiedGauche", elements["JambeGaucheBas"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
+        }
+
+        public void PiedDroit()
+        {
+            AjouterEllipse("PiedDroit", elements["JambeDroiteBas"].PointAdjacent(Figure.Y), dimension, Color.Wheat, Color.Black, 1);
+        }
+        
         public override string ToString()
         {
             compteur++;

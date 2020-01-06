@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Carrosse.Animations;
 using Carrosse.Elements;
 using Carrosse.Figures;
+using Carabine = Carrosse.Elements.Carabine;
 
 namespace Carrosse
 {

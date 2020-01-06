@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Animations\Animateur.cs" />
     <Compile Include="Animations\Animation.cs" />
+    <Compile Include="Animations\Carabine.cs" />
     <Compile Include="Animations\Tireur.cs" />
     <Compile Include="Elements\Arbre.cs" />
     <Compile Include="Elements\Balle.cs" />
