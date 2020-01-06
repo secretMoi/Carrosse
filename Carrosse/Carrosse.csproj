@@ -48,6 +48,8 @@
   <ItemGroup>
     <Compile Include="Animations\Animateur.cs" />
     <Compile Include="Animations\Animation.cs" />
+    <Compile Include="Animations\Balle.cs" />
+    <Compile Include="Animations\Barney.cs" />
     <Compile Include="Animations\Carabine.cs" />
     <Compile Include="Animations\Cible.cs" />
     <Compile Include="Animations\Lunette.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Elements\Carabine.cs" />
     <Compile Include="Elements\Cible.cs" />
     <Compile Include="Elements\Element.cs" />
+    <Compile Include="Elements\Personnage.cs" />
     <Compile Include="Elements\RessourceImage.cs" />
     <Compile Include="Elements\Lunette.cs" />
     <Compile Include="Figures\Arc.cs" />
@@ -133,13 +136,26 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ressources\sons\ouh.mp3">
+    <EmbeddedResource Include="ressources\sons\breath.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="ressources\sons\reload.mp3">
+    <EmbeddedResource Include="ressources\sons\ouh.wav">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="ressources\sons\shot.mp3">
+    <EmbeddedResource Include="ressources\sons\reload.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ressources\sons\shot.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ressources\sons\oh_No.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ressources\images\barney.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

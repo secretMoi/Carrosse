@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Carrosse.Animations;
 using Carrosse.Elements;
 using Carrosse.Figures;
+using Balle = Carrosse.Elements.Balle;
 using Carabine = Carrosse.Elements.Carabine;
 using Cible = Carrosse.Elements.Cible;
 using Lunette = Carrosse.Elements.Lunette;

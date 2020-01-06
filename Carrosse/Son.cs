@@ -1,11 +1,17 @@
-﻿namespace Carrosse
+﻿using System.Diagnostics;
+using System.IO;
+
+namespace Carrosse
 {
     public class Son
     {
         private System.Media.SoundPlayer player;
+        string repertoireSons = Path.GetDirectoryName(Process.GetCurrentProcess().MainModule?.FileName) + @"\ressources\sons\";
+        private string extension;
         public Son(string cheminFichier)
         {
-            player = new System.Media.SoundPlayer(@"c:\mywavfile.wav");
+            extension = ".wav";
+            player = new System.Media.SoundPlayer(repertoireSons + cheminFichier + extension);
         }
 
         public void Joue()

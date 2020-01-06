@@ -8,6 +8,8 @@
         <e p="Animations" t="Include">
           <e p="Animateur.cs" t="Include" />
           <e p="Animation.cs" t="Include" />
+          <e p="Balle.cs" t="Include" />
+          <e p="Barney.cs" t="Include" />
           <e p="Carabine.cs" t="Include" />
           <e p="Cible.cs" t="Include" />
           <e p="Lunette.cs" t="Include" />
@@ -24,6 +26,7 @@
           <e p="Cible.cs" t="Include" />
           <e p="Element.cs" t="Include" />
           <e p="Lunette.cs" t="Include" />
+          <e p="Personnage.cs" t="Include" />
           <e p="RessourceImage.cs" t="Include" />
         </e>
         <e p="Figures" t="Include">
@@ -57,12 +60,15 @@
             <e p="arbre-5.png" t="Include" />
             <e p="arbre-6.png" t="Include" />
             <e p="balle.png" t="Include" />
+            <e p="barney.png" t="Include" />
             <e p="cible2.png" t="Include" />
           </e>
           <e p="sons" t="Include">
-            <e p="ouh.mp3" t="Include" />
-            <e p="reload.mp3" t="Include" />
-            <e p="shot.mp3" t="Include" />
+            <e p="breath.wav" t="Include" />
+            <e p="oh_No.wav" t="Include" />
+            <e p="ouh.wav" t="Include" />
+            <e p="reload.wav" t="Include" />
+            <e p="shot.wav" t="Include" />
           </e>
         </e>
         <e p="Son.cs" t="Include" />
