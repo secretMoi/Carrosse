@@ -26,7 +26,7 @@ namespace Carrosse.Elements
                 
                 image = (Bitmap)Image.FromFile(imageChemin + nomFichier);
                 image = new Bitmap(image,
-                    new Size((int) (ancienneDimensions.Width * zoom), (int) (ancienneDimensions.Height * zoom)));
+                    new Size((int) (ancienneDimensions.Width + zoom), (int) (ancienneDimensions.Height + zoom)));
             }
         }
 

@@ -7,7 +7,6 @@ namespace Carrosse.Animations
     public abstract class Animation
     {
         //todo inutile vu l'imprécision du timer par défaut
-        protected static int tempsPourCycle; // temps pour réaliser un cycle complet
         
         protected Element element; // élément couramment animé
         protected Point position; // position de l' élément couramment animé
@@ -27,11 +26,6 @@ namespace Carrosse.Animations
 
         // contient l'animation de l'élément
         public abstract void Anime();
-
-        public static void SetPeriode(int periode)
-        {
-            tempsPourCycle = periode;
-        }
 
         protected double Angle(string figure)
         {

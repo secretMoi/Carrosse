@@ -20,6 +20,7 @@ namespace Carrosse.Animations
         private long tempsProgramme; // temps depuis le démarrage du programme, utilisé par le timer de référence
         private long tempsExpirationScene; // définit combien de temps une scène va s'exécuter
         private int numeroSceneSuivante;
+        private bool nettoyeApresScene;
 
         protected readonly PictureBox pictureBox;
 
@@ -28,6 +29,7 @@ namespace Carrosse.Animations
         public Animateur(PictureBox pictureBox)
         {
             this.pictureBox = pictureBox;
+            nettoyeApresScene = true;
             
             Elements = new Dictionary<string, Animation>();
             
@@ -48,19 +50,7 @@ namespace Carrosse.Animations
             
             pictureBox.Invalidate();
 
-            // si le temps est expière, sauf si le temps est illimité
-            if (tempsProgramme >= tempsExpirationScene && tempsExpirationScene != 0)
-            {
-                SetTimer(OFF); // arrête le timer de scène
-                Elements = new Dictionary<string, Animation>(); // vide la liste pour préparer la nouvelle scène
-                numeroSceneSuivante++;
-                tempsProgramme = 0;
-                
-                // récupère le nom de la méthode dynamiquement
-                MethodInfo method = GetType().GetMethod("Scene" + numeroSceneSuivante,
-                    BindingFlags.Instance | BindingFlags.Public);
-                method?.Invoke(this, null);
-            }
+            FermeScene();
         }
         
         // actualise le temps du timer de référence
@@ -77,8 +67,6 @@ namespace Carrosse.Animations
             loopTimer.Enabled = etat;
             loopTimer.Elapsed += LoopTimerEvent; // à effectuer à toutes les intervalles
             loopTimer.AutoReset = autoReset; // le ré enclenche à la fin
-            
-            Animation.SetPeriode(intervalle);
         }
         
         // initialise le timer de référence
@@ -116,14 +104,11 @@ namespace Carrosse.Animations
         public void SceneDepart()
         {
             tempsExpirationScene = 3000;
-            tempsExpirationScene = 500;
-            tempsExpirationScene = 0;
+            //tempsExpirationScene = 500;
             
-            /*Elements.Add("carabine", new Carabine());
+            Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
-            Elements["carabine"].Hydrate(Elements["tireur"].Element.GetFigure("AvantBrasDroit"));*/
-            
-            Elements.Add("barney", new Barney(new Point(400, 30)));
+            Elements["carabine"].Hydrate(Elements["tireur"].Element.GetFigure("AvantBrasDroit"));
 
             SetTimer(ON);
         }
@@ -131,7 +116,7 @@ namespace Carrosse.Animations
         public void Scene1()
         {
             tempsExpirationScene = 7700;
-            tempsExpirationScene = 500;
+            //tempsExpirationScene = 500;
 
             Elements.Add("cible", new Cible(new Point(400, 300)));
             Elements.Add("lunette", new Lunette(new Point(300, 200)));
@@ -144,7 +129,7 @@ namespace Carrosse.Animations
         
         public void Scene2()
         {
-            tempsExpirationScene = 0;
+            tempsExpirationScene = 5000;
             
             Elements.Add("barney", new Barney(new Point(400, 30)));
             int xBalle = Elements["barney"].Element.Position("Personnage").X
@@ -155,6 +140,57 @@ namespace Carrosse.Animations
             son.Joue();
             
             SetTimer(ON);
+
+            nettoyeApresScene = false;
+        }
+        
+        public void Scene3()
+        {
+            tempsExpirationScene = 4000;
+            
+            Elements["barney"].Hydrate(false);
+
+            Son son = new Son("oh_No");
+            son.Joue();
+            
+            SetTimer(ON);
+            
+            nettoyeApresScene = false;
+        }
+        
+        public void Scene4()
+        {
+            tempsExpirationScene = 4000;
+            
+            Elements["barney"].Hydrate(true);
+
+            Son son = new Son("reload");
+            son.Joue();
+            
+            SetTimer(ON);
+        }
+
+        private void FermeScene()
+        {
+            // si le temps est expiré, sauf si le temps est illimité
+            if (tempsProgramme >= tempsExpirationScene && tempsExpirationScene != 0)
+            {
+                SetTimer(OFF); // arrête le timer de scène
+
+                if (nettoyeApresScene)
+                {
+                    Elements = new Dictionary<string, Animation>(); // vide la liste pour préparer la nouvelle scène
+                    nettoyeApresScene = true;
+                }
+                    
+                numeroSceneSuivante++;
+                tempsProgramme = 0;
+
+                // récupère le nom de la méthode dynamiquement
+                MethodInfo method = GetType().GetMethod("Scene" + numeroSceneSuivante,
+                    BindingFlags.Instance | BindingFlags.Public);
+                method?.Invoke(this, null);
+            }
         }
     }
 }
