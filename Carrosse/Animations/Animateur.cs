@@ -115,6 +115,7 @@ namespace Carrosse.Animations
         public void SceneDepart()
         {
             tempsExpirationScene = 3000;
+            tempsExpirationScene = 500;
             
             Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));

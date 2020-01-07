@@ -67,7 +67,7 @@ namespace Carrosse.Elements
             elements.Add(cle, new Disque(position, dimensions.X, remplissage, contour, largeurContour));
         }
         
-        protected void AjouterCercle(string cle, Color contour, int largeurContour)
+        protected void AjouterCercle(string cle, Color contour, int largeurContour = 1)
         {
             if (elements.ContainsKey(cle)) return;
             elements.Add(cle, new Cercle(position, dimensions.X, contour, largeurContour));
