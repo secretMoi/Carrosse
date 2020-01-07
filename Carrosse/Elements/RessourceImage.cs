@@ -49,11 +49,5 @@ namespace Carrosse.Elements
                 graphics.DrawImage(image, position);
             }
         }
-
-        public override void Centre(ref Point point)
-        {
-            point.X -= dimensions.X / 2;
-            point.Y -= dimensions.Y / 2;
-        }
     }
 }

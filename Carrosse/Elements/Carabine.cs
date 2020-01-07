@@ -80,16 +80,5 @@ namespace Carrosse.Elements
             AjouterRectangle("crosse", Color.Chocolate);
             elements["crosse"].Rotation.Position(20);
         }
-
-        public override void Centre(ref Point point)
-        {
-            point.X -= dimensions.X / 2;
-            point.Y -= dimensions.Y / 2;
-        }
-        
-        public override string ToString()
-        {
-            return "Carabine";
-        }
     }
 }

@@ -6,7 +6,6 @@ namespace Carrosse.Elements
 {
     public class Bonhomme : Element
     {
-        private static int compteur;
         public Bonhomme(Point position) : base(position)
         {
             // création tête
@@ -213,20 +212,6 @@ namespace Carrosse.Elements
             AjouterEllipse("PiedDroit", Color.Wheat, Color.Black, 1);
             
             AjustePosition("PiedDroit", "JambeDroiteBas", position);
-        }
-        
-        public override string ToString()
-        {
-            compteur++;
-            return "Bonhomme - " + compteur;
-        }
-        
-        public override void Centre(ref Point point)
-        {
-            point.X = point.X - 
-                      elements["Corps"].Dimension.X / 2;
-            point.Y = point.Y - 
-                      elements["Tete"].Dimension.Y - elements["Corps"].Dimension.Y / 2;
         }
     }
 }

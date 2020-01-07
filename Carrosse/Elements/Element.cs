@@ -119,8 +119,6 @@ namespace Carrosse.Elements
             }
         }
 
-        public abstract void Centre(ref Point point);
-
         public List<Figure> ListeElements()
         {
             List<Figure> figures = new List<Figure>();

@@ -16,10 +16,5 @@ namespace Carrosse.Elements
             
             ChargeImage();
         }
-
-        public override string ToString()
-        {
-            return "Arbre - " + nombre;
-        }
     }
 }

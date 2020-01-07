@@ -13,10 +13,5 @@ namespace Carrosse.Elements
             
             ChargeImage();
         }
-        
-        public override string ToString()
-        {
-            return "Cible";
-        }
     }
 }

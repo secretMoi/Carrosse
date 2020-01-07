@@ -10,6 +10,8 @@ namespace Carrosse.Elements
             dimensions = new Point(400, 400);
             AjouterCercle("lunette", Color.Black, 15);
             
+            
+            
             // création mollette gauche
             dimensions = new Point(50, 100);
             position.X -= dimensions.X;
@@ -49,15 +51,10 @@ namespace Carrosse.Elements
             AjouterLigne("ligneHorizontale", Color.Black, 2);
         }
 
-        public override void Centre(ref Point point)
+        public void CercleLunetteInterieur()
         {
-            point.X -= dimensions.X / 2;
-            point.Y -= dimensions.Y / 2;
-        }
-        
-        public override string ToString()
-        {
-            return "Lunette";
+            dimensions.X = elements["lunette"].Dimension.X / 2;
+            dimensions.Y = elements["lunette"].Dimension.Y / 2;
         }
     }
 }
