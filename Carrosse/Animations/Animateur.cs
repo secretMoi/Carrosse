@@ -128,6 +128,9 @@ namespace Carrosse.Animations
                             );
             Elements.Add("cheveux", new Cheveux(positionCheveux));
             Elements["carabine"].Hydrate(Elements["tireur"].GetFigure("AvantBrasDroit"));
+            
+            Son son = new Son("mmh");
+            son.Joue();
 
             SetTimer(ON);
         }
