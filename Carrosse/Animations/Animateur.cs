@@ -101,10 +101,11 @@ namespace Carrosse.Animations
             return figures;
         }
 
+        // tireur vue de profil
         public void SceneDepart()
         {
             tempsExpirationScene = 3000;
-            //tempsExpirationScene = 500;
+            tempsExpirationScene = 500;
             
             Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
@@ -113,10 +114,11 @@ namespace Carrosse.Animations
             SetTimer(ON);
         }
 
+        // vue lunette et cible
         public void Scene1()
         {
             tempsExpirationScene = 7700;
-            //tempsExpirationScene = 500;
+            tempsExpirationScene = 500;
 
             Elements.Add("cible", new Cible(new Point(400, 300)));
             Elements.Add("lunette", new Lunette(new Point(300, 200)));
@@ -125,9 +127,25 @@ namespace Carrosse.Animations
             son.Joue();
             
             SetTimer(ON);
+
+            nettoyeApresScene = false;
+        }
+
+        // éternuement
+        public void Scene2()
+        {
+            tempsExpirationScene = 1000;
+            
+            Son son = new Son("sneeze");
+            son.Joue();
+            
+            Elements["cible"].Hydrate(true);
+            
+            SetTimer(ON);
         }
         
-        public void Scene2()
+        // tir après vue lunette
+        public void Scene3()
         {
             tempsExpirationScene = 5000;
             
@@ -144,9 +162,11 @@ namespace Carrosse.Animations
             nettoyeApresScene = false;
         }
         
-        public void Scene3()
+        // pause Oh NO
+        public void Scene4()
         {
             tempsExpirationScene = 4000;
+            tempsExpirationScene = 500;
             
             Elements["barney"].Hydrate(false);
 
@@ -158,9 +178,11 @@ namespace Carrosse.Animations
             nettoyeApresScene = false;
         }
         
-        public void Scene4()
+        // reprise zoom
+        public void Scene5()
         {
             tempsExpirationScene = 4000;
+            tempsExpirationScene = 500;
             
             Elements["barney"].Hydrate(true);
 
@@ -180,9 +202,9 @@ namespace Carrosse.Animations
                 if (nettoyeApresScene)
                 {
                     Elements = new Dictionary<string, Animation>(); // vide la liste pour préparer la nouvelle scène
-                    nettoyeApresScene = true;
                 }
-                    
+                
+                nettoyeApresScene = true;
                 numeroSceneSuivante++;
                 tempsProgramme = 0;
 

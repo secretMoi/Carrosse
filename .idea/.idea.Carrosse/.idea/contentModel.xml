@@ -69,6 +69,7 @@
             <e p="ouh.wav" t="Include" />
             <e p="reload.wav" t="Include" />
             <e p="shot.wav" t="Include" />
+            <e p="sneeze.wav" t="Include" />
           </e>
         </e>
         <e p="Son.cs" t="Include" />
