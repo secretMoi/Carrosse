@@ -6,8 +6,10 @@ namespace Carrosse.Elements
     {
         public Personnage(Point position) : base(position)
         {
-            dimensions.X = 200;
-            dimensions.Y = 200;
+            //elements.Add("Personnage", null);
+            
+            dimensions.X = 100;
+            dimensions.Y = 100;
 
             nomFichier = "barney.png";
             

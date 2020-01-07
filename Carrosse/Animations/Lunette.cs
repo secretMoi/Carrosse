@@ -24,7 +24,7 @@ namespace Carrosse.Animations
                 x = -x;
                 y = -y;
             }
-
+            //todo terminer les valeurs extrêmes
                 /*if (element.GetFigure("lunette").Position.X > positionDepart.X + 50) x = 0;
                 if (element.GetFigure("lunette").Position.Y > positionDepart.Y + 50) y = 0;*/
             element.Deplace(x, y);

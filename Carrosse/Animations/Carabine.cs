@@ -12,9 +12,9 @@ namespace Carrosse.Animations
             element = new Elements.Carabine(position);
         }
 
-        public override void Hydrate(Figure parente)
+        public override void Hydrate(params object[] parametre)
         {
-            this.parente = parente;
+            this.parente = (Figure) parametre[0];
         }
 
         public override void Anime()

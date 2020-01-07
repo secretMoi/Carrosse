@@ -21,7 +21,7 @@ namespace Carrosse.Animations
         }
 
         // permet d'hydrater l'objet après le constructeur
-        public virtual void Hydrate(Figure parente)
+        public virtual void Hydrate(params object[] parametre)
         {
         }
 

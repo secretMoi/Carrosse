@@ -12,8 +12,7 @@ namespace Carrosse.Elements
     {
         protected readonly Dictionary<string, Figure> elements; // contient les éléments de l'élément
         protected Point position; // position courante de l'élément
-        protected Point dimensions; // tailles de l'élément
-        protected Point dimensionFigure; // utlisé lors de la création de chaque figure
+        protected Point dimensions; // utlisé lors de la création de chaque figure
         protected double zoom;
 
         public Element(Point position)
@@ -26,7 +25,7 @@ namespace Carrosse.Elements
         }
 
         // change la mise à l'échelle'
-        public void Zoom(double zoom)
+        public virtual void Zoom(double zoom)
         {
             this.zoom = zoom;
         }
@@ -34,7 +33,7 @@ namespace Carrosse.Elements
         // permet de mettre à l'échelle un élément
         protected void Dimensionne(int x, int y)
         {
-            dimensionFigure = new Point((int) (x * zoom), (int) (y * zoom));
+            dimensions = new Point((int) (x * zoom), (int) (y * zoom));
         }
 
         // affiche toutes les figures de l'élément
@@ -58,25 +57,25 @@ namespace Carrosse.Elements
         protected void AjouterRectangle(string cle, Color? remplissage = null, Color? contour = null, int largeurContour = 0)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Rectangle(position, dimensionFigure, remplissage, contour, largeurContour));
+            elements.Add(cle, new Rectangle(position, dimensions, remplissage, contour, largeurContour));
         }
         
         protected void AjouterDisque(string cle, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Disque(position, dimensionFigure.X, remplissage, contour, largeurContour));
+            elements.Add(cle, new Disque(position, dimensions.X, remplissage, contour, largeurContour));
         }
         
         protected void AjouterCercle(string cle, Color contour, int largeurContour)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Cercle(position, dimensionFigure.X, contour, largeurContour));
+            elements.Add(cle, new Cercle(position, dimensions.X, contour, largeurContour));
         }
         
         protected void AjouterEllipse(string cle, Color remplissage, Color? contour = null, int largeurContour = 0)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Ellipse(position, dimensionFigure, remplissage, contour, largeurContour));
+            elements.Add(cle, new Ellipse(position, dimensions, remplissage, contour, largeurContour));
         }
         
         protected void AjouterLigne(string cle, Color contour, int largeurContour)
@@ -84,14 +83,14 @@ namespace Carrosse.Elements
             if (elements.ContainsKey(cle)) return;
 
             Point positionSource = position;
-            Point positionDestination = dimensionFigure;
+            Point positionDestination = dimensions;
             elements.Add(cle, new Ligne(positionSource, positionDestination, contour, largeurContour));
         }
 
         protected void AjouterArc(string cle, Color contour, int largeurContour, float angleDebut, float amplitude)
         {
             if (elements.ContainsKey(cle)) return;
-            elements.Add(cle, new Arc(position, dimensionFigure, contour, largeurContour, angleDebut, amplitude));
+            elements.Add(cle, new Arc(position, dimensions, contour, largeurContour, angleDebut, amplitude));
         }
 
         // déplace à une position donnée
@@ -163,6 +162,22 @@ namespace Carrosse.Elements
             if (!elements.ContainsKey(cle)) return null;
 
             return elements[cle];
+        }
+
+        public Point Position(string cle)
+        {
+            if (GetFigure(cle) != null)
+                return GetFigure(cle).Position;
+            
+            return position;
+        }
+        
+        public Point Dimension(string cle)
+        {
+            if (GetFigure(cle) != null)
+                return GetFigure(cle).Dimension;
+            
+            return dimensions;
         }
 
         public Dictionary<string, Figure> ListeFigures()

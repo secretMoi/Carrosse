@@ -54,6 +54,7 @@ namespace Carrosse.Animations
                 SetTimer(OFF); // arrête le timer de scène
                 Elements = new Dictionary<string, Animation>(); // vide la liste pour préparer la nouvelle scène
                 numeroSceneSuivante++;
+                tempsProgramme = 0;
                 
                 // récupère le nom de la méthode dynamiquement
                 MethodInfo method = GetType().GetMethod("Scene" + numeroSceneSuivante,
@@ -114,17 +115,22 @@ namespace Carrosse.Animations
 
         public void SceneDepart()
         {
+            tempsExpirationScene = 3000;
             tempsExpirationScene = 500;
+            tempsExpirationScene = 0;
             
-            Elements.Add("carabine", new Carabine());
+            /*Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
-            Elements["carabine"].Hydrate(Elements["tireur"].Element.GetFigure("AvantBrasDroit"));
+            Elements["carabine"].Hydrate(Elements["tireur"].Element.GetFigure("AvantBrasDroit"));*/
+            
+            Elements.Add("barney", new Barney(new Point(400, 30)));
 
             SetTimer(ON);
         }
 
         public void Scene1()
         {
+            tempsExpirationScene = 7700;
             tempsExpirationScene = 500;
 
             Elements.Add("cible", new Cible(new Point(400, 300)));
@@ -139,11 +145,13 @@ namespace Carrosse.Animations
         public void Scene2()
         {
             tempsExpirationScene = 0;
+            
+            Elements.Add("barney", new Barney(new Point(400, 30)));
+            int xBalle = Elements["barney"].Element.Position("Personnage").X
+                         + Elements["barney"].Element.Dimension("Image").X / 3;
+            Elements.Add("balle", new Balle(new Point(xBalle, 550)));
 
-            Elements.Add("balle", new Balle(new Point(400, 300)));
-            Elements.Add("barney", new Barney(new Point(400, 300)));
-
-            Son son = new Son("oh_No");
+            Son son = new Son("shot");
             son.Joue();
             
             SetTimer(ON);

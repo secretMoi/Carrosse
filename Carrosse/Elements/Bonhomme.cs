@@ -60,7 +60,7 @@ namespace Carrosse.Elements
         {
             Dimensionne(40,80);
             position.X += elements["Tete"].Dimension.X / 2 -
-                          dimensionFigure.X / 2 + 5;
+                          dimensions.X / 2 + 5;
             position.Y += elements["Tete"].Dimension.Y + 40;
             AjouterEllipse("BrasGauche", Color.Brown, Color.Black, 1);
         }
@@ -111,7 +111,7 @@ namespace Carrosse.Elements
             Dimensionne(30,30);
             position.X = elements["JambeGauche"].PointAdjacent(Figure.Y).X;
             position.Y = elements["JambeGauche"].PointAdjacent(Figure.Y).Y
-                         - dimensionFigure.Y / 2;
+                         - dimensions.Y / 2;
             
             AjouterDisque("GenouGauche", Color.CadetBlue, Color.Black, 1);
             
@@ -142,7 +142,7 @@ namespace Carrosse.Elements
             Dimensionne(30,30);
             position.X = elements["JambeDroite"].PointAdjacent(Figure.Y).X;
             position.Y = elements["JambeDroite"].PointAdjacent(Figure.Y).Y
-                         - dimensionFigure.Y / 2;
+                         - dimensions.Y / 2;
             
             AjouterDisque("GenouDroit", Color.CadetBlue, Color.Black, 1);
             

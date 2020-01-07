@@ -7,46 +7,45 @@ namespace Carrosse.Elements
         public Lunette(Point positionConstrcuteur) : base(positionConstrcuteur)
         {
             // création cercle lunette
-            dimensionFigure = new Point(400, 400);
-            dimensions = dimensionFigure;
+            dimensions = new Point(400, 400);
             AjouterCercle("lunette", Color.Black, 15);
             
             // création mollette gauche
-            dimensionFigure = new Point(50, 100);
-            position.X -= dimensionFigure.X;
+            dimensions = new Point(50, 100);
+            position.X -= dimensions.X;
             position.Y += elements["lunette"].Dimension.Y / 2
-                          - dimensionFigure.X;
+                          - dimensions.X;
             AjouterRectangle("molletteG", Color.Black);
             
             // création mollette droite
-            dimensionFigure = new Point(50, 100);
+            dimensions = new Point(50, 100);
             position.X += elements["lunette"].Dimension.X
-                          + dimensionFigure.X;
+                          + dimensions.X;
             AjouterRectangle("molletteD", Color.Black);
             
             // création mollette haut
-            dimensionFigure = new Point(100, 50);
+            dimensions = new Point(100, 50);
             position.X = elements["lunette"].Position.X
                          + elements["lunette"].Dimension.X / 2
-                         - dimensionFigure.X / 2;
+                         - dimensions.X / 2;
             position.Y = elements["lunette"].Position.Y
-                          - dimensionFigure.Y;
+                          - dimensions.Y;
             AjouterRectangle("molletteH", Color.Black);
             
             // création ligne verticale
             position.X = elements["lunette"].Position.X
                          + elements["lunette"].Dimension.X / 2;
             position.Y = elements["lunette"].Position.Y;
-            dimensionFigure.X = position.X;
-            dimensionFigure.Y = position.Y + elements["lunette"].Dimension.Y;
+            dimensions.X = position.X;
+            dimensions.Y = position.Y + elements["lunette"].Dimension.Y;
             AjouterLigne("ligneVerticale", Color.Black, 2);
             
             // création ligne horizontale
             position.X = elements["lunette"].Position.X;
             position.Y = elements["lunette"].Position.Y
                          + elements["lunette"].Dimension.Y / 2;
-            dimensionFigure.X = position.X + elements["lunette"].Dimension.X;
-            dimensionFigure.Y = position.Y;
+            dimensions.X = position.X + elements["lunette"].Dimension.X;
+            dimensions.Y = position.Y;
             AjouterLigne("ligneHorizontale", Color.Black, 2);
         }
 
