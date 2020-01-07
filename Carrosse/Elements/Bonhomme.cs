@@ -11,6 +11,10 @@ namespace Carrosse.Elements
         {
             // création tête
             Tete();
+            
+            OeilDroit();
+
+            Bouche();
 
             // création bras gauche
             BrasGauche();
@@ -56,12 +60,40 @@ namespace Carrosse.Elements
             AjouterDisque("Tete", Color.Bisque);
         }
 
+        public void OeilDroit()
+        {
+            Dimensionne(10,10);
+            position.X = elements["Tete"].Position.X
+                         + elements["Tete"].Dimension.X
+                         - dimensions.X * 2;
+            position.Y = elements["Tete"].Position.Y
+                         + elements["Tete"].Dimension.Y / 4;
+            
+            AjouterDisque("OeilDroit", Color.Black);
+            
+            AjustePosition("OeilDroit", "Tete", position);
+        }
+        
+        public void Bouche()
+        {
+            dimensions = new Point(15, 15);
+            position.X = elements["OeilDroit"].Position.X;
+            position.Y = elements["OeilDroit"].Position.Y
+                         + elements["Tete"].Dimension.Y / 4;
+            AjouterArc("Bouche", Color.Black, 3, 0, 180);
+            
+            AjustePosition("Bouche", "Tete", position);
+        }
+
         public void BrasGauche()
         {
             Dimensionne(40,80);
-            position.X += elements["Tete"].Dimension.X / 2 -
-                          dimensions.X / 2 + 5;
-            position.Y += elements["Tete"].Dimension.Y + 40;
+            position.X = elements["Tete"].Position.X
+                         + elements["Tete"].Dimension.X / 2 -
+                         dimensions.X / 2 + 5;
+            position.Y = elements["Tete"].Position.X + 
+                         elements["Tete"].Dimension.Y + 40;
+            
             AjouterEllipse("BrasGauche", Color.Brown, Color.Black, 1);
         }
 
@@ -70,6 +102,7 @@ namespace Carrosse.Elements
             Dimensionne(40,80);
             position.X = elements["BrasGauche"].Position.X - 5;
             position.Y = elements["BrasGauche"].Position.Y;
+            
             AjouterEllipse("BrasDroit", Color.Brown, Color.Black, 1);
             
             RotationFigure("BrasDroit", 60);
@@ -79,6 +112,7 @@ namespace Carrosse.Elements
         {
             Dimensionne(40,80);
             position = elements["BrasDroit"].PointAdjacent(Figure.Y);
+            
             AjouterEllipse("AvantBrasDroit", Color.Brown, Color.Black, 1);
             
             AjustePosition("AvantBrasDroit", "BrasDroit");
@@ -102,6 +136,7 @@ namespace Carrosse.Elements
             position.X = elements["BrasGauche"].Position.X;
             position.Y = elements["Corps"].Position.Y +
                          elements["Corps"].Dimension.Y;
+            
             AjouterEllipse("JambeGauche", Color.CadetBlue, Color.Black, 1);
             RotationFigure("JambeGauche", 40);
         }
