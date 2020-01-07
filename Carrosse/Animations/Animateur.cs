@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Reflection;
+using System.Threading;
 using System.Timers;
 using System.Windows.Forms;
 using Carrosse.Elements;
@@ -15,6 +16,7 @@ namespace Carrosse.Animations
         private Dictionary<string, Animation> Elements;
         // todo remplacer le timer par un multimedia timer, windows étant fort parallélisé, il n'est pas toujours occupé sur cette application et l interval est peut etre de 50ms
         private static Timer loopTimer; // timer qui gère la scène courante
+        private static bool timerFini = true; // permet de savoir si le timer précédent à eu le temps de finir ses actions
         private static Timer timerReference; // timer qui coordonne les changements de scène
         private const int INTERVAL_TIMER = 5; // temps pour le timer par défaut
         private long tempsProgramme; // temps depuis le démarrage du programme, utilisé par le timer de référence
@@ -43,6 +45,12 @@ namespace Carrosse.Animations
         // gère les actions de la scène courante
         private void LoopTimerEvent(Object source, ElapsedEventArgs e)
         {
+            // si le timer précédent n'a pas fini ses actions
+            if(timerFini == false)
+                return;
+            
+            timerFini = false;
+            
             foreach (Animation animation in Elements.Values)
             {
                 animation.Anime();
@@ -51,8 +59,10 @@ namespace Carrosse.Animations
             pictureBox.Invalidate();
 
             FermeScene();
+
+            timerFini = true;
         }
-        
+
         // actualise le temps du timer de référence
         private void TimerReferenceEvent(Object source, ElapsedEventArgs e)
         {
@@ -105,7 +115,7 @@ namespace Carrosse.Animations
         public void SceneDepart()
         {
             tempsExpirationScene = 3000;
-            tempsExpirationScene = 0;
+            tempsExpirationScene = 500;
             
             Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
@@ -149,9 +159,9 @@ namespace Carrosse.Animations
         {
             tempsExpirationScene = 5000;
             
-            Elements.Add("barney", new Barney(new Point(400, 30)));
+            Elements.Add("barney", new Barney(new Point(350, 30)));
             int xBalle = Elements["barney"].Element.Position("Personnage").X
-                         + Elements["barney"].Element.Dimension("Image").X / 3;
+                         + Elements["barney"].Element.Dimension("Image").X;
             Elements.Add("balle", new Balle(new Point(xBalle, 550)));
 
             Son son = new Son("shot");
@@ -182,7 +192,6 @@ namespace Carrosse.Animations
         public void Scene5()
         {
             tempsExpirationScene = 4000;
-            tempsExpirationScene = 500;
             
             Elements["barney"].Hydrate(true);
 

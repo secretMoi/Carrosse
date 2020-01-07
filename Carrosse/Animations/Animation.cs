@@ -6,8 +6,6 @@ namespace Carrosse.Animations
 {
     public abstract class Animation
     {
-        //todo inutile vu l'imprécision du timer par défaut
-        
         protected Element element; // élément couramment animé
         protected Point position; // position de l' élément couramment animé
         protected bool animationInitialisee; // vérifie que l'animation soit initialisée'

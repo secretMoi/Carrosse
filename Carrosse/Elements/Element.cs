@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -10,10 +11,11 @@ namespace Carrosse.Elements
 {
     public abstract class Element
     {
-        protected readonly Dictionary<string, Figure> elements; // contient les éléments de l'élément
+        protected readonly Dictionary<string, Figure> elements; // contient les figures de l'élément
         protected Point position; // position courante de l'élément
         protected Point dimensions; // utlisé lors de la création de chaque figure
         protected double zoom;
+        protected Dictionary<string, RessourceImage> images;
 
         public Element(Point position)
         {
@@ -52,6 +54,17 @@ namespace Carrosse.Elements
                     method?.Invoke(this, null);
                 }
             }
+
+            /*if (objetsDivers != null)
+            {
+                foreach (object objet in ListeObjets())
+                {
+                    RessourceImage image = (RessourceImage) objet;
+                
+                    image.Affiche(graphics);
+                }
+            }*/
+            
         }
         
         protected void AjouterRectangle(string cle, Color? remplissage = null, Color? contour = null, int largeurContour = 0)
@@ -131,6 +144,18 @@ namespace Carrosse.Elements
 
             return figures;
         }
+        
+        public List<object> ListeObjets()
+        {
+            List<object> objet = new List<object>();
+
+            foreach (object figure in images.Values)
+            {
+                objet.Add(figure);
+            }
+
+            return objet;
+        }
 
         public void RotationFigure(string cle, int angle)
         {
@@ -154,6 +179,13 @@ namespace Carrosse.Elements
                 elements[enfant].Position = positionPreCalculee;
             
             AjoutEnfant(enfant, parent);
+        }
+
+        public void AjouteObjet(string cle, RessourceImage objet)
+        {
+            if(images == null) images = new Dictionary<string, RessourceImage>();
+            
+            images.Add(cle, objet);
         }
 
         public Figure GetFigure(string cle)
