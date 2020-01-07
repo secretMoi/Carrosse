@@ -11,6 +11,7 @@
           <e p="Balle.cs" t="Include" />
           <e p="Barney.cs" t="Include" />
           <e p="Carabine.cs" t="Include" />
+          <e p="Cheveux.cs" t="Include" />
           <e p="Cible.cs" t="Include" />
           <e p="Lunette.cs" t="Include" />
           <e p="Tireur.cs" t="Include" />
@@ -62,6 +63,7 @@
             <e p="arbre-6.png" t="Include" />
             <e p="balle.png" t="Include" />
             <e p="barney.png" t="Include" />
+            <e p="cheveux.png" t="Include" />
             <e p="cible2.png" t="Include" />
           </e>
           <e p="sons" t="Include">

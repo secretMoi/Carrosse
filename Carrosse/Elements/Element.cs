@@ -55,7 +55,7 @@ namespace Carrosse.Elements
                 }
             }
 
-            /*if (objetsDivers != null)
+            if (images != null)
             {
                 foreach (object objet in ListeObjets())
                 {
@@ -63,7 +63,7 @@ namespace Carrosse.Elements
                 
                     image.Affiche(graphics);
                 }
-            }*/
+            }
             
         }
         
@@ -145,11 +145,11 @@ namespace Carrosse.Elements
             return figures;
         }
         
-        public List<object> ListeObjets()
+        public List<RessourceImage> ListeObjets()
         {
-            List<object> objet = new List<object>();
+            List<RessourceImage> objet = new List<RessourceImage>();
 
-            foreach (object figure in images.Values)
+            foreach (RessourceImage figure in images.Values)
             {
                 objet.Add(figure);
             }

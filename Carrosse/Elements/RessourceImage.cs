@@ -35,7 +35,7 @@ namespace Carrosse.Elements
             image = (Bitmap)Image.FromFile(imageChemin + nomFichier);
 
             double rapport = (double) image.Height / (double) image.Width;
-            
+        
             image = new Bitmap(image, new Size(dimensions.X,(int) (dimensions.X * rapport)));
         }
         

@@ -22,7 +22,7 @@ namespace Carrosse.Animations
         private long tempsProgramme; // temps depuis le démarrage du programme, utilisé par le timer de référence
         private long tempsExpirationScene; // définit combien de temps une scène va s'exécuter
         private int numeroSceneSuivante;
-        private bool nettoyeApresScene;
+        private bool nettoyeApresScene; // défini si les éléments de la scène seront supprimés ou pas
 
         protected readonly PictureBox pictureBox;
 
@@ -115,11 +115,19 @@ namespace Carrosse.Animations
         public void SceneDepart()
         {
             tempsExpirationScene = 3000;
-            tempsExpirationScene = 500;
             
             Elements.Add("carabine", new Carabine());
             Elements.Add("tireur", new Tireur(new Point(100, 100)));
-            Elements["carabine"].Hydrate(Elements["tireur"].Element.GetFigure("AvantBrasDroit"));
+            Point positionCheveux = new Point();
+            positionCheveux.X = Elements["tireur"].GetFigure("Tete").Position.X
+                                - Elements["tireur"].GetFigure("Tete").Dimension.X / 2
+                                - 10;
+            positionCheveux.Y = (int) (
+                                Elements["tireur"].GetFigure("Tete").Position.Y
+                                - Elements["tireur"].GetFigure("Tete").Dimension.Y * 0.7
+                            );
+            Elements.Add("cheveux", new Cheveux(positionCheveux));
+            Elements["carabine"].Hydrate(Elements["tireur"].GetFigure("AvantBrasDroit"));
 
             SetTimer(ON);
         }
@@ -128,7 +136,6 @@ namespace Carrosse.Animations
         public void Scene1()
         {
             tempsExpirationScene = 7700;
-            tempsExpirationScene = 500;
 
             Elements.Add("cible", new Cible(new Point(400, 300)));
             Elements.Add("lunette", new Lunette(new Point(300, 200)));
@@ -176,7 +183,6 @@ namespace Carrosse.Animations
         public void Scene4()
         {
             tempsExpirationScene = 4000;
-            tempsExpirationScene = 500;
             
             Elements["barney"].Hydrate(false);
 
