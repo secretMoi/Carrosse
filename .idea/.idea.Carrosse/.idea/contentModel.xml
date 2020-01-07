@@ -65,6 +65,7 @@
             <e p="barney.png" t="Include" />
             <e p="cheveux.png" t="Include" />
             <e p="cible2.png" t="Include" />
+            <e p="fond.jpg" t="Include" />
           </e>
           <e p="sons" t="Include">
             <e p="breath.wav" t="Include" />
