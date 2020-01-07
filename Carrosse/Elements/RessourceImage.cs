@@ -23,10 +23,13 @@ namespace Carrosse.Elements
             lock (cadenas)
             {
                 SizeF ancienneDimensions = image.PhysicalDimension;
+                Bitmap imageTemp;
                 
-                image = (Bitmap)Image.FromFile(imageChemin + nomFichier);
-                image = new Bitmap(image,
+                imageTemp = (Bitmap)Image.FromFile(imageChemin + nomFichier);
+                image.Dispose();
+                image = new Bitmap(imageTemp,
                     new Size((int) (ancienneDimensions.Width + zoom), (int) (ancienneDimensions.Height + zoom)));
+                imageTemp.Dispose();
             }
         }
 
