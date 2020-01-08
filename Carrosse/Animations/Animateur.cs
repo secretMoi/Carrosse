@@ -140,6 +140,7 @@ namespace Carrosse.Animations
         public void Scene1()
         {
             tempsExpirationScene = 7700;
+            tempsExpirationScene = 500;
 
             Elements.Add("cible", new Cible(new Point(400, 300)));
             Elements.Add("lunette", new Lunette(new Point(300, 200)));
@@ -156,6 +157,7 @@ namespace Carrosse.Animations
         public void Scene2()
         {
             tempsExpirationScene = 1000;
+            tempsExpirationScene = 500;
             
             Son son = new Son("sneeze");
             son.Joue();
@@ -170,10 +172,15 @@ namespace Carrosse.Animations
         {
             tempsExpirationScene = 5000;
             
+            Elements.Add("EffetBalle", new EffetBalle());
             Elements.Add("barney", new Barney(new Point(350, 30)));
             int xBalle = Elements["barney"].Element.Position("Personnage").X
                          + Elements["barney"].Element.Dimension("Image").X;
             Elements.Add("balle", new Balle(new Point(xBalle, 550)));
+            Elements["EffetBalle"].Hydrate(
+                Elements["balle"].Element.GetPosition.X + Elements["balle"].Element.GetDimension.X / 2,
+                Elements["balle"].Element.GetPosition.Y
+                );
 
             Son son = new Son("shot");
             son.Joue();

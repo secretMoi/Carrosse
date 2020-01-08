@@ -131,7 +131,7 @@ namespace Carrosse.Elements
             return figures;
         }
 
-        public void RotationFigure(string cle, int angle)
+        public void RotationFigure(string cle, double angle)
         {
             if(elements.ContainsKey(cle))
                 elements[cle].Rotation.Position(angle);
@@ -170,7 +170,10 @@ namespace Carrosse.Elements
             
             return position;
         }
-        
+
+        public Point GetPosition => position;
+        public Point GetDimension => dimensions;
+
         public Point Dimension(string cle)
         {
             if (GetFigure(cle) != null)

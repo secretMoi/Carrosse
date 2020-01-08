@@ -7,18 +7,11 @@ namespace Carrosse.Animations
     {
         public Tireur(Point position) : base(position)
         {
-            element = new Elements.Bonhomme(position);
+            element = new Bonhomme(position);
         }
 
         private void SetAnime()
         {
-            Point positionCheveux = new Point();
-            positionCheveux.X = element.GetFigure("Tete").Position.X;
-            positionCheveux.Y = element.GetFigure("Tete").Position.Y
-                                - element.GetFigure("Tete").Dimension.Y;
-            //Cheveux cheveux= new Cheveux(positionCheveux);
-            //element.AjouteObjet("Cheveux", new Cheveux(positionCheveux));
-            
             element.GetFigure("BrasDroit").Rotation.SetRotation(70, 85);
             element.GetFigure("JambeGauche").Rotation.SetRotation(40, 50);
             element.GetFigure("JambeDroite").Rotation.SetRotation(330, 340);

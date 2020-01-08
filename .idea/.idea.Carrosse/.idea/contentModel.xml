@@ -13,6 +13,7 @@
           <e p="Carabine.cs" t="Include" />
           <e p="Cheveux.cs" t="Include" />
           <e p="Cible.cs" t="Include" />
+          <e p="EffetBalle.cs" t="Include" />
           <e p="Lunette.cs" t="Include" />
           <e p="Tireur.cs" t="Include" />
         </e>
@@ -29,6 +30,7 @@
           <e p="Element.cs" t="Include" />
           <e p="Lunette.cs" t="Include" />
           <e p="Personnage.cs" t="Include" />
+          <e p="RayonsCentre.cs" t="Include" />
           <e p="RessourceImage.cs" t="Include" />
         </e>
         <e p="Figures" t="Include">
