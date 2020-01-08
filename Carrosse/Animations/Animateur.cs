@@ -178,7 +178,7 @@ namespace Carrosse.Animations
                          + Elements["barney"].Element.Dimension("Image").X;
             Elements.Add("balle", new Balle(new Point(xBalle, 550)));
             Elements["EffetBalle"].Hydrate(
-                Elements["balle"].Element.GetPosition.X + Elements["balle"].Element.GetDimension.X / 2,
+                Elements["balle"].Element.GetPosition.X + Elements["balle"].Element.GetDimension.X / 2 - 3,
                 Elements["balle"].Element.GetPosition.Y
                 );
 

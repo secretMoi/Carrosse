@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Drawing;
+using Carrosse.Figures;
 
 namespace Carrosse.Elements
 {
@@ -26,14 +27,23 @@ namespace Carrosse.Elements
 
                 if (i > 0) // si une parente est déjà créée
                 {
-                    Point positionAjustee = position;
-                    AjustePosition(ligneCourante, "Ligne" + (i-1), positionAjustee);
-                    Debug.WriteLine(elements["Ligne" + (i-1)].Angle + 20);
+                    //AjustePosition(ligneCourante, "Ligne" + (i-1), position);
                     RotationFigure(
                         ligneCourante, 
                         elements["Ligne" + (i-1)].Rotation.AngleInverse() - 20
                     );
                 }
+            }
+        }
+        
+        public override void Affiche(Graphics graphics)
+        {
+            // redessine toutes les parties des éléments
+            foreach (Figure figure in ListeElements())
+            {
+                Ligne();
+                
+                figure.Afficher(graphics);
             }
         }
     }

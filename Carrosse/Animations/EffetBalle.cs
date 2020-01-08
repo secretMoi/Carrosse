@@ -13,7 +13,7 @@ namespace Carrosse.Animations
 
         public override void Hydrate(params object[] parametre)
         {
-            position.X = (int) parametre[0] + 8;
+            position.X = (int) parametre[0];
             position.Y = (int) parametre[1];
             element.Deplace(position);
         }
