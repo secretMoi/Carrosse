@@ -54,12 +54,16 @@
     <Compile Include="Animations\Cheveux.cs" />
     <Compile Include="Animations\Cible.cs" />
     <Compile Include="Animations\EffetBalle.cs" />
+    <Compile Include="Animations\Kepi.cs" />
     <Compile Include="Animations\Lunette.cs" />
+    <Compile Include="Animations\Spectateur.cs" />
     <Compile Include="Animations\Tireur.cs" />
+    <Compile Include="Animations\Volcan.cs" />
     <Compile Include="Elements\Arbre.cs" />
     <Compile Include="Elements\Balle.cs" />
     <Compile Include="Elements\Bonhomme.cs" />
     <Compile Include="Elements\Carabine.cs" />
+    <Compile Include="Elements\Chapeau.cs" />
     <Compile Include="Elements\Cheveux.cs" />
     <Compile Include="Elements\Cible.cs" />
     <Compile Include="Elements\Element.cs" />
@@ -67,6 +71,7 @@
     <Compile Include="Elements\RayonsCentre.cs" />
     <Compile Include="Elements\RessourceImage.cs" />
     <Compile Include="Elements\Lunette.cs" />
+    <Compile Include="Elements\Volcan.cs" />
     <Compile Include="Figures\Arc.cs" />
     <Compile Include="Figures\Cercle.cs" />
     <Compile Include="Figures\Disque.cs" />
@@ -180,6 +185,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ressources\images\fond.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ressources\images\volcan.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

@@ -111,8 +111,19 @@ namespace Carrosse.Animations
             return figures;
         }
 
-        // tireur vue de profil
         public void SceneDepart()
+        {
+            tempsExpirationScene = 0;
+            
+            Elements.Add("spectateur", new Spectateur(new Point(100, 100)));
+            Elements.Add("kepi", new Kepi(new Point(100, 45)));
+            Elements.Add("volcan", new Volcan(new Point(600, 130)));
+            
+            SetTimer(ON);
+        }
+
+        // tireur vue de profil
+        public void Scene1()
         {
             tempsExpirationScene = 3000;
             
@@ -136,7 +147,7 @@ namespace Carrosse.Animations
         }
 
         // vue lunette et cible
-        public void Scene1()
+        public void Scene2()
         {
             tempsExpirationScene = 7700;
 
@@ -152,7 +163,7 @@ namespace Carrosse.Animations
         }
 
         // éternuement
-        public void Scene2()
+        public void Scene3()
         {
             tempsExpirationScene = 1000;
             
@@ -165,7 +176,7 @@ namespace Carrosse.Animations
         }
         
         // tir après vue lunette
-        public void Scene3()
+        public void Scene4()
         {
             tempsExpirationScene = 5000;
             
@@ -188,7 +199,7 @@ namespace Carrosse.Animations
         }
         
         // pause Oh NO
-        public void Scene4()
+        public void Scene5()
         {
             tempsExpirationScene = 4000;
             
@@ -203,7 +214,7 @@ namespace Carrosse.Animations
         }
         
         // reprise zoom
-        public void Scene5()
+        public void Scene6()
         {
             tempsExpirationScene = 4000;
             

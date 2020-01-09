@@ -14,8 +14,11 @@
           <e p="Cheveux.cs" t="Include" />
           <e p="Cible.cs" t="Include" />
           <e p="EffetBalle.cs" t="Include" />
+          <e p="Kepi.cs" t="Include" />
           <e p="Lunette.cs" t="Include" />
+          <e p="Spectateur.cs" t="Include" />
           <e p="Tireur.cs" t="Include" />
+          <e p="Volcan.cs" t="Include" />
         </e>
         <e p="App.config" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
@@ -25,6 +28,7 @@
           <e p="Balle.cs" t="Include" />
           <e p="Bonhomme.cs" t="Include" />
           <e p="Carabine.cs" t="Include" />
+          <e p="Chapeau.cs" t="Include" />
           <e p="Cheveux.cs" t="Include" />
           <e p="Cible.cs" t="Include" />
           <e p="Element.cs" t="Include" />
@@ -32,6 +36,7 @@
           <e p="Personnage.cs" t="Include" />
           <e p="RayonsCentre.cs" t="Include" />
           <e p="RessourceImage.cs" t="Include" />
+          <e p="Volcan.cs" t="Include" />
         </e>
         <e p="Figures" t="Include">
           <e p="Arc.cs" t="Include" />
@@ -68,6 +73,7 @@
             <e p="cheveux.png" t="Include" />
             <e p="cible2.png" t="Include" />
             <e p="fond.jpg" t="Include" />
+            <e p="volcan.png" t="Include" />
           </e>
           <e p="sons" t="Include">
             <e p="breath.wav" t="Include" />
